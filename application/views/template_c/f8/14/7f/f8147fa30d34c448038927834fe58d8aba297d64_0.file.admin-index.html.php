@@ -1,3 +1,29 @@
+<?php /* Smarty version 3.1.24, created on 2015-06-12 13:50:17
+         compiled from "/www/oa/application/views/admin-index.html" */ ?>
+<?php
+/*%%SmartyHeaderCode:1539468561557a73196c35a6_06390360%%*/
+if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'f8147fa30d34c448038927834fe58d8aba297d64' => 
+    array (
+      0 => '/www/oa/application/views/admin-index.html',
+      1 => 1434088017,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '1539468561557a73196c35a6_06390360',
+  'has_nocache_code' => false,
+  'version' => '3.1.24',
+  'unifunc' => 'content_557a73196f4971_34950734',
+),false);
+/*/%%SmartyHeaderCode%%*/
+if ($_valid && !is_callable('content_557a73196f4971_34950734')) {
+function content_557a73196f4971_34950734 ($_smarty_tpl) {
+
+$_smarty_tpl->properties['nocache_hash'] = '1539468561557a73196c35a6_06390360';
+?>
   <div class="admin-content">
 
     <div class="am-cf am-padding">
@@ -239,4 +265,6 @@
         </div>
       </div>
     </div>
-  </div>
+  </div><?php }
+}
+?>
