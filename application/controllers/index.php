@@ -23,7 +23,6 @@ class Index extends MY_Controller {
 	
 	public function index($b=null)
 	{
-		
 		$this->assign('a','dddddd');
 		$this->show('admin-index');
 	}
