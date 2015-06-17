@@ -6,14 +6,14 @@ deny from all
 #Options -Indexes
 Options +FollowSymLinks
 
-#ÔÊĞí½âÎöÎÄ¼şÖĞµÄSSIÖ¸Áî
+#å…è®¸è§£ææ–‡ä»¶ä¸­çš„SSIæŒ‡ä»¤
 Options +Includes
 
-#¶¨Òå404£¬500´íÎóÒ³Ãæ
+#å®šä¹‰404ï¼Œ500é”™è¯¯é¡µé¢
 #ErrorDocument 404 /404.htm 
 #ErrorDocument 500 /404.htm
 
-#¶¨ÒåÄ¿Â¼Ë÷ÒıÒ³Ãæ
+#å®šä¹‰ç›®å½•ç´¢å¼•é¡µé¢
 DirectoryIndex index.php
 order deny,allow
 
@@ -21,7 +21,7 @@ RewriteEngine on
 
 
 
-#È¥µôÁ´½ÓµØÖ·ÖĞindex.php×Ö·û´®
+#å»æ‰é“¾æ¥åœ°å€ä¸­index.phpå­—ç¬¦ä¸²
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond $1 !^(index.php|test.php|test_ui.php|images|touch|robots\.txt)
