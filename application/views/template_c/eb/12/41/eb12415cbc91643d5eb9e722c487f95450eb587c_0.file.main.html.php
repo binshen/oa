@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.24, created on 2015-06-12 13:56:09
+<?php /* Smarty version 3.1.24, created on 2015-06-16 15:28:44
          compiled from "/www/oa/application/views/layout/main.html" */ ?>
 <?php
-/*%%SmartyHeaderCode:809109187557a74796c9ef2_31517510%%*/
+/*%%SmartyHeaderCode:1794653365557fd02ce96e87_02049544%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'eb12415cbc91643d5eb9e722c487f95450eb587c' => 
     array (
       0 => '/www/oa/application/views/layout/main.html',
-      1 => 1434088567,
+      1 => 1434439724,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '809109187557a74796c9ef2_31517510',
+  'nocache_hash' => '1794653365557fd02ce96e87_02049544',
   'variables' => 
   array (
     'base_url' => 0,
@@ -21,13 +21,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.24',
-  'unifunc' => 'content_557a74796fe5c5_32432262',
+  'unifunc' => 'content_557fd02cec7267_36631234',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_557a74796fe5c5_32432262')) {
-function content_557a74796fe5c5_32432262 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_557fd02cec7267_36631234')) {
+function content_557fd02cec7267_36631234 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '809109187557a74796c9ef2_31517510';
+$_smarty_tpl->properties['nocache_hash'] = '1794653365557fd02ce96e87_02049544';
 ?>
 <!doctype html>
 <html class="no-js">
@@ -42,12 +42,12 @@ $_smarty_tpl->properties['nocache_hash'] = '809109187557a74796c9ef2_31517510';
   <meta http-equiv="Cache-Control" content="no-siteapp" />
   <link rel="icon" type="image/png" href="assets/i/favicon.png">
   <link rel="apple-touch-icon-precomposed" href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
-status/i/app-icon72x72@2x.png">
+statics/amaze/i/app-icon72x72@2x.png">
   <meta name="apple-mobile-web-app-title" content="Amaze UI" />
   <link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
-status/css/amazeui.min.css"/>
+statics/amaze/css/amazeui.min.css"/>
   <link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
-status/css/admin.css">
+statics/amaze/css/admin.css">
 </head>
 <body>
 <!--[if lte IE 9]>
@@ -155,16 +155,16 @@ status/css/admin.css">
 <!--[if (gte IE 9)|!(IE)]><!-->
 <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
-status/js/jquery.min.js"><?php echo '</script'; ?>
+statics/amaze/js/jquery.min.js"><?php echo '</script'; ?>
 >
 <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
-status/js/amazeui.min.js"><?php echo '</script'; ?>
+statics/amaze/js/amazeui.min.js"><?php echo '</script'; ?>
 >
 <!--<![endif]-->
 <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
-status/js/app.js"><?php echo '</script'; ?>
+statics/amaze/js/app.js"><?php echo '</script'; ?>
 >
 </body>
 </html>
