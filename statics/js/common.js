@@ -28,4 +28,37 @@ $(function () {
             }
         });
     });
+
+    if ($('button.J_ajax_del').length) {
+    	$('.J_ajax_del').on('click', function(e) {
+    		e.preventDefault();
+    		$('#my-confirm').modal({
+    			relatedTarget: this, 
+    			onConfirm: function(options) {
+    	            var url = $(this.relatedTarget).attr('data-url');
+    	            $.getJSON(url).done(function (data) {
+    	            	if (data.referer) {
+                            location.href = data.referer;
+                        } else {
+                            reloadPage(window);
+                        }
+                    });
+    	        },
+    	        // closeOnConfirm: false,
+    	        onCancel: function() {
+    	        }
+    	    });
+    	});
+    }
 });
+
+//重新刷新页面，使用location.reload()有可能导致重新提交
+function reloadPage(win) {
+    var location = win.location;
+    location.href = location.pathname + location.search;
+}
+
+//页面跳转
+function redirect(url) {
+    location.href = url;
+}

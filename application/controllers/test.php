@@ -21,4 +21,9 @@ class Test extends MY_Controller {
 		
 		$this->show('test');
 	}
+	
+	public function del() {
+		
+		echo json_encode(array('referer' => '/'));
+	}
 }
