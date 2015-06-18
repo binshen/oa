@@ -3,5 +3,6 @@ encoding/.htaccess=UTF-8
 encoding//application/views=UTF-8
 encoding//application/views/admin-index.html=UTF-8
 encoding//application/views/layout/sidebar.html=UTF-8
+encoding//application/views/sidebar.html=UTF-8
 encoding//application/views/test.html=UTF-8
 encoding/<project>=UTF-8
