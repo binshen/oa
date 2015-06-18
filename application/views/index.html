@@ -20,9 +20,9 @@
 <!--[if lt IE 9]>
   <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
   <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-  <script src="assets/js/polyfill/rem.min.js"></script>
-  <script src="assets/js/polyfill/respond.min.js"></script>
-  <script src="assets/js/amazeui.legacy.js"></script>
+  <script src="{{$base_url}}assets/js/polyfill/rem.min.js"></script>
+  <script src="{{$base_url}}assets/js/polyfill/respond.min.js"></script>
+  <script src="{{$base_url}}assets/js/amazeui.legacy.js"></script>
   <![endif]-->
 
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -86,50 +86,11 @@
 		<iframe src="{{$base_url}}index/main"  style="height: 100%;width:100px" id="mainFrame"  frameborder="0"  >
 		</iframe>
 		<div id="load" style="position:absolute;top:40%;left:50%;display:none;">
-			<img src="http://sc.cnwebshow.com/upimg/allimg/070707/01294420.gif" /> loading...
-		</div> <!-- 首先放一个div，用做loading效果 -->
+			<img src="{{$base_url}}statics/images/loading.gif" /> loading...
+		</div> 
 		</div>
 		<!-- content end -->
-<script type="text/javascript" language="javascript">
-$(function () {
-	$content=$("#contentq");
-	$mainFrame=$("#mainFrame");
-	$menuDiv = $("#menuDiv");
-	
-	var headerheight=50;
-	$content.height($(window).height()-headerheight-$('footer').height());
-	$menuDiv.height($(window).height()-headerheight-$('footer').height());
-	if($(window).width()-$('.admin-sidebar').width()-1 > 380){
-		$mainFrame.width($(window).width()-$('.admin-sidebar').width()-2);
-	}else{
-		$mainFrame.width($(window).width());
-	}
-	
-	$(window).resize(function(){
-		$content.height($(window).height()-headerheight-$('footer').height());
-		$menuDiv.height($(window).height()-headerheight-$('footer').height());
-		if($(window).width()-$('.admin-sidebar').width()-1 > 380){
-			$mainFrame.width($(window).width()-$('.admin-sidebar').width()-2);
-		}else{
-			$mainFrame.width($(window).width());
-		}
-	});
 
-/*	if (mainFrame.attachEvent){
-		mainFrame.attachEvent("onload", function(){
-	        $("#load").hide();
-	    });
-	} else {
-		mainFrame.onload = function(){
-			$("#load").hide();
-	    };
-	}*/
-
-	
-
-	
-});
-</script>
 	</div>
 	<a class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
 		data-am-offcanvas="{target: '#admin-offcanvas'}"></a>

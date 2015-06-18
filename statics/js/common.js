@@ -50,6 +50,32 @@ $(function () {
     	    });
     	});
     }
+    
+    //ifrmae
+	$content=$("#contentq");
+	$mainFrame=$("#mainFrame");
+	$menuDiv = $("#menuDiv");
+	
+	var headerheight=50;
+	$content.height($(window).height()-headerheight-$('footer').height());
+	$menuDiv.height($(window).height()-headerheight-$('footer').height());
+	if($(window).width()-$('.admin-sidebar').width()-1 > 380){
+		$mainFrame.width($(window).width()-$('.admin-sidebar').width()-2);
+	}else{
+		$mainFrame.width($(window).width());
+	}
+	
+	$(window).resize(function(){
+		$content.height($(window).height()-headerheight-$('footer').height());
+		$menuDiv.height($(window).height()-headerheight-$('footer').height());
+		if($(window).width()-$('.admin-sidebar').width()-1 > 380){
+			$mainFrame.width($(window).width()-$('.admin-sidebar').width()-2);
+		}else{
+			$mainFrame.width($(window).width());
+		}
+	});
+	
+	
 });
 
 //重新刷新页面，使用location.reload()有可能导致重新提交
@@ -61,4 +87,13 @@ function reloadPage(win) {
 //页面跳转
 function redirect(url) {
     location.href = url;
+}
+
+//点击菜单打开ifrmae页面
+function open_content(url){
+	$("#mainFrame").attr("src",url);
+	$("#load").show();
+	$("#mainFrame").load(function(){
+		$("#load").hide();
+    });
 }
