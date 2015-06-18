@@ -7,9 +7,9 @@ class MY_Pagination extends CI_Pagination {
 		parent::__construct();
 	}
 	
-	function getPageLink($total_rows, $per_page) {
+	function getPageLink($base_url, $total_rows, $per_page) {
 		
-		$config['base_url'] = '/test/index/';
+		$config['base_url'] = $base_url;
 		$config['total_rows'] = $total_rows;
 		$config['per_page'] = $per_page;
 		$config['use_page_numbers'] = true;

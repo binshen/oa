@@ -18,8 +18,9 @@ class Test extends MY_Controller {
 		$total = $this->tests_model->get_count();
 		
 		$items = $this->tests_model->get_tests($offset, $limit);
-		
-		$pager = $this->pagination->getPageLink($total, $limit);
+
+		$base_url = "/test/index";
+		$pager = $this->pagination->getPageLink($base_url, $total, $limit);
 		
 		$this->assign('pager', $pager);
 		$this->assign('items', $items);
