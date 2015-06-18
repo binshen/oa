@@ -5,18 +5,23 @@ class Test extends MY_Controller {
 
 	public function __construct() {
 		parent::__construct();
+		
+		$this->load->library('pagination');
+		$this->load->model('tests_model');
 	}
 	
-	public function index() {
+	public function index($page=1) {
+
+		$limit = 2;
+		$offset = ($page - 1) * $limit;
 		
-		$items = array(
-			array('id' => 1, 'title' => 'Business management', 'type' => 'default', 'author' => '测试1号', 'date' => date('Y-m-d H:i:s')),
-			array('id' => 2, 'title' => 'Business management', 'type' => 'default', 'author' => '测试1号', 'date' => date('Y-m-d H:i:s')),
-			array('id' => 3, 'title' => 'Business management', 'type' => 'default', 'author' => '测试1号', 'date' => date('Y-m-d H:i:s')),
-			array('id' => 4, 'title' => 'Business management', 'type' => 'default', 'author' => '测试1号', 'date' => date('Y-m-d H:i:s')),
-			array('id' => 5, 'title' => 'Business management', 'type' => 'default', 'author' => '测试1号', 'date' => date('Y-m-d H:i:s')),
-			array('id' => 6, 'title' => 'Business management', 'type' => 'default', 'author' => '测试1号', 'date' => date('Y-m-d H:i:s')),
-		);
+		$total = $this->tests_model->get_count();
+		
+		$items = $this->tests_model->get_tests($offset, $limit);
+		
+		$pager = $this->pagination->getPageLink($total, $limit);
+		
+		$this->assign('pager', $pager);
 		$this->assign('items', $items);
 		
 		$this->show('test');
