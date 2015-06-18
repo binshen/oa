@@ -11,7 +11,7 @@ class Index_model extends MY_Model
     }
     
     public function index(){
-    	die('1111');
+    	return $this->db->select()->from('admin')->get()->row_array();
     }
     
  

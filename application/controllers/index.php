@@ -24,8 +24,22 @@ class Index extends MY_Controller {
 	
 	public function index($b=null)
 	{
-		$this->assign('a','dddddd');
-		$this->show('admin-index');
+		$this->display('index.html');
 	}
+	
+	public function main(){
+		$this->show('admin-user');
+	}
+	
+	public function list_user(){
+		for($i=0;$i<10000000;$i++){
+			
+		}
+		
+		
+		$this->show('list_user');
+	}
+	
+
 
 }
