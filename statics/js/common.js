@@ -75,6 +75,26 @@ $(function () {
 		}
 	});
 	
+
+//	var iframe = $mainFrame.get(0);
+//	if (!/*@cc_on!@*/0) { //if not IE 
+//		iframe.onload = function(){ 
+//			//$("#load").hide();
+//		}; 
+//	} else { 
+//		iframe.onreadystatechange = function(){ 
+//			if (iframe.readyState == "complete"){ 
+//				//$("#load").hide();
+//			} 
+//		}; 
+//	}
+	
+	$(".am-pagination").find('a').click(function() {
+		if(!$(this).parent().hasClass('am-active')) {
+			parent.document.getElementById("load").style.display = 'block';
+		}
+    })
+
 });
 
 //重新刷新页面，使用location.reload()有可能导致重新提交
