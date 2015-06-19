@@ -22,9 +22,9 @@ class Index extends MY_Controller {
 		$this->load->model('index_model');
 	}
 	
-	public function index($b=null)
+	public function index()
 	{
-		$this->display('index.html');
+		$this->display('layout/index.html');
 	}
 	
 	public function main(){

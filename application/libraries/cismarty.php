@@ -10,7 +10,8 @@ class cismarty extends Smarty {
 	protected $complie_dir;
 	public $ext = 'html';
 	public $dir = '';
-	public $layout = 'layout/main';
+	public $layout = 'layout/header';
+	//public $index = 'layout/index';
 	
 	function __construct() {
 		parent::__construct ();
@@ -42,6 +43,7 @@ class cismarty extends Smarty {
 		$this->assign ( 'jsFiles1', $this->getJsHtml ( 1 ) );
 		$this->assign ( 'LAYOUT', $this->dir ? $this->dir . '/' . $tpl . '.' . $this->ext : $tpl . '.' . $this->ext );
 		$this->display ( $this->layout . '.' . $this->ext );
+		//$this->display ( $this->index . '.' . $this->ext );
 	}
 	/**
 	 * 添加一个CSS文件包含

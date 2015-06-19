@@ -75,7 +75,6 @@ $(function () {
 		}
 	});
 	
-	
 });
 
 //重新刷新页面，使用location.reload()有可能导致重新提交
@@ -92,6 +91,7 @@ function redirect(url) {
 //点击菜单打开ifrmae页面
 function open_content(url){
 	$("#mainFrame").attr("src",url);
+	$("#load").show();
 	$("#load").show();
 	$("#mainFrame").load(function(){
 		$("#load").hide();
