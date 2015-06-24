@@ -30,6 +30,6 @@ class Test extends MY_Controller {
 	
 	public function del() {
 		
-		echo json_encode(array('referer' => '/'));
+		echo json_encode(array('referer' => '/test/index'));
 	}
 }
