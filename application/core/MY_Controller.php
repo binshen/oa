@@ -20,6 +20,16 @@ class MY_Controller extends CI_Controller
 		ini_set('date.timezone','Asia/Shanghai');
 		$this->cismarty->assign('base_url',base_url());//url路径
 		//$this->show('layout/index');
+		
+		
+		//var_dump($this->session->username);die;
+		
+		if(! $this->session->username)
+		{
+			redirect(site_url('login/index'));
+		}
+		
+		
 	}
 
 

@@ -94,6 +94,18 @@ $(function () {
 			parent.document.getElementById("load").style.display = 'block';
 		}
     })
+    
+    //如果存在搜索框，则用post提交分页
+	if($('.search_form').html()){
+		$(".am-pagination a").click(function(){
+			if($(this).attr('data-ci-pagination-page')){
+				$('.search_form').attr('action',$(this).attr('href'));
+				$('.search_form').submit();
+				return false;
+			}
+			
+		});
+	}
 
 });
 
