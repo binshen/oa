@@ -52,9 +52,8 @@ $(function () {
     }*/
     
     var btnFn = function(){
-    	  conselo.log( e.target );
     	  return false;
-    	};
+    };
     
     if ($('button.btn_del').length) {
     	$('.btn_del').on('click', function(e) {
