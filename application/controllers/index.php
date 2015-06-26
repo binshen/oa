@@ -28,7 +28,7 @@ class Index extends MY_Controller {
 	}
 	
 	public function main(){
-		$this->show('admin-user');
+		$this->show('index');
 	}
 	
 	public function list_user(){
