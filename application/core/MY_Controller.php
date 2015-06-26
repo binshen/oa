@@ -109,9 +109,8 @@ class MY_Controller extends CI_Controller
 	 * @param varchar $message 提示信息
 	 * @param varchar $url 跳转页面，如果为空则后退
 	 * @param int $type 提示类型，1是自动关闭的提示框，2是错误提示框
-	 * @return array 显示页码的数组
 	 **/
-	public function show_message($message,$url=null,$type){
+	public function show_message($message,$url=null,$type=1){
 		if($url){
 			$js = "location.href='".$url."';";
 		}else{
@@ -124,11 +123,11 @@ class MY_Controller extends CI_Controller
 				<head>
 				<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 				<title>".$message."</title>
-				<script src='".base_url()."static/js/jquery-1.11.1.min.js'></script>
-				<link rel='stylesheet' href='".base_url()."static/css/easydialog.css'>
+				<script src='".base_url()."statics/amaze/js/jquery.min.js'></script>
+				<link rel='stylesheet' href='".base_url()."statics/css/easydialog.css'>
 				</head>
 				<body>
-				<script src='".base_url()."static/js/easydialog.min.js'></script>
+				<script src='".base_url()."statics/js/easydialog.min.js'></script>
 				<script>
 				var callFn = function(){
 				  ".$js."
@@ -137,7 +136,7 @@ class MY_Controller extends CI_Controller
 					container : {
 						content : '".$message."'
 					},
-					autoClose : 2000,
+					autoClose : 1200,
 					callback : callFn
 					
 				});

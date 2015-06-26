@@ -29,5 +29,22 @@ class Rule extends MY_Controller {
 		$this->show('rule/list_company');
 	}
 	
+	public function add_company(){
+		$this->show('rule/add_company');
+	}
+	
+	public function save_company(){
+		$rs = $this->rule_model->save_company();
+		if($rs == 1){
+			$this->show_message('保存成功',site_url('rule/list_company'));
+		}else{
+			$this->show_message('保存失败');
+		}
+	}
+	
+	public function del_company($id){
+		//die($id);
+		echo json_encode(array('referer' => '/rule/list_company'));
+	}
 	
 }

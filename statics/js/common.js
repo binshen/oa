@@ -29,7 +29,7 @@ $(function () {
         });
     });
 
-    if ($('button.J_ajax_del').length) {
+/*    if ($('button.J_ajax_del').length) {
     	$('.J_ajax_del').on('click', function(e) {
     		e.preventDefault();
     		$('#my-confirm').modal({
@@ -48,6 +48,24 @@ $(function () {
     	        onCancel: function() {
     	        }
     	    });
+    	});
+    }*/
+    
+    var btnFn = function(){
+    	  conselo.log( e.target );
+    	  return false;
+    	};
+    
+    if ($('button.btn_del').length) {
+    	$('.btn_del').on('click', function(e) {
+    		easyDialog.open({
+    			  container : {
+    			    header : '弹出层标题',
+    			    content : '欢迎使用easyDialog : )',
+    			    yesFn : btnFn,
+    			    noFn : true
+    			  }
+    			});
     	});
     }
     
