@@ -57,11 +57,12 @@ $(function () {
     
     if ($('button.btn_del').length) {
     	$('.btn_del').on('click', function(e) {
+    		url = $(this).attr('data-url');
     		easyDialog.open({
     			  container : {
-    			    header : '弹出层标题',
-    			    content : '欢迎使用easyDialog : )',
-    			    yesFn : btnFn,
+    			    header : '操作',
+    			    content : '您确定删除这条记录？',
+    			    yesFn : function(){location.href=url},
     			    noFn : true
     			  }
     			});

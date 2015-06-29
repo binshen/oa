@@ -19,12 +19,15 @@ class Rule extends MY_Controller {
 		$limit = 2;
 		$offset = ($page - 1) * $limit;
 		
-		$total = $this->rule_model->get_count();
-		$items = $this->rule_model->get_tests($offset, $limit);
+		//$total = $this->rule_model->company_count();
+		//$items = $this->rule_model->list_company($offset, $limit);
+		$data = $this->rule_model->list_company($offset, $limit);
+		
+		
 		$base_url = "/rule/list_company";
-		$pager = $this->pagination->getPageLink($base_url, $total, $limit);
+		$pager = $this->pagination->getPageLink($base_url, $data['total'], $limit);
 		$this->assign('pager', $pager);
-		$this->assign('items', $items);
+		$this->assign('data', $data);
 		
 		$this->show('rule/list_company');
 	}
@@ -43,8 +46,12 @@ class Rule extends MY_Controller {
 	}
 	
 	public function del_company($id){
-		//die($id);
-		echo json_encode(array('referer' => '/rule/list_company'));
+		$rs = $this->rule_model->del_company($id);
+		if($rs == 1){
+			$this->show_message('删除成功',site_url('rule/list_company'));
+		}else{
+			$this->show_message('删除失败');
+		}
 	}
 	
 }

@@ -10,15 +10,35 @@ class rule_model extends MY_Model
     	parent::__construct();
     }
     
-    public function get_count() {
+    public function company_count() {
     	
     	$count = $this->db->count_all_results('company');
     	return $count;
     }
     
-    public function get_tests($offset, $limit){
-    	$results = $this->db->limit($limit, $offset)->get('company')->result_array();
-    	return $results;
+    public function list_company($offset, $limit){
+    	//获取总记录数
+    	$this->db->select('count(1) num')->from('company');
+    	if($this->input->post('company_name')){
+    		$this->db->like('name',$this->input->post('company_name'));
+    	}
+    	$num = $this->db->get()->row();
+    	$data['total'] = $num->num;
+    	
+    	//搜索条件
+    	$data['company_name'] = null;
+    	
+    	//获取详细列
+    	$this->db->select()->from('company');
+    	if($this->input->post('company_name')){
+    		$this->db->like('name',$this->input->post('company_name'));
+    		$data['company_name'] = $this->input->post('company_name');
+    	}
+    	$this->db->limit($limit, $offset);
+    	$data['items'] = $this->db->get()->result_array();
+    	
+    	return $data;
+    	
     }
     
     public function save_company(){
@@ -43,6 +63,19 @@ class rule_model extends MY_Model
     	} else {
     		return 1;
     	}
+    }
+    
+    public function del_company($id){
+    	$this->db->trans_start();//--------开始事务
+    	 
+		$this->db->where('id',$id);
+		$this->db->delete('company');
     	
+    	$this->db->trans_complete();//------结束事务
+    	if ($this->db->trans_status() === FALSE) {
+    		return -1;
+    	} else {
+    		return 1;
+    	}
     }
 }
