@@ -16,7 +16,8 @@ class rule_model extends MY_Model
     	return $count;
     }
     
-    public function list_company($offset, $limit){
+    public function list_company($page){
+    	$data['limit'] = $this->limit;
     	//获取总记录数
     	$this->db->select('count(1) num')->from('company');
     	if($this->input->post('company_name')){
@@ -34,7 +35,7 @@ class rule_model extends MY_Model
     		$this->db->like('name',$this->input->post('company_name'));
     		$data['company_name'] = $this->input->post('company_name');
     	}
-    	$this->db->limit($limit, $offset);
+    	$this->db->limit($this->limit, $offset = ($page - 1) * $this->limit);
     	$data['items'] = $this->db->get()->result_array();
     	
     	return $data;
@@ -77,5 +78,9 @@ class rule_model extends MY_Model
     	} else {
     		return 1;
     	}
+    }
+    
+    public function get_company($id){
+    	return $this->db->select()->from('company')->where('id',$id)->get()->row_array();
     }
 }
