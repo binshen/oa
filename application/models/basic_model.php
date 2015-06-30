@@ -22,7 +22,7 @@ class Basic_model extends MY_Model
     	$data['total'] = $num->num;
     	 
     	//搜索条件
-    	$data['company_name'] = null;
+    	$data['department_name'] = null;
     	 
     	//获取详细列
     	$this->db->select()->from('department');
@@ -34,5 +34,48 @@ class Basic_model extends MY_Model
     	$data['items'] = $this->db->get()->result_array();
     	 
     	return $data;
+    }
+    
+    public function save_department(){
+    	$data = array(
+    		'name'=>$this->input->post('department_name'),
+    		'pid'=>$this->input->post('pid'),
+    		'status'=>$this->input->post('status'),
+    		'cdate'=>date('Y-m-d H:i:s',time())
+    	);
+    	 
+    	$this->db->trans_start();//--------开始事务
+    	 
+    	if($this->input->post('id')){//修改
+    		$this->db->where('id',$this->input->post('id'));
+    		$this->db->update('department',$data);
+    	}else{//新增
+    		$this->db->insert('department',$data);
+    	}
+    	 
+    	$this->db->trans_complete();//------结束事务
+    	if ($this->db->trans_status() === FALSE) {
+    		return -1;
+    	} else {
+    		return 1;
+    	}
+    }
+    
+    public function del_department($id){
+    	$this->db->trans_start();//--------开始事务
+    
+    	$this->db->where('id',$id);
+    	$this->db->delete('department');
+    	 
+    	$this->db->trans_complete();//------结束事务
+    	if ($this->db->trans_status() === FALSE) {
+    		return -1;
+    	} else {
+    		return 1;
+    	}
+    }
+    
+    public function get_department($id){
+    	return $this->db->select()->from('department')->where('id',$id)->get()->row_array();
     }
 }
