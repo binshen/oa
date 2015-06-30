@@ -21,6 +21,8 @@ class Rule extends MY_Controller {
 	}
 	
 	public function add_company(){
+		$company_all = $this->rule_model->list_company_all();
+		$this->assign('company_all', $company_all);
 		$this->show('rule/add_company');
 	}
 	
@@ -45,6 +47,8 @@ class Rule extends MY_Controller {
 	public function edit_company($id){
 		$data = $this->rule_model->get_company($id);
 		$this->assign('data', $data);
+		$company_all = $this->rule_model->list_company_all();
+		$this->assign('company_all', $company_all);
 		$this->show('rule/add_company');
 	}
 	

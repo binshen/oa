@@ -20,6 +20,20 @@
               <input type="hidden" name="id" value="{{$data.id}}">
             </div>
           </div>
+          
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">上级公司</label>
+            <div class="am-u-sm-9">
+              <select name="pid">
+              <option value="0">-无-</option>
+              {{foreach from=$company_all item=row}}
+              	<option value="{{$row.id}}" {{if $row.id == $data.pid}}selected='selected'{{/if}}>{{$row.name}}</option>
+              {{/foreach}}
+              </select>
+            </div>
+          </div>
+          
+          
 
           <div class="am-form-group">
             <label for="user-email" class="am-u-sm-3 am-form-label">状态</label>
