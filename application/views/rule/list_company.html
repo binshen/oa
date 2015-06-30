@@ -33,6 +33,7 @@
               <tr>
                 <th class="table-id">ID</th>
                 <th class="table-title">公司名称</th>
+                <th class="table-title">上级公司</th>
                 <th class="table-type">状态</th>
                 <th class="table-date am-hide-sm-only">创建时间</th>
                 <th class="table-set">操作</th>
@@ -43,6 +44,7 @@
           	<tr>
               <td>{{$item.id}}</td>
               <td><a href="#">{{$item.name}}</a></td>
+              <td>{{if $item.pname}}{{$item.pname}}{{else}}-无-{{/if}}</td>
               <td>{{if $item.status == '1'}}<font class="am-badge am-badge-success">正常</font>{{else}}<font class="am-badge am-badge-danger">停用</font>{{/if}}</td>
               <td class="am-hide-sm-only">{{$item.cdate}}</td>
               <td>

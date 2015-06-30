@@ -11,7 +11,6 @@ class rule_model extends MY_Model
     }
     
     public function company_count() {
-    	
     	$count = $this->db->count_all_results('company');
     	return $count;
     }
@@ -30,9 +29,10 @@ class rule_model extends MY_Model
     	$data['company_name'] = null;
     	
     	//获取详细列
-    	$this->db->select()->from('company');
+    	$this->db->select("a.*,b.name pname")->from('company a');
+    	$this->db->join('company b',"a.pid=b.id","left");
     	if($this->input->post('company_name')){
-    		$this->db->like('name',$this->input->post('company_name'));
+    		$this->db->like('a.name',$this->input->post('company_name'));
     		$data['company_name'] = $this->input->post('company_name');
     	}
     	$this->db->limit($this->limit, $offset = ($page - 1) * $this->limit);
@@ -45,6 +45,7 @@ class rule_model extends MY_Model
     public function save_company(){
     	$data = array(
     			'name'=>$this->input->post('company_name'),
+    			'pid'=>$this->input->post('pid'),
     			'status'=>$this->input->post('status'),
     			'cdate'=>date('Y-m-d H:i:s',time())
     	);
@@ -82,5 +83,9 @@ class rule_model extends MY_Model
     
     public function get_company($id){
     	return $this->db->select()->from('company')->where('id',$id)->get()->row_array();
+    }
+    
+    public function list_company_all(){
+    	return $this->db->select()->from('company')->where('pid',0)->where('status',1)->get()->result_array();
     }
 }
