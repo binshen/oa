@@ -10,46 +10,51 @@ class Rule extends MY_Controller {
 	}
 	
 	
-	public function list_company($page=1){
-		$data = $this->rule_model->list_company($page);
-		$base_url = "/rule/list_company";
+	public function list_rule($page=1){
+		$data = $this->rule_model->list_rule($page);
+		$base_url = "/rule/list_rule";
 		$pager = $this->pagination->getPageLink($base_url, $data['total'], $data['limit']);
 		$this->assign('pager', $pager);
 		$this->assign('data', $data);
 		
-		$this->show('rule/list_company');
+		$this->show('rule/list_rule');
 	}
 	
-	public function add_company(){
-		$company_all = $this->rule_model->list_company_all();
-		$this->assign('company_all', $company_all);
-		$this->show('rule/add_company');
+	public function add_rule(){
+		$menus = $this->rule_model->list_menu_all();
+		$operation_menu = $this->rule_model->get_operation_menu();
+		$this->assign('menus', $menus);
+		$this->assign('operation_menu', $operation_menu);
+		$this->show('rule/add_rule');
 	}
 	
-	public function save_company(){
-		$rs = $this->rule_model->save_company();
+	public function save_rule(){
+		$rs = $this->rule_model->save_rule();
 		if($rs == 1){
-			$this->show_message('保存成功',site_url('rule/list_company'));
+			$this->show_message('保存成功',site_url('rule/list_rule'));
 		}else{
 			$this->show_message('保存失败');
 		}
 	}
 	
-	public function del_company($id){
-		$rs = $this->rule_model->del_company($id);
+	public function del_rule($id){
+		$rs = $this->rule_model->del_rule($id);
 		if($rs == 1){
-			$this->show_message('删除成功',site_url('rule/list_company'));
+			$this->show_message('删除成功',site_url('rule/list_rule'));
 		}else{
 			$this->show_message('删除失败');
 		}
 	}
 	
-	public function edit_company($id){
-		$data = $this->rule_model->get_company($id);
+	public function edit_rule($id){
+		$data = $this->rule_model->get_rule($id);
+		$menus = $this->rule_model->list_menu_all();
+		$operation_menu = $this->rule_model->get_operation_menu();
+		$this->assign('operation_menu', $operation_menu);
+		$this->assign('menus', $menus);
 		$this->assign('data', $data);
-		$company_all = $this->rule_model->list_company_all();
-		$this->assign('company_all', $company_all);
-		$this->show('rule/add_company');
+		$this->show('rule/add_rule');
 	}
+	
 	
 }

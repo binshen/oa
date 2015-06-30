@@ -1,0 +1,79 @@
+<!-- content start -->
+  <div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">添加角色</strong> / <small>Add rule</small></div>
+    </div>
+
+    <hr/>
+
+    <div class="am-g">
+
+      <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+
+      </div>
+      <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+        <form class="am-form am-form-horizontal" method="post" action="/rule/save_rule" onsubmit="return check_input(this);">
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">角色名称</label>
+            <div class="am-u-sm-9">
+              <input type="text" name="mark" id="mark" placeholder="角色" value="{{$data.main.mark}}">
+              <input type="hidden" name="id" value="{{$data.main.id}}">
+            </div>
+          </div>
+
+
+		菜单<br />
+		<div class="am-form-group">
+		{{foreach from=$menus item=row}}
+			<label class="am-checkbox-inline">
+			  <input type="checkbox" class="mid" value="{{$row.id}}" {{if $row.id|in_array:$data.mid}}checked="checked"{{/if}}> {{$row.name}}
+			</label>
+		{{/foreach}}
+		</div>
+		
+		{{foreach from=$operation_menu item=row key=k}}
+		<p class="am-article-lead" id="operation_menu_{{$k}}" {{if !$k|in_array:$data.mid}}style="display:none"{{/if}}>
+		{{$row.0.name}}<br />
+			{{foreach from=$row item=roww}}
+			<label class="am-checkbox-inline">
+			  <input type="checkbox" value="{{$roww.operation}}" name="operation[]" {{if $roww.operation|in_array:$data.operation}}checked="checked"{{/if}}>{{$roww.mark}}
+			</label>
+			{{/foreach}}
+		</p>
+		{{/foreach}}
+
+
+          <div class="am-form-group">
+            <div class="am-u-sm-9 am-u-sm-push-3">
+              <input type="submit" class="am-btn am-btn-primary" value="确认">
+              <a class="am-btn am-btn-default" href="/rule/list_rule">返回</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- content end -->
+<script>
+function check_input(obj){
+	if(!$("#mark").val()){
+		easyDialog.open({
+			container : {
+				content : "角色名称不能为空！"
+			},
+			autoClose : 1200,
+		});
+		return false;
+	}
+}
+
+$(".mid").click(function(){
+	if($(this).is(':checked')){
+		$("#operation_menu_"+$(this).val()).find('input').prop("checked", true)
+		$("#operation_menu_"+$(this).val()).show(500);
+	}else{
+		$("#operation_menu_"+$(this).val()).find('input').prop("checked", false)
+		$("#operation_menu_"+$(this).val()).hide(500);
+	}
+});
+</script>
