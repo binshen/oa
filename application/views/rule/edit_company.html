@@ -1,7 +1,7 @@
 <!-- content start -->
   <div class="admin-content">
     <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">添加公司</strong> / <small>Add company</small></div>
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">修改公司</strong> / <small>Edit company</small></div>
     </div>
 
     <hr/>
@@ -16,7 +16,8 @@
           <div class="am-form-group">
             <label for="user-name" class="am-u-sm-3 am-form-label">公司名称</label>
             <div class="am-u-sm-9">
-              <input type="text" name="company_name" id="company_name" placeholder="公司名称">
+              <input type="text" name="company_name" id="company_name"  placeholder="公司名称" value="{{$data.name}}" >
+              <input type="hidden" name="id" value="{{$data.id}}">
             </div>
           </div>
           
@@ -26,7 +27,7 @@
               <select name="pid">
               <option value="0">-无-</option>
               {{foreach from=$company_all item=row}}
-              	<option value="{{$row.id}}">{{$row.name}}</option>
+              	<option value="{{$row.id}}" {{if $row.id == $data.pid}}selected='selected'{{/if}}>{{$row.name}}</option>
               {{/foreach}}
               </select>
             </div>
@@ -46,7 +47,8 @@
 
           <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
-              <input type="submit" class="am-btn am-btn-primary" value="确认">
+              <a class="am-btn am-btn-default" href="{{site_url url='rule_company/edit_company'}}/{{$data.id}}">修改</a>
+              <input type="submit" class="am-btn am-btn-default" value="保存">
               <a class="am-btn am-btn-default" href="/rule_company/list_company">返回</a>
             </div>
           </div>
@@ -56,6 +58,16 @@
   </div>
   <!-- content end -->
 <script>
+
+$(function(){
+	//判断是否修改,调整界面可编辑项
+	var url = "{{segment_url c='2'}}";
+	if(url.substr(0, 5) == 'show_'){
+    	$('input,textarea,select').attr('disabled','disabled');
+	}
+});
+
+
 function check_input(obj){
 	if(!$("#company_name").val()){
 		easyDialog.open({

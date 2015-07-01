@@ -46,14 +46,18 @@ class Rule extends MY_Controller {
 		}
 	}
 	
-	public function edit_rule($id){
+	public function show_rule($id){
 		$data = $this->rule_model->get_rule($id);
 		$menus = $this->rule_model->list_menu_all();
 		$operation_menu = $this->rule_model->get_operation_menu();
 		$this->assign('operation_menu', $operation_menu);
 		$this->assign('menus', $menus);
 		$this->assign('data', $data);
-		$this->show('rule/add_rule');
+		$this->show('rule/edit_rule');
+	}
+	
+	public function edit_rule($id){
+		$this->show_rule($id);
 	}
 	
 	

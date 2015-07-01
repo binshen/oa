@@ -124,8 +124,10 @@ $(function () {
 			
 		});
 	}
-
+	
 });
+
+
 
 //重新刷新页面，使用location.reload()有可能导致重新提交
 function reloadPage(win) {

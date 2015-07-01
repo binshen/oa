@@ -7,6 +7,11 @@ class Rule_company extends MY_Controller {
 		parent::__construct();
 		$this->load->library('pagination');
 		$this->load->model('rule_model');
+		
+		$rule = array(
+				'list_company','add_company'
+		);
+		
 	}
 	
 	
@@ -44,12 +49,16 @@ class Rule_company extends MY_Controller {
 		}
 	}
 	
-	public function edit_company($id){
+	public function show_company($id){
 		$data = $this->rule_model->get_company($id);
 		$this->assign('data', $data);
 		$company_all = $this->rule_model->list_company_all();
 		$this->assign('company_all', $company_all);
-		$this->show('rule/add_company');
+		$this->show('rule/edit_company');
+	}
+	
+	public function edit_company($id){
+		$this->show_company($id);
 	}
 	
 }
