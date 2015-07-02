@@ -13,10 +13,11 @@
       </div>
       <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
         <form class="am-form am-form-horizontal" method="post" action="/basic_department/save_department" data-am-validator>
+        <fieldset>
           <div class="am-form-group">
             <label for="user-name" class="am-u-sm-3 am-form-label">部门名称</label>
             <div class="am-u-sm-9">
-              <input type="text" name="department_name" id="department_name" placeholder="名称名称" required>
+              <input type="text" name="department_name" id="department_name" placeholder="名称名称" value="{{$data.name}}" required>
               <input type="hidden" name="id" value="{{$data.id}}">
             </div>
           </div>
@@ -27,7 +28,7 @@
               <select name="pid" required>
               <option value="">-请选择上级公司-</option>
               {{foreach from=$company_all item=row}}
-              	<option value="{{$row.id}}" >{{$row.name}}</option>
+              	<option value="{{$row.id}}" {{if $row.id == $data.pid}}selected='selected'{{/if}}>{{$row.name}}</option>
               {{/foreach}}
               </select>
             </div>
@@ -37,20 +38,31 @@
             <label for="user-email" class="am-u-sm-3 am-form-label">状态</label>
             <div class="am-u-sm-9">
               <select name="status" required>
-				<option value="1">正常</option>
-				<option value="-1">停用</option>
+				<option value="1" {{if $data.status == '1'}}selected='selected'{{/if}}>正常</option>
+				<option value="-1"  {{if $data.status == '-1'}}selected='selected'{{/if}}>停用</option>
               </select>
             </div>
           </div>
 
           <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
-              <input type="submit" class="am-btn am-btn-primary" value="确认">
+              <input type="submit" class="am-btn am-btn-primary edit_save" value="保存">
               <a class="am-btn am-btn-default" href="/basic_department/list_department">返回</a>
             </div>
           </div>
+        </fieldset>
         </form>
       </div>
     </div>
   </div>
   <!-- content end -->
+<script>
+$(function(){
+	//判断是否修改,调整界面可编辑项
+	var url = "{{segment_url c='2'}}";
+	if(url.substr(0, 5) == 'show_'){
+    	$('input,textarea,select').attr('disabled','disabled');
+    	$('.edit_save').hide();
+	}
+});
+</script>

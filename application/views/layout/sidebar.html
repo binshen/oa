@@ -1,7 +1,7 @@
 <div class="am-offcanvas-bar admin-offcanvas-bar"  id="menuDiv">
   <ul class="am-list admin-sidebar-list am-panel">
     <li><a href="/"><span class="am-icon-home"></span> 工作台</a></li>
-    <li class="admin-parent">
+<!--     <li class="admin-parent">
       <a class="am-cf" data-am-collapse="{parent: '#menuDiv', target: '#collapse-nav'}">
       	<span class="am-icon-file"></span> 公告管理 <span class="am-icon-angle-right am-fr am-margin-right"></span>
       </a>
@@ -71,7 +71,7 @@
       <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-nav7">
         <li><a href="javascript:open_content('/rule_company/list_company');" class="am-cf"><span class="am-icon-check"></span> 公司管理<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
       </ul>
-    </li>
+    </li> -->
     
     <li class="admin-parent">
       <a class="am-cf" data-am-collapse="{parent: '#menuDiv', target: '#collapse-nav8'}">
@@ -80,9 +80,10 @@
       <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-nav8">
         <li><a href="javascript:open_content('/rule_company/list_company');" class="am-cf"><span class="am-icon-check"></span> 公司管理<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
         <li><a href="javascript:open_content('/rule/list_rule');" class="am-cf"><span class="am-icon-check"></span> 角色管理<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
+        <li><a href="javascript:open_content('/rule_user/list_user');" class="am-cf"><span class="am-icon-check"></span> 用户管理<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
       </ul>
     </li>
-        
+    {{if 1|in_array:$menu}}
     <li class="admin-parent">
       <a class="am-cf" data-am-collapse="{parent: '#menuDiv', target: '#collapse-nav9'}">
       	<span class="am-icon-file"></span> 基础数据 <span class="am-icon-angle-right am-fr am-margin-right"></span>
@@ -91,5 +92,6 @@
         <li><a href="javascript:open_content('/basic_department/list_department');" class="am-cf"><span class="am-icon-check"></span> 部门管理<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
       </ul>
     </li>
+    {{/if}}
   </ul>
 </div>

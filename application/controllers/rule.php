@@ -7,6 +7,7 @@ class Rule extends MY_Controller {
 		parent::__construct();
 		$this->load->library('pagination');
 		$this->load->model('rule_model');
+		
 	}
 	
 	

@@ -153,7 +153,10 @@ class rule_model extends MY_Model
     	$this->db->trans_start();//--------开始事务
     
     	$this->db->where('id',$id);
-    	$this->db->delete('company');
+    	$this->db->delete('rule');
+    	
+    	$this->db->where('rid',$id);
+    	$this->db->delete('rule_operation');
     	 
     	$this->db->trans_complete();//------结束事务
     	if ($this->db->trans_status() === FALSE) {
@@ -194,6 +197,102 @@ class rule_model extends MY_Model
     
     public function list_menu_all(){
     	return $this->db->select()->from('menu')->get()->result_array();
+    }
+    
+    public function list_user($page){
+    	$data['limit'] = $this->limit;
+    	//获取总记录数
+    	$this->db->select('count(1) num')->from('users');
+    	if($this->input->post('dept_id')){
+    		$this->db->where('dept_id',$this->input->post('dept_id'));
+    	}
+    	
+    	if($this->input->post('rel_name')){
+    		$this->db->like('rel_name',$this->input->post('rel_name'));
+    	}
+    	$num = $this->db->get()->row();
+    	$data['total'] = $num->num;
+    
+    	//搜索条件
+    	$data['dept_id'] = null;
+    	$data['rel_name'] = null;
+    
+    	//获取详细列
+    	$this->db->select('a.*,b.name dname,mark')->from('users a');
+    	$this->db->join('department b',"a.dept_id=b.id",'left');
+    	$this->db->join('rule c',"a.rule_id=c.id",'left');
+    	if($this->input->post('dept_id')){
+    		$this->db->where('dept_id',$this->input->post('dept_id'));
+    		$data['dept_id'] = $this->input->post('dept_id');
+    	}
+    	 
+    	if($this->input->post('rel_name')){
+    		$this->db->like('rel_name',$this->input->post('rel_name'));
+    		$data['rel_name'] = $this->input->post('rel_name');
+    	}
+    	
+    	$this->db->limit($this->limit, $offset = ($page - 1) * $this->limit);
+    	$data['items'] = $this->db->get()->result_array();
+    
+    	return $data;
+    
+    }
+    
+    public function save_user(){
+    	$this->db->trans_start();//--------开始事务
+    
+    	$id = $this->input->post('id');
+    	
+    	$data= array(
+    			'username'=>$this->input->post('username'),
+    			'company_id'=>$this->input->post('company_id'),
+    			'dept_id'=>$this->input->post('dept_id'),
+    			'rule_id'=>$this->input->post('rule_id'),
+    			'rel_name'=>$this->input->post('rel_name')
+    	);
+    	if($id){//修改
+    		$data['status'] = $this->input->post('status');
+    		$this->db->where('id',$id);
+    		$this->db->update('users',$data);
+    	}else{//新增
+    		$data['pwd'] = sha1('888888');
+    		$data['cdate'] = date('Y-m-d H:i:s',time());
+    		$this->db->insert('users',$data);
+    	}
+    
+    	$this->db->trans_complete();//------结束事务
+    	if ($this->db->trans_status() === FALSE) {
+    		return -1;
+    	} else {
+    		return 1;
+    	}
+    }
+    
+/*    public function del_user($id){
+    	$this->db->trans_start();//--------开始事务
+    
+    	$this->db->where('id',$id);
+    	$this->db->delete('rule');
+    	
+    	$this->db->trans_complete();//------结束事务
+    	if ($this->db->trans_status() === FALSE) {
+    		return -1;
+    	} else {
+    		return 1;
+    	}
+    }*/
+    
+    public function get_user($id){
+    	$data = $this->db->select()->from('users')->where('id',$id)->get()->result_array();
+    	return $data;
+    }
+    
+    public function list_rule_all(){
+    	return $this->db->select()->from('rule')->get()->result_array();
+    }
+    
+    public function list_dept_all(){
+    	return $this->db->select()->from('department')->where('status','1')->get()->result_array();
     }
     
 }

@@ -16,13 +16,6 @@ if (! defined('BASEPATH'))
  */
 class Login_model extends MY_Model
 {
-    /**
-     * 表名数组
-     * @var array
-     */
-    protected $tables = array(
-            'users',
-    );
 
     public function __construct ()
     {
@@ -44,35 +37,38 @@ class Login_model extends MY_Model
     {
         $username = $this->input->post('username');
         $passwd = $this->input->post('password');
-        $this->db->from($this->tables[0]);
-        $this->db->where('username', $username);
-        $this->db->where('pwd', sha1($passwd));
-        $this->db->where('status', 1);
-        $rs = $this->db->get();
         
-        if ($rs->num_rows() > 0) {
-            $user_info = $rs->row_array();
-/*            $role = '';
+        $rs = $this->db->select()->from('users')
+        		->where('username', $username)
+        		->where('pwd', sha1($passwd))
+        		->where('status', 1)
+        		->get()->row_array();
+        
+        if($rs){
+        	$company = $this->db->select('id,name,status')->from('company')->where('id',$rs['company_id'])->get()->row_array();
+        	if($company['status'] == '-1'){
+        		return -2; //上级公司已经被停用
+        	}
+        	$data['company'] = $company;
+            $operation = array();
+            $menu = array();
             //取用户角色
-            $res = $this->db->select('role')->from($this->tables[4])->where('user_id',$login_id)->get()->result();
+            $res = $this->db->select('a.operation,b.mid')->from('rule_operation a')
+            		->join('operation_menu b','a.operation=b.operation','left')
+            		->where('rid',$rs['rule_id'])->get()->result();
             foreach ($res as $k=>$v){
-            	$role[] = $v->role;
+            	$operation[] = $v->operation;
+            	if(!in_array($v->mid, $menu)){
+            		$menu[] = $v->mid;
+            	}
             }
-            if(!$role)
-            	return false;
-            $result = $this->db->select('module')->from($this->tables[2])->where_in('role',$role)->get()->result();
-            foreach ($result as $v){
-            	$module[] = $v->module;
-            }
-			if(!$role)
-            	return false;
-
-            $user_info['module'] = $module;*/
-            $this->session->set_userdata($user_info);
-
-            return true;
-        } else {
-            return false;
+            $data['operation'] = $operation;
+            $data['menu'] = $menu;
+            $data['user_info'] = $rs;
+            $this->session->set_userdata($data);
+            return 1;
+        }else{
+        	return -1;//用户名或密码错误
         }
     }
     

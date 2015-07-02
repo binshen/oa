@@ -2,24 +2,22 @@
   <div class="admin-content">
 
     <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">部门管理</strong></div>
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">用户管理</strong></div>
     </div>
 
     <div class="am-g">
       <div class="am-u-sm-12 am-u-md-6">
         <div class="am-btn-toolbar">
           <div class="am-btn-group am-btn-group-xs">
-          {{if 'add_department'|in_array:$operation}}
-            <a type="button" class="am-btn am-btn-default" href="{{site_url url='basic_department/add_department'}}"><span class="am-icon-plus"></span> 新增</a>
-          {{/if}}
+            <a type="button" class="am-btn am-btn-default" href="{{site_url url='rule_user/add_user'}}"><span class="am-icon-plus"></span> 新增</a>
           </div>
         </div>
       </div>
-       <form method="post" action="{{site_url url='basic_department/list_department'}}" class="search_form">
+       <form method="post" action="{{site_url url='rule_user/list_user'}}" class="search_form">
       
       <div class="am-u-sm-12 am-u-md-3">
         <div class="am-input-group am-input-group-sm">
-          <input type="text" class="am-form-field" name="department_name" value="{{$data.department_name}}">
+          <input type="text" class="am-form-field" name="rel_name" value="{{$data.rel_name}}">
           <span class="am-input-group-btn">
             <input type="submit" class="am-btn am-btn-default" value="搜索" />
           </span>
@@ -34,7 +32,10 @@
             <thead>
               <tr>
                 <th class="table-id">ID</th>
-                <th class="table-title">公司名称</th>
+                <th class="table-title">用户名</th>
+                <th class="table-title">姓名</th>
+                <th class="table-title">部门</th>
+                <th class="table-title">角色</th>
                 <th class="table-type">状态</th>
                 <th class="table-date am-hide-sm-only">创建时间</th>
                 <th class="table-set">操作</th>
@@ -44,21 +45,17 @@
           	{{foreach from=$data.items key=key item=item}}
           	<tr>
               <td>{{$item.id}}</td>
-              <td><a href="#">{{$item.name}}</a></td>
+              <td><a href="#">{{$item.username}}</a></td>
+              <td>{{$item.rel_name}}</td>
+              <td>{{$item.dname}}</td>
+              <td>{{$item.mark}}</td>
               <td>{{if $item.status == '1'}}<font class="am-badge am-badge-success">正常</font>{{else}}<font class="am-badge am-badge-danger">停用</font>{{/if}}</td>
               <td class="am-hide-sm-only">{{$item.cdate}}</td>
               <td>
                 <div class="am-btn-toolbar">
                   <div class="am-btn-group am-btn-group-xs">
-                    {{if 'show_department'|in_array:$operation}}
-                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="javascript:location.href='{{site_url url='basic_department/show_department'}}/{{$item.id}}';"><span class="am-icon-pencil-square-o"></span> 查看</button>
-                    {{/if}}
-                    {{if 'edit_department'|in_array:$operation}}
-                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="javascript:location.href='{{site_url url='basic_department/edit_department'}}/{{$item.id}}';"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                    {{/if}}
-                    {{if 'del_department'|in_array:$operation}}
-                    <button class="am-btn am-btn-default am-btn-xs am-text-danger btn_del" data-url="{{site_url url='basic_department/del_department'}}/{{$item.id}}"><span class="am-icon-trash-o"></span> 删除</button>
-                    {{/if}}
+                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="javascript:location.href='{{site_url url='rule_company/show_company'}}/{{$item.id}}';"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+                    <button class="am-btn am-btn-default am-btn-xs am-text-danger btn_del" data-url="{{site_url url='rule_company/del_company'}}/{{$item.id}}"><span class="am-icon-trash-o"></span> 删除</button>
                   </div>
                 </div>
               </td>

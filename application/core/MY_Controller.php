@@ -17,17 +17,14 @@ class MY_Controller extends CI_Controller
 		parent::__construct();
 		ini_set('date.timezone','Asia/Shanghai');
 		$this->cismarty->assign('base_url',base_url());//url路径
-		//$this->show('layout/index');
-		
-		
-		//var_dump($this->session->username);die;
-		
-		if(! $this->session->username)
-		{
+		if(! $this->session->userdata('user_info'))
+		{//未登陆
 			redirect(site_url('login/index'));
 		}
-		
-		
+		$this->cismarty->assign('menu',$this->session->userdata('menu'));
+		$this->cismarty->assign('user_info',$this->session->userdata('user_info'));
+		$this->cismarty->assign('operation',$this->session->userdata('operation'));
+		$this->cismarty->assign('company',$this->session->userdata('company'));
 	}
 
 

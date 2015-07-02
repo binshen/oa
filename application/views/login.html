@@ -56,11 +56,18 @@ if(top.location != this.location){
       <label for="password">密码:</label>
       <input type="password" name="password" value="">
       <br>
+      {{if $flag == '-1'}}
+      <a class="am-badge am-badge-danger am-radius">用户名密码错误或者账号已被停用！</a>
+      {{/if}}
+      {{if $flag == '-2'}}
+      <a class="am-badge am-badge-danger am-radius">您所在公司账号已被停用，您无法登陆！</a>
+      {{/if}}
       <br />
       <div class="am-cf">
         <input type="submit"  value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl">
         <input type="submit" value="忘记密码 ^_^? " class="am-btn am-btn-default am-btn-sm am-fr">
       </div>
+      
     </form>
     <hr>
     <p>© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
