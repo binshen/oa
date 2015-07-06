@@ -64,9 +64,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '127.0.0.1',
+	'hostname' => '121.40.97.183',
 	'username' => 'root',
-	'password' => '',
+	'password' => 'soukecsk',
 	'database' => 'oa_db',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

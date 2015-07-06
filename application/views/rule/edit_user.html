@@ -1,0 +1,77 @@
+<!-- content start -->
+  <div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">修改用户</strong> / <small>Edit user</small></div>
+    </div>
+
+    <hr/>
+
+    <div class="am-g">
+
+      <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+
+      </div>
+      <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+        <form class="am-form am-form-horizontal" method="post" action="/rule_user/save_user" data-am-validator>
+        <fieldset>
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">用户名</label>
+            <div class="am-u-sm-9">
+              <input type="text" name="username" placeholder="用户名" value="{{$data.username}}" required>
+            </div>
+          </div>
+          
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">真实姓名</label>
+            <div class="am-u-sm-9">
+              <input type="text" name="rel_name" placeholder="真实姓名" value="{{$data.rel_name}}" required>
+            </div>
+          </div>
+          
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">所属部门</label>
+            <div class="am-u-sm-9">
+              <select name="dept_id" required>
+              <option value="">-请选择部门-</option>
+              {{foreach from=$dept item=row}}
+              	<option value="{{$row.id}}" {{if $row.id == $data.dept_id}}selected='selected'{{/if}}>{{$row.name}}</option>
+              {{/foreach}}
+              </select>
+            </div>
+          </div>
+          
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">角色</label>
+            <div class="am-u-sm-9">
+              <select name="rule_id" required>
+              <option value="">-请选择角色-</option>
+              {{foreach from=$rules item=row}}
+              	<option value="{{$row.id}}"  {{if $row.id == $data.rule_id}}selected='selected'{{/if}}>{{$row.mark}}</option>
+              {{/foreach}}
+              </select>
+            </div>
+          </div>
+          
+          
+          <div class="am-form-group">
+            <label for="user-email" class="am-u-sm-3 am-form-label">状态</label>
+            <div class="am-u-sm-9">
+              <select name="status">
+				<option value="1" {{if $data.status == '1'}}selected='selected'{{/if}}>正常</option>
+				<option value="-1"  {{if $data.status == '-1'}}selected='selected'{{/if}}>停用</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <div class="am-u-sm-9 am-u-sm-push-3">
+              <button class="am-btn am-btn-secondary" type="submit">提交</button>
+              <a class="am-btn am-btn-default" href="/rule_user/list_user">返回</a>
+            </div>
+          </div>
+        </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- content end -->

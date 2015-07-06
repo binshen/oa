@@ -7,7 +7,6 @@ class Basic_department extends MY_Controller {
 		
 		parent::__construct();
 		
-		$this->load->library('pagination');
 		$this->load->model('basic_model');
 		$this->load->model('rule_model');
 	}

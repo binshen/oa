@@ -283,7 +283,7 @@ class rule_model extends MY_Model
     }*/
     
     public function get_user($id){
-    	$data = $this->db->select()->from('users')->where('id',$id)->get()->result_array();
+    	$data = $this->db->select()->from('users')->where('id',$id)->get()->row_array();
     	return $data;
     }
     
