@@ -86,7 +86,7 @@ class Executive_model extends MY_Model
     	 
     	$data['limit'] = $this->limit;
     	//获取总记录数
-    	$this->db->select('count(1) num')->from('bulletin_main');
+    	$this->db->select('count(1) num')->from('bulletin');
     	if($this->input->post('bulletin_title')){
     		$this->db->like('title',$this->input->post('bulletin_title'));
     	}
@@ -97,8 +97,8 @@ class Executive_model extends MY_Model
     	$data['bulletin_title'] = null;
     	 
     	//获取详细列
-    	$this->db->select('bulletin_main.*, users.username AS uname')->from('bulletin_main');
-    	$this->db->join('users', 'bulletin_main.from_uid = users.id', 'left');
+    	$this->db->select('bulletin.*, users.username AS uname')->from('bulletin');
+    	$this->db->join('users', 'bulletin.from_uid = users.id', 'left');
     	if($this->input->post('bulletin_title')){
     		$this->db->like('title',$this->input->post('bulletin_title'));
     		$data['bulletin_title'] = $this->input->post('bulletin_title');
@@ -107,5 +107,49 @@ class Executive_model extends MY_Model
     	$data['items'] = $this->db->get()->result_array();
     	 
     	return $data;
+    }
+    
+    public function save_bulletin() {
+    	
+    	$data = array(
+    		'title'=>$this->input->post('title'),
+    		'content'=>$this->input->post('editorValue'),
+    		'cdate'=>date('Y-m-d H:i:s'),
+    		'from_uid'=>$this->session->get_userdata()['user_info']['id']
+    	);
+    	
+    	$this->db->trans_start();//--------开始事务
+    	
+    	if($this->input->post('id')){//修改
+    		$this->db->where('id',$this->input->post('id'));
+    		$this->db->update('bulletin',$data);
+    	}else{//新增
+    		$this->db->insert('bulletin',$data);
+    	}
+    	
+    	$this->db->trans_complete();//------结束事务
+    	if ($this->db->trans_status() === FALSE) {
+    		return -1;
+    	} else {
+    		return 1;
+    	}
+    }
+    
+    public function del_bulletin($id){
+    	$this->db->trans_start();//--------开始事务
+    
+    	$this->db->where('id',$id);
+    	$this->db->delete('bulletin');
+    
+    	$this->db->trans_complete();//------结束事务
+    	if ($this->db->trans_status() === FALSE) {
+    		return -1;
+    	} else {
+    		return 1;
+    	}
+    }
+    
+    public function get_bulletin($id){
+    	return $this->db->select()->from('bulletin')->where('id',$id)->get()->row_array();
     }
 }

@@ -19,8 +19,6 @@ class Xz_bulletin extends MY_Controller {
 	}
 	
 	public function add_bulletin(){
-		//$company_all = $this->executive_model->list_bulletin_all();
-		//$this->assign('company_all', $company_all);
 		$this->show('executive/add_bulletin');
 	}
 	
@@ -45,8 +43,6 @@ class Xz_bulletin extends MY_Controller {
 	public function show_bulletin($id){
 		$data = $this->executive_model->get_bulletin($id);
 		$this->assign('data', $data);
-		$company_all = $this->executive_model->list_bulletin_all();
-		$this->assign('company_all', $company_all);
 		$this->show('executive/edit_bulletin');
 	}
 	

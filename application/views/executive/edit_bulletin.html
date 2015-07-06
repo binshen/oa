@@ -4,7 +4,7 @@
 <!-- content start -->
   <div class="admin-content">
     <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">添加公告</strong> / <small>Add bulletin</small></div>
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">修改公告</strong> / <small>Add bulletin</small></div>
     </div>
 
     <hr/>
@@ -18,20 +18,22 @@
           <div class="am-form-group">
             <label for="user-name" class="am-u-sm-2 am-form-label">标题</label>
             <div class="am-u-sm-10">
-              <input type="text" name="title" id="title" placeholder="标题">
+              <input type="text" name="title" id="title" placeholder="标题" value="{{$data.title}}">
+              <input type="hidden" name="id" value="{{$data.id}}">
             </div>
           </div>
           
           <div class="am-form-group">
             <label for="user-name" class="am-u-sm-2 am-form-label">内容</label>
             <div class="am-u-sm-10">
-              <textarea id="editor" ></textarea>
+              <textarea id="editor" >{{$data.content}}</textarea>
             </div>
           </div>
 
           <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
-              <input type="submit" class="am-btn am-btn-primary" value="确认">
+              <a class="am-btn am-btn-default" href="{{site_url url='xz_bulletin/edit_bulletin'}}/{{$data.id}}">修改</a>
+              <input type="submit" class="am-btn am-btn-default" value="保存">
               <a class="am-btn am-btn-default" href="/xz_bulletin/list_bulletin">返回</a>
             </div>
           </div>
@@ -44,6 +46,15 @@
 <script type="text/javascript">
 	var ue = UE.getEditor('editor', { initialFrameWidth:850 });
 	
+	$(function(){
+		//判断是否修改,调整界面可编辑项
+		var url = "{{segment_url c='2'}}";
+		if(url.substr(0, 5) == 'show_'){
+	    	$('input,textarea,select').attr('disabled','disabled');
+		}
+	});
+
+
 	function check_input(obj){
 		if(!$("#title").val()){
 			easyDialog.open({
