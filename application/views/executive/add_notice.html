@@ -1,3 +1,6 @@
+
+<script type="text/javascript" charset="utf-8" src="/statics/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/statics/ueditor/ueditor.all.min.js"> </script>
 <!-- content start -->
   <div class="admin-content">
     <div class="am-cf am-padding">
@@ -17,6 +20,13 @@
             <label for="user-name" class="am-u-sm-3 am-form-label">标题</label>
             <div class="am-u-sm-9">
               <input type="text" name="title" id="title" placeholder="标题">
+            </div>
+          </div>
+          
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">标题</label>
+            <div class="am-u-sm-9">
+              <textarea id="editor" ></textarea>
             </div>
           </div>
           
@@ -55,3 +65,6 @@
     </div>
   </div>
   <!-- content end -->
+<script type="text/javascript">
+	var ue = UE.getEditor('editor');
+</script>
