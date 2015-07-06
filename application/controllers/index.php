@@ -20,6 +20,8 @@ class Index extends MY_Controller {
 	{
 		parent::__construct();
 		$this->load->model('index_model');
+		
+		$this->load->model('executive_model');
 	}
 	
 	public function index()
@@ -28,6 +30,10 @@ class Index extends MY_Controller {
 	}
 	
 	public function main(){
+		
+		$bulletins = $this->executive_model->display_bulletin();
+		$this->assign('bulletins', $bulletins);
+		
 		$this->show('index');
 	}
 	

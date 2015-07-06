@@ -80,6 +80,14 @@ class Executive_model extends MY_Model
     }
     
     /**
+     * 首页*公告
+     */
+    public function display_bulletin() {
+    	
+    	return $this->db->from('bulletin')->order_by('cdate', 'DESC')->limit(3)->get()->result_array();
+    }
+    
+    /**
      * 行政*公告(Bulletin)
      */
     public function list_bulletin($page) {
