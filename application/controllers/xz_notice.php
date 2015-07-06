@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Notice extends MY_Controller {
+class Xz_notice extends MY_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('notice_model');
+		$this->load->model('executive_model');
 	}
 	
 	
