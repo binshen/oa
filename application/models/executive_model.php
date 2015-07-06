@@ -78,4 +78,34 @@ class Executive_model extends MY_Model
     public function get_department($id){
     	return $this->db->select()->from('department')->where('id',$id)->get()->row_array();
     }
+    
+    /**
+     * 行政*公告(Bulletin)
+     */
+    public function list_bulletin($page) {
+    	 
+    	$data['limit'] = $this->limit;
+    	//获取总记录数
+    	$this->db->select('count(1) num')->from('bulletin_main');
+    	if($this->input->post('bulletin_title')){
+    		$this->db->like('title',$this->input->post('bulletin_title'));
+    	}
+    	$num = $this->db->get()->row();
+    	$data['total'] = $num->num;
+    	 
+    	//搜索条件
+    	$data['bulletin_title'] = null;
+    	 
+    	//获取详细列
+    	$this->db->select('bulletin_main.*, users.username AS uname')->from('bulletin_main');
+    	$this->db->join('users', 'bulletin_main.from_uid = users.id', 'left');
+    	if($this->input->post('bulletin_title')){
+    		$this->db->like('title',$this->input->post('bulletin_title'));
+    		$data['bulletin_title'] = $this->input->post('bulletin_title');
+    	}
+    	$this->db->limit($this->limit, $offset = ($page - 1) * $this->limit);
+    	$data['items'] = $this->db->get()->result_array();
+    	 
+    	return $data;
+    }
 }
