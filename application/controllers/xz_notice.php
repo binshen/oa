@@ -9,26 +9,25 @@ class Xz_notice extends MY_Controller {
 	}
 	
 	
-	public function list_company($page=1){
-		$data = $this->rule_model->list_company($page);
-		$base_url = "/rule_company/list_company";
+	public function list_notice($page=1){
+		$data = $this->executive_model->list_notice($page);
+		$base_url = "/xz_notice/list_notice";
 		$pager = $this->pagination->getPageLink($base_url, $data['total'], $data['limit']);
 		$this->assign('pager', $pager);
 		$this->assign('data', $data);
-		
-		$this->show('rule/list_company');
+		$this->show('executive/list_notice');
 	}
 	
-	public function add_company(){
-		$company_all = $this->rule_model->list_company_all();
-		$this->assign('company_all', $company_all);
-		$this->show('rule/add_company');
+	public function add_notice(){
+		//$company_all = $this->rule_model->list_company_all();
+		//$this->assign('company_all', $company_all);
+		$this->show('executive/add_notice');
 	}
 	
-	public function save_company(){
-		$rs = $this->rule_model->save_company();
+	public function save_notice(){
+		$rs = $this->executive_model->save_notice();
 		if($rs == 1){
-			$this->show_message('保存成功',site_url('rule_company/list_company'));
+			$this->show_message('保存成功',site_url('executive/list_notice'));
 		}else{
 			$this->show_message('保存失败');
 		}

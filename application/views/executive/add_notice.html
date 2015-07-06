@@ -1,0 +1,57 @@
+<!-- content start -->
+  <div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">添加通知</strong> / <small>Add notice</small></div>
+    </div>
+
+    <hr/>
+
+    <div class="am-g">
+
+      <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+
+      </div>
+      <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+        <form class="am-form am-form-horizontal" method="post" action="/xz_notice/save_notice" >
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">标题</label>
+            <div class="am-u-sm-9">
+              <input type="text" name="title" id="title" placeholder="标题">
+            </div>
+          </div>
+          
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">上级公司</label>
+            <div class="am-u-sm-9">
+              <select name="pid">
+              <option value="0">-无-</option>
+              {{foreach from=$company_all item=row}}
+              	<option value="{{$row.id}}">{{$row.name}}</option>
+              {{/foreach}}
+              </select>
+            </div>
+          </div>
+          
+          
+
+          <div class="am-form-group">
+            <label for="user-email" class="am-u-sm-3 am-form-label">状态</label>
+            <div class="am-u-sm-9">
+              <select name="status">
+				<option value="1" {{if $data.status == '1'}}selected='selected'{{/if}}>正常</option>
+				<option value="-1"  {{if $data.status == '-1'}}selected='selected'{{/if}}>停用</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <div class="am-u-sm-9 am-u-sm-push-3">
+              <input type="submit" class="am-btn am-btn-primary" value="确认">
+              <a class="am-btn am-btn-default" href="/rule_company/list_company">返回</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- content end -->

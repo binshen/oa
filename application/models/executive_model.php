@@ -14,21 +14,21 @@ class Executive_model extends MY_Model
     {
     	$data['limit'] = $this->limit;
     	//获取总记录数
-    	$this->db->select('count(1) num')->from('department');
-    	if($this->input->post('department_name')){
-    		$this->db->like('name',$this->input->post('department_name'));
+    	$this->db->select('count(1) num')->from('notice_main');
+    	if($this->input->post('title')){
+    		$this->db->like('title',$this->input->post('title'));
     	}
     	$num = $this->db->get()->row();
     	$data['total'] = $num->num;
     	 
     	//搜索条件
-    	$data['department_name'] = null;
+    	$data['title'] = null;
     	 
     	//获取详细列
-    	$this->db->select()->from('department');
-    	if($this->input->post('department_name')){
-    		$this->db->like('name',$this->input->post('department_name'));
-    		$data['department_name'] = $this->input->post('department_name');
+    	$this->db->select()->from('notice_main');
+    	if($this->input->post('title')){
+    		$this->db->like('title',$this->input->post('title'));
+    		$data['title'] = $this->input->post('title');
     	}
     	$this->db->limit($this->limit, $offset = ($page - 1) * $this->limit);
     	$data['items'] = $this->db->get()->result_array();
@@ -36,7 +36,7 @@ class Executive_model extends MY_Model
     	return $data;
     }
     
-    public function save_department(){
+    public function save_notice(){
     	$data = array(
     		'name'=>$this->input->post('department_name'),
     		'pid'=>$this->input->post('pid'),
