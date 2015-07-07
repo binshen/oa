@@ -30,6 +30,21 @@
             </div>
           </div>
 
+		  <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-2 am-form-label">审核</label>
+            <div class="am-u-sm-10">
+              <select data-am-selected="{searchBox: 1, dropUp: 1, btnWidth: '250px'}" id="departmentSelect">
+              	<option value="-1">- 选择部门 -</option>
+              	{{foreach from=$departments key=key item=item}}
+              	<option value="{{$item.id}}">{{$item.name}}</option>
+              	{{/foreach}}
+			  </select>
+			  <select data-am-selected="{searchBox: 1, dropUp: 1}" id="checkerSelect">
+			  	<option value="-1">- 选择审核人 -</option>
+			  </select>
+            </div>
+          </div>
+
           <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
               <a class="am-btn am-btn-default" href="{{site_url url='xz_bulletin/edit_bulletin'}}/{{$data.id}}">修改</a>
@@ -69,4 +84,18 @@
 			return false;
 		}
 	}
+	
+	$("#departmentSelect").change(function() {
+		var department_id = $(this).val();
+		if(department_id > 0) {
+			$.get('/xz_bulletin/get_user_list/' + department_id, function(data) {
+				var json = JSON.parse(data);
+				$("#checkerSelect").empty();
+				$("#checkerSelect").append('<option value="-1">- 选择审核人 -</option>');
+				for(var i=0; i<json.length; i++) {
+					$("#checkerSelect").append('<option value="' + json[i].id + '">' + json[i].rel_name + '</option>');
+				}
+			});
+		}
+	});
 </script>
