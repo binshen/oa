@@ -240,12 +240,12 @@ class rule_model extends MY_Model
     
     public function save_user(){
     	$this->db->trans_start();//--------开始事务
-    
+    	$company = $this->session->userdata('company');
     	$id = $this->input->post('id');
     	
     	$data= array(
     			'username'=>$this->input->post('username'),
-    			'company_id'=>$this->input->post('company_id'),
+    			'company_id'=>$company['id'],
     			'dept_id'=>$this->input->post('dept_id'),
     			'rule_id'=>$this->input->post('rule_id'),
     			'rel_name'=>$this->input->post('rel_name')

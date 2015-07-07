@@ -30,15 +30,40 @@
             </div>
           </div>
           
+          
           <div class="am-form-group">
-            <label for="user-email" class="am-u-sm-2 am-form-label">状态</label>
+            <label for="user-name" class="am-u-sm-2 am-form-label">收件人</label>
             <div class="am-u-sm-10">
-              <select name="status">
-				<option value="1" {{if $data.status == '1'}}selected='selected'{{/if}}>正常</option>
-				<option value="-1"  {{if $data.status == '-1'}}selected='selected'{{/if}}>停用</option>
-              </select>
+            
+            {{foreach from=$data item=row key=k name=foo}}
+            <div id="all_company_{{$smarty.foreach.foo.index}}">
+            <label class="am-checkbox-inline">
+				<input type="checkbox" class="select_all" select_option="all_company_{{$smarty.foreach.foo.index}}"><b>{{$k}}</b>
+			</label>
+            <HR align=left width=490 color=#990099 size=3 noShade>
+            	{{foreach from=$row item=roww key=kk name=fooo}}
+				<p class="am-article-lead" id="">
+				{{$kk}}
+				  <label class="am-checkbox-inline">
+					  <input type="checkbox" class="select_all" select_option="all_dept_{{$smarty.foreach.foo.index}}_{{$smarty.foreach.fooo.index}}">全选
+					</label>
+				<br />
+				<span id="all_dept_{{$smarty.foreach.foo.index}}_{{$smarty.foreach.fooo.index}}">
+					{{foreach from=$roww item=rowww}}
+					<label class="am-checkbox-inline">
+					  <input type="checkbox" value="{{$rowww.id}}" name="uid[]" >{{$rowww.rel_name}}
+					</label>
+					{{/foreach}}
+				</span>
+				</p>
+				{{/foreach}}
+			</div>
+			{{/foreach}}
+				
+				
             </div>
           </div>
+          
 
           <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
@@ -53,4 +78,12 @@
   <!-- content end -->
 <script type="text/javascript">
 	var ue = UE.getEditor('editor');
+	$(".select_all").click(function(){
+		id = $(this).attr('select_option');
+		if($(this).is(':checked')){
+			$('#'+id).find('input').prop("checked", true);
+		}else{
+			$('#'+id).find('input').prop("checked", false);
+		}
+	});
 </script>

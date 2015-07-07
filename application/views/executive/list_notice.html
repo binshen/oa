@@ -42,15 +42,13 @@
           	{{foreach from=$data.items key=key item=item}}
           	<tr>
               <td>{{$item.id}}</td>
-              <td><a href="#">{{$item.name}}</a></td>
-              <td>{{if $item.pname}}{{$item.pname}}{{else}}-无-{{/if}}</td>
-              <td>{{if $item.status == '1'}}<font class="am-badge am-badge-success">正常</font>{{else}}<font class="am-badge am-badge-danger">停用</font>{{/if}}</td>
+              <td><a href="#">{{$item.title}}</a></td>
+              <td>{{$item.rel_name}}</td>
               <td class="am-hide-sm-only">{{$item.cdate}}</td>
               <td>
                 <div class="am-btn-toolbar">
                   <div class="am-btn-group am-btn-group-xs">
-                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="javascript:location.href='{{site_url url='rule_company/show_company'}}/{{$item.id}}';"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                    <button class="am-btn am-btn-default am-btn-xs am-text-danger btn_del" data-url="{{site_url url='rule_company/del_company'}}/{{$item.id}}"><span class="am-icon-trash-o"></span> 删除</button>
+                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="javascript:location.href='{{site_url url='xz_notice/show_notice'}}/{{$item.id}}';"><span class="am-icon-pencil-square-o"></span> 查看</button>
                   </div>
                 </div>
               </td>

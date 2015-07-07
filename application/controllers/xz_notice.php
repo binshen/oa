@@ -19,15 +19,21 @@ class Xz_notice extends MY_Controller {
 	}
 	
 	public function add_notice(){
-		//$company_all = $this->rule_model->list_company_all();
-		//$this->assign('company_all', $company_all);
+		$data = $this->executive_model->get_company_dept();
+		$this->assign('data', $data);
 		$this->show('executive/add_notice');
+	}
+	
+	public function show_notice($id){
+		$data = $this->executive_model->get_notice($id);
+		$this->assign('data', $data);
+		$this->show('executive/edit_notice');
 	}
 	
 	public function save_notice(){
 		$rs = $this->executive_model->save_notice();
 		if($rs == 1){
-			$this->show_message('保存成功',site_url('executive/list_notice'));
+			$this->show_message('保存成功',site_url('xz_notice/list_notice'));
 		}else{
 			$this->show_message('保存失败');
 		}
