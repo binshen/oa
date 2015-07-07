@@ -101,7 +101,7 @@ class rule_model extends MY_Model
     	$data['total'] = $num->num;
     	 
     	//搜索条件
-    	$data['rule'] = null;
+    	$data['mark'] = null;
     	 
     	//获取详细列
     	$this->db->select()->from('rule');

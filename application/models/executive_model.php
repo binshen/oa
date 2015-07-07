@@ -20,39 +20,52 @@ class Executive_model extends MY_Model
     	}
     	$num = $this->db->get()->row();
     	$data['total'] = $num->num;
-    	 
+    
     	//搜索条件
     	$data['title'] = null;
-    	 
+    
     	//获取详细列
-    	$this->db->select()->from('notice_main');
+    	$this->db->select('a.id,title,a.cdate,b.rel_name')->from('notice_main a');
+    	$this->db->join('users b','a.from_uid=b.id','left');
     	if($this->input->post('title')){
     		$this->db->like('title',$this->input->post('title'));
     		$data['title'] = $this->input->post('title');
     	}
     	$this->db->limit($this->limit, $offset = ($page - 1) * $this->limit);
     	$data['items'] = $this->db->get()->result_array();
-    	 
+    
     	return $data;
     }
     
     public function save_notice(){
+    	$user_info = $this->session->userdata('user_info');
+    	$company = $this->session->userdata('company');
     	$data = array(
-    		'name'=>$this->input->post('department_name'),
-    		'pid'=>$this->input->post('pid'),
-    		'status'=>$this->input->post('status'),
-    		'cdate'=>date('Y-m-d H:i:s',time())
+    			'title'=>$this->input->post('title'),
+    			'content'=>$this->input->post('content'),
+    			'from_uid'=>$user_info['id'],
+    			'company_id'=>$company['id'],
+    			'to_user'=>'',
+    			'cdate'=>date('Y-m-d H:i:s',time())
     	);
     	 
-    	$this->db->trans_start();//--------开始事务
+    	$rs = $this->db->select('rel_name')->from('users')->where_in('id',$this->input->post('uid'))->get()->result_array();
     	 
-    	if($this->input->post('id')){//修改
-    		$this->db->where('id',$this->input->post('id'));
-    		$this->db->update('department',$data);
-    	}else{//新增
-    		$this->db->insert('department',$data);
+    	foreach($rs as $v){
+    		$data['to_user'] = $v['rel_name'].';'.$data['to_user'];
     	}
     	 
+    	 
+    	$this->db->trans_start();//--------开始事务
+    
+    	$this->db->insert('notice_main',$data);
+    	 
+    	$id = $this->db->insert_id();
+    	 
+    	foreach ($this->input->post('uid') as $v){
+    		$this->db->insert('notice_list',array('mid'=>$id,'uid'=>$v,'read'=>0));
+    	}
+    
     	$this->db->trans_complete();//------结束事务
     	if ($this->db->trans_status() === FALSE) {
     		return -1;
@@ -61,22 +74,52 @@ class Executive_model extends MY_Model
     	}
     }
     
-    public function del_department($id){
-    	$this->db->trans_start();//--------开始事务
+    public function get_company_dept(){
+    	$company = $this->session->userdata('company');
+    	$company_id = $company['id'];
+    	$sql = 'SELECT
+					a.id,
+					a.rel_name,
+					b.`name` company_name,
+					c.`name` dept_name
+				FROM
+					users a
+				LEFT JOIN company b ON a.company_id = b.id
+				LEFT JOIN department c ON a.dept_id = c.id
+				WHERE
+					dept_id IN (
+						SELECT
+							a.id
+						FROM
+							department a
+						LEFT JOIN company b ON a.pid = b.id
+						WHERE
+							a.pid IN (
+								SELECT
+									id
+								FROM
+									company
+								WHERE
+									pid = '.$company_id.'
+								OR id = '.$company_id.'
+							)
+					)';
     
-    	$this->db->where('id',$id);
-    	$this->db->delete('department');
-    	 
-    	$this->db->trans_complete();//------结束事务
-    	if ($this->db->trans_status() === FALSE) {
-    		return -1;
-    	} else {
-    		return 1;
+    	$query = $this->db->query($sql);
+    	$rs = $query->result_array();
+    	$data = array();
+    
+    	foreach($rs as $k=>$v){
+    		$data[$v['company_name']][$v['dept_name']][] = $v;
     	}
+    	return $data;
     }
     
-    public function get_department($id){
-    	return $this->db->select()->from('department')->where('id',$id)->get()->row_array();
+    public function get_notice($id){
+    	$data = $this->db->select('a.*,b.rel_name')->from('notice_main a')
+    	->join('users b','a.from_uid=b.id','left')
+    	->where('a.id',$id)->get()->row_array();
+    	return $data;
     }
     
     /**
