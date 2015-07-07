@@ -139,6 +139,7 @@ class Executive_model extends MY_Model
     		$check_data = array(
     			'bid' => $bid,
     			'uid' => $this->input->post('user_id'),
+    			'dept_id' => $this->input->post('dept_id'),
     			'status' => 0
     		);
     		$this->db->insert('bulletin_check',$check_data);
@@ -178,5 +179,9 @@ class Executive_model extends MY_Model
     
     public function get_user_list($dept_id) {
     	return $this->db->select('id, rel_name')->get_where('users', array('dept_id' => $dept_id))->result_array();
+    }
+    
+    public function get_bulletin_check($bid) {
+    	return $this->db->order_by('id', 'ASC')->get_where('bulletin_check', array('bid' => $bid))->row_array();
     }
 }

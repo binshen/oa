@@ -19,10 +19,8 @@ class Xz_bulletin extends MY_Controller {
 	}
 	
 	public function add_bulletin(){
-		
 		$departments = $this->executive_model->get_department_list();
 		$this->assign('departments', $departments);
-		
 		$this->show('executive/add_bulletin');
 	}
 	
@@ -45,8 +43,15 @@ class Xz_bulletin extends MY_Controller {
 	}
 	
 	public function show_bulletin($id){
+		$departments = $this->executive_model->get_department_list();
+		$this->assign('departments', $departments);
+		
 		$data = $this->executive_model->get_bulletin($id);
 		$this->assign('data', $data);
+		
+		$bulletin_check = $this->executive_model->get_bulletin_check($id);
+		$this->assign('bulletin_check', $bulletin_check);
+		
 		$this->show('executive/edit_bulletin');
 	}
 	

@@ -35,7 +35,7 @@
               <select data-am-selected="{searchBox: 1, dropUp: 1, btnWidth: '250px'}" id="departmentSelect" name="dept_id">
               	<option value="-1">- 选择部门 -</option>
               	{{foreach from=$departments key=key item=item}}
-              	<option value="{{$item.id}}">{{$item.name}}</option>
+              	<option value="{{$item.id}}" >{{$item.name}}</option>
               	{{/foreach}}
 			  </select>
 			  <select data-am-selected="{searchBox: 1, dropUp: 1}" id="checkerSelect" name="user_id">

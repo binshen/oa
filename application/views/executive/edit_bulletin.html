@@ -36,7 +36,7 @@
               <select data-am-selected="{searchBox: 1, dropUp: 1, btnWidth: '250px'}" id="departmentSelect">
               	<option value="-1">- 选择部门 -</option>
               	{{foreach from=$departments key=key item=item}}
-              	<option value="{{$item.id}}">{{$item.name}}</option>
+              	<option value="{{$item.id}}" {{if $item.id == $bulletin_check.dept_id}}selected{{/if}}>{{$item.name}}</option>
               	{{/foreach}}
 			  </select>
 			  <select data-am-selected="{searchBox: 1, dropUp: 1}" id="checkerSelect">
@@ -93,7 +93,13 @@
 				$("#checkerSelect").empty();
 				$("#checkerSelect").append('<option value="-1">- 选择审核人 -</option>');
 				for(var i=0; i<json.length; i++) {
-					$("#checkerSelect").append('<option value="' + json[i].id + '">' + json[i].rel_name + '</option>');
+					var id = json[i].id;
+					var name = json[i].rel_name;
+					var selected = "";
+					if(id == '{{$bulletin_check.uid}}') {
+						selected = "selected";
+					}
+					$("#checkerSelect").append('<option value="' + json[i].id + '" ' + selected + '>' + json[i].rel_name + '</option>');
 				}
 			});
 		}
