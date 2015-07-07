@@ -78,16 +78,12 @@ class Xz_bulletin extends MY_Controller {
 	}
 	
 	public function confirm_bulletin() {
-		
 		$this->executive_model->confirm_bulletin();
-		
-		$this->show('index');
+		redirect('/index/main');
 	}
 	
 	public function continue_bulletin() {
-		
 		$this->executive_model->continue_bulletin();
-	
-		$this->show('index');
+		redirect('/index/main');
 	}
 }

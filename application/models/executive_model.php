@@ -213,11 +213,12 @@ class Executive_model extends MY_Model
     }
     
     public function get_user_list($dept_id) {
-    	return $this->db->select('id, rel_name')->get_where('users', array('dept_id' => $dept_id))->result_array();
+    	$user_id = $this->session->userdata('user_info')['id'];
+    	return $this->db->select('id, rel_name')->get_where('users', array('dept_id' => $dept_id, 'id <>' => $user_id))->result_array();
     }
     
     public function get_bulletin_check($bid) {
-    	return $this->db->order_by('id', 'ASC')->get_where('bulletin_check', array('bid' => $bid))->row_array();
+    	return $this->db->order_by('id', 'DESC')->get_where('bulletin_check', array('bid' => $bid))->row_array();
     }
     
     public function confirm_bulletin() {
@@ -227,7 +228,7 @@ class Executive_model extends MY_Model
 		$this->db->update('bulletin', array('checked' => 1));
     	
 		$this->db->where('id', $this->input->post('bc_id'));
-		$this->db->update('bulletin_check', array('status' => 2));
+		$this->db->update('bulletin_check', array('status' => 3));
 		
     	$this->db->trans_complete();//------结束事务
     	if ($this->db->trans_status() === FALSE) {
@@ -239,9 +240,9 @@ class Executive_model extends MY_Model
     
     public function continue_bulletin() {
     	$this->db->trans_start();//--------开始事务
-    	 
+    	
     	$this->db->where('id', $this->input->post('bc_id'));
-    	$this->db->update('bulletin_check', array('status' => 3));
+    	$this->db->update('bulletin_check', array('status' => 2));
     	
     	$check_data = array(
     		'bid' => $this->input->post('id'),

@@ -34,8 +34,7 @@ class Index extends MY_Controller {
 		$bulletins = $this->main_model->display_bulletin();
 		$this->assign('bulletins', $bulletins);
 		
-		$user_id = $this->session->userdata('user_info')['id'];
-		$bulletin_checks = $this->main_model->display_bulletin_check($user_id);
+		$bulletin_checks = $this->main_model->display_bulletin_check();
 		$this->assign('bulletin_checks', $bulletin_checks);
 		
 		$this->show('index');
