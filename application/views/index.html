@@ -16,7 +16,7 @@
               {{foreach from=$bulletins key=key item=item}}
               <li>
                 <strong><span class="am-icon-check"></span> 
-                	<a href="" target="_blank">{{$item.title}}</a>
+                	<a href="{{site_url url='xz_bulletin/view_bulletin'}}/{{$item.id}}" target="_self">{{$item.title}}</a>
                 </strong>
               </li>
               {{/foreach}}

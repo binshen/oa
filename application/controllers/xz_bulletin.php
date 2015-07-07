@@ -86,4 +86,11 @@ class Xz_bulletin extends MY_Controller {
 		$this->executive_model->continue_bulletin();
 		redirect('/index/main');
 	}
+	
+	public function view_bulletin($id) {
+		$data = $this->executive_model->get_bulletin($id);
+		$this->assign('data', $data);
+		
+		$this->show('executive/view_bulletin');
+	}
 }
