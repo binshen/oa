@@ -220,5 +220,42 @@ class Executive_model extends MY_Model
     	return $this->db->order_by('id', 'ASC')->get_where('bulletin_check', array('bid' => $bid))->row_array();
     }
     
+    public function confirm_bulletin() {
+    	$this->db->trans_start();//--------开始事务
+    	
+    	$this->db->where('id', $this->input->post('id'));
+		$this->db->update('bulletin', array('checked' => 1));
+    	
+		$this->db->where('id', $this->input->post('bc_id'));
+		$this->db->update('bulletin_check', array('status' => 2));
+		
+    	$this->db->trans_complete();//------结束事务
+    	if ($this->db->trans_status() === FALSE) {
+    		return -1;
+    	} else {
+    		return 1;
+    	}
+    }
     
+    public function continue_bulletin() {
+    	$this->db->trans_start();//--------开始事务
+    	 
+    	$this->db->where('id', $this->input->post('bc_id'));
+    	$this->db->update('bulletin_check', array('status' => 3));
+    	
+    	$check_data = array(
+    		'bid' => $this->input->post('id'),
+    		'uid' => $this->input->post('user_id'),
+    		'dept_id' => $this->input->post('dept_id'),
+    		'status' => 1
+    	);
+    	$this->db->insert('bulletin_check',$check_data);
+    	 
+    	$this->db->trans_complete();//------结束事务
+    	if ($this->db->trans_status() === FALSE) {
+    		return -1;
+    	} else {
+    		return 1;
+    	}
+    }
 }

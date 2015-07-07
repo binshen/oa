@@ -63,4 +63,31 @@ class Xz_bulletin extends MY_Controller {
 		$users = $this->executive_model->get_user_list($dept_id);
 		echo json_encode($users);
 	}
+	
+	public function check_bulletin($id){
+		$departments = $this->executive_model->get_department_list();
+		$this->assign('departments', $departments);
+		
+		$data = $this->executive_model->get_bulletin($id);
+		$this->assign('data', $data);
+		
+		$bulletin_check = $this->executive_model->get_bulletin_check($id);
+		$this->assign('bulletin_check', $bulletin_check);
+		
+		$this->show('executive/check_bulletin');
+	}
+	
+	public function confirm_bulletin() {
+		
+		$this->executive_model->confirm_bulletin();
+		
+		$this->show('index');
+	}
+	
+	public function continue_bulletin() {
+		
+		$this->executive_model->continue_bulletin();
+	
+		$this->show('index');
+	}
 }
