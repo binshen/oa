@@ -160,4 +160,14 @@ class Executive_model extends MY_Model
     public function get_bulletin($id){
     	return $this->db->select()->from('bulletin')->where('id',$id)->get()->row_array();
     }
+    
+    public function get_department_list() {
+    	$where = ' select department.id, CONCAT(company.name, "-", department.name) AS name from department ';
+    	$where .= ' left join company on department.pid = company.id ';
+    	return $this->db->query($where)->result_array();
+    }
+    
+    public function get_user_list($dept_id) {
+    	return $this->db->select('id, rel_name')->get_where('users', array('dept_id' => $dept_id))->result_array();
+    }
 }
