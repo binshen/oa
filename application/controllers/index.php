@@ -21,7 +21,7 @@ class Index extends MY_Controller {
 		parent::__construct();
 		$this->load->model('index_model');
 		
-		$this->load->model('executive_model');
+		$this->load->model('main_model');
 	}
 	
 	public function index()
@@ -31,8 +31,12 @@ class Index extends MY_Controller {
 	
 	public function main(){
 		
-		$bulletins = $this->executive_model->display_bulletin();
+		$bulletins = $this->main_model->display_bulletin();
 		$this->assign('bulletins', $bulletins);
+		
+		$user_id = $this->session->userdata('user_info')['id'];
+		$bulletin_checks = $this->main_model->display_bulletin_check();
+		$this->assign('bulletin_check', $bulletin_checks);
 		
 		$this->show('index');
 	}

@@ -80,14 +80,6 @@ class Executive_model extends MY_Model
     }
     
     /**
-     * 首页*公告
-     */
-    public function display_bulletin() {
-    	
-    	return $this->db->from('bulletin')->order_by('cdate', 'DESC')->limit(3)->get()->result_array();
-    }
-    
-    /**
      * 行政*公告(Bulletin)
      */
     public function list_bulletin($page) {
@@ -123,7 +115,7 @@ class Executive_model extends MY_Model
     		'title'=>$this->input->post('title'),
     		'content'=>$this->input->post('editorValue'),
     		'cdate'=>date('Y-m-d H:i:s'),
-    		'from_uid'=>$this->session->get_userdata()['user_info']['id']
+    		'from_uid'=>$this->session->userdata('user_info')['id']
     	);
     	
     	$this->db->trans_start();//--------开始事务
@@ -140,7 +132,7 @@ class Executive_model extends MY_Model
     			'bid' => $bid,
     			'uid' => $this->input->post('user_id'),
     			'dept_id' => $this->input->post('dept_id'),
-    			'status' => 0
+    			'status' => 1
     		);
     		$this->db->insert('bulletin_check',$check_data);
     	}
@@ -184,4 +176,6 @@ class Executive_model extends MY_Model
     public function get_bulletin_check($bid) {
     	return $this->db->order_by('id', 'ASC')->get_where('bulletin_check', array('bid' => $bid))->row_array();
     }
+    
+    
 }
