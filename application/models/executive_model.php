@@ -158,7 +158,8 @@ class Executive_model extends MY_Model
     		'title'=>$this->input->post('title'),
     		'content'=>$this->input->post('editorValue'),
     		'cdate'=>date('Y-m-d H:i:s'),
-    		'from_uid'=>$this->session->userdata('user_info')['id']
+    		'from_uid'=>$this->session->userdata('user_info')['id'],
+    		'num' => $this->input->post('num'),
     	);
     	
     	$this->db->trans_start();//--------开始事务
@@ -258,5 +259,9 @@ class Executive_model extends MY_Model
     	} else {
     		return 1;
     	}
+    }
+    
+    public function get_bulletin_num($year) {
+    	return $this->db->select_max('num')->from('bulletin')->where('YEAR(cdate)=' . $year)->get()->row_array()['num'];
     }
 }
