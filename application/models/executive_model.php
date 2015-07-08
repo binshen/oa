@@ -140,7 +140,7 @@ class Executive_model extends MY_Model
     	$data['bulletin_title'] = null;
     	 
     	//获取详细列
-    	$this->db->select('bulletin.*, users.username AS uname')->from('bulletin');
+    	$this->db->select('bulletin.*, users.rel_name AS uname')->from('bulletin');
     	$this->db->join('users', 'bulletin.from_uid = users.id', 'left');
     	if($this->input->post('bulletin_title')){
     		$this->db->like('title',$this->input->post('bulletin_title'));

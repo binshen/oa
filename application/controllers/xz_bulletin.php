@@ -19,17 +19,6 @@ class Xz_bulletin extends MY_Controller {
 	}
 	
 	public function add_bulletin(){
-// 		$year = date('Y');
-// 		$num = $this->get_bulletin_num($year);
-// 		if(empty($num)) {
-// 			$num = 1;
-// 		} else {
-// 			$num += 1;
-// 		}
-// 		$bulletin_num = $year . '-' . str_pad($num, 3, '0', STR_PAD_LEFT);
-// 		$this->assign('num', $num);
-// 		$this->assign('bulletin_num', $bulletin_num);
-		
 		$departments = $this->executive_model->get_department_list();
 		$this->assign('departments', $departments);
 		$this->show('executive/add_bulletin');
@@ -56,13 +45,7 @@ class Xz_bulletin extends MY_Controller {
 	public function show_bulletin($id){
 		$data = $this->executive_model->get_bulletin($id);
 		$this->assign('data', $data);
-		
-// 		$year = date('Y', strtotime($data['cdate']));
-// 		$num = $this->get_bulletin_num($year);
-// 		$bulletin_num = $year . '-' . str_pad($num, 3, '0', STR_PAD_LEFT);
-// 		$this->assign('num', $num);
-// 		$this->assign('bulletin_num', $bulletin_num);
-		
+
 		$departments = $this->executive_model->get_department_list();
 		$this->assign('departments', $departments);
 		
@@ -110,7 +93,7 @@ class Xz_bulletin extends MY_Controller {
 		redirect('/index/main');
 	}
 	
-	public function view_bulletin($id) {
+	public function view_bulletin($id, $key=NULL) {
 		$data = $this->executive_model->get_bulletin($id);
 		$this->assign('data', $data);
 		
@@ -118,6 +101,8 @@ class Xz_bulletin extends MY_Controller {
 		$num = $this->get_bulletin_num($year);
 		$bulletin_num = $year . '年第' . str_pad($num, 3, '0', STR_PAD_LEFT) . '号公告';
 		$this->assign('bulletin_num', $bulletin_num);
+		
+		$this->assign('key', $key);
 		
 		$this->show('executive/view_bulletin');
 	}
