@@ -30,7 +30,7 @@
 
           <div class="am-form-group">
             <div class="am-u-sm-10 am-u-sm-push-2">
-              <input type="submit" class="am-btn am-btn-primary" value="公告审核">
+              <input type="button" class="am-btn am-btn-primary" value="公告审核" id="confirmBtn">
               <input type="button" class="am-btn am-btn-primary" value="推送至" id="continueBtn">
               <select data-am-selected="{searchBox: 1, dropUp: 1, btnWidth: '250px'}" id="departmentSelect" name="dept_id">
               	<option value="-1">- 选择部门 -</option>
@@ -79,9 +79,51 @@
 		}
 	});
 	
-	$("#continueBtn").click(function() {
-		$("#checkBulletinForm").attr('action', '/xz_bulletin/continue_bulletin');
-		$("#checkBulletinForm").submit();
-	});
+	$("#confirmBtn").click(function() {
+		easyDialog.open({
+			container : {
+			    header : '公告审核',
+			    content : '您确定审核通过这个公告吗？',
+			    yesFn : function(){
+			    	$("#checkBulletinForm").attr('action', '/xz_bulletin/confirm_bulletin');
+					$("#checkBulletinForm").submit();
+			    },
+			    noFn : true
+			}
+		});
+	})
 	
+	$("#continueBtn").click(function() {
+		var dept_id = $("#departmentSelect").val();
+		if(dept_id < 0) {
+			easyDialog.open({
+				container : {
+					content : '请选择预推送的审核部门'
+				},
+				autoClose : 1500
+			});
+			return;
+		}
+		var user_id = $("#checkerSelect").val();
+		if(user_id < 0) {
+			easyDialog.open({
+				container : {
+					content : '请选择预推送的审核人员'
+				},
+				autoClose : 1500
+			});
+			return;
+		}
+		easyDialog.open({
+			container : {
+			    header : '公告审核',
+			    content : '您确定要推送至上级部门来审核公告？',
+			    yesFn : function(){
+			    	$("#checkBulletinForm").attr('action', '/xz_bulletin/continue_bulletin');
+					$("#checkBulletinForm").submit();
+			    },
+			    noFn : true
+			}
+		});
+	});
 </script>
