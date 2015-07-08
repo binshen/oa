@@ -32,6 +32,10 @@ class Index extends MY_Controller {
 	public function main(){
 		
 		$bulletins = $this->main_model->display_bulletin();
+		foreach ($bulletins as &$b) {
+			$year = date('Y', strtotime($b['cdate']));
+			$b['bulletin_num'] = $year . '-' . str_pad($b['num'], 3, '0', STR_PAD_LEFT);
+		}
 		$this->assign('bulletins', $bulletins);
 		
 		$bulletin_checks = $this->main_model->display_bulletin_check();
