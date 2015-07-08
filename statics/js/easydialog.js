@@ -643,7 +643,6 @@ var extend = {
 		if( dialogYesBtn ){
 			event.bind( dialogYesBtn, 'click', function( event ){
 				if( options.container.yesFn.call(self, event) !== false ){
-					alert('bbbb');
 					self.close();
 				}
 			});
