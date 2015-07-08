@@ -14,7 +14,7 @@
 		    <p class="am-article-meta">{{$bulletin_num}} - {{$data.cdate}}</p>
 		  </div>
 		  {{$data.content}}
-		  <a class="am-btn am-btn-default" href="/index/main">返回</a>
+		  <a class="am-btn am-btn-default" href="{{if $key == 1}}/xz_bulletin/list_bulletin{{else}}/index/main{{/if}}">返回</a>
 		</article>
       </div>
     </div>

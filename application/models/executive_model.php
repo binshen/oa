@@ -140,20 +140,40 @@ class Executive_model extends MY_Model
     	$data['bulletin_title'] = null;
     	 
     	//获取详细列
-    	$this->db->select('bulletin.*, users.username AS uname')->from('bulletin');
-    	$this->db->join('users', 'bulletin.from_uid = users.id', 'left');
+//     	$this->db->select('bulletin.*, users.rel_name AS uname')->from('bulletin');
+//     	$this->db->join('users', 'bulletin.from_uid = users.id', 'left');
+//     	if($this->input->post('bulletin_title')){
+//     		$this->db->like('title',$this->input->post('bulletin_title'));
+//     		$data['bulletin_title'] = $this->input->post('bulletin_title');
+//     	}
+//     	$this->db->limit($this->limit, $offset = ($page - 1) * $this->limit);
+//     	$data['items'] = $this->db->get()->result_array();
+
+    	$sql = '
+    		select t1.*, t2.rel_name as rname, t3.rel_name as uname
+			from bulletin t1
+			left join (
+				select a.bid, b.uid, c.rel_name
+				from (
+					select bid, max(id) id
+					from bulletin_check
+					group by bid
+				) a
+				left join bulletin_check b on a.bid = b.bid and a.id = b.id
+				left join users c on b.uid = c.id
+			) t2 on t1.id = t2.bid
+			left join users t3 on t1.from_uid = t3.id
+    	';
     	if($this->input->post('bulletin_title')){
-    		$this->db->like('title',$this->input->post('bulletin_title'));
-    		$data['bulletin_title'] = $this->input->post('bulletin_title');
+    		$sql .= " t1.title like '%" . $this->input->post('bulletin_title') . "%'";
     	}
-    	$this->db->limit($this->limit, $offset = ($page - 1) * $this->limit);
-    	$data['items'] = $this->db->get()->result_array();
+    	$sql .= " limit " . $this->limit . " offset " . ($page - 1) * $this->limit;
+    	$data['items'] = $this->db->query($sql)->result_array();
     	 
     	return $data;
     }
     
     public function save_bulletin() {
-    	
     	$data = array(
     		'title'=>$this->input->post('title'),
     		'content'=>$this->input->post('editorValue'),
@@ -165,21 +185,22 @@ class Executive_model extends MY_Model
     	$this->db->trans_start();//--------开始事务
     	
     	if($this->input->post('id')){//修改
-    		$this->db->where('id',$this->input->post('id'));
+    		$bid = $this->input->post('id');
+    		$this->db->where('id',$bid);
     		$this->db->update('bulletin',$data);
-    		//TODO
+    		
+    		$this->db->delete('bulletin_check', array('bid' => $bid));
     	}else{//新增
     		$this->db->insert('bulletin',$data);
     		$bid = $this->db->insert_id();
-    		
-    		$check_data = array(
-    			'bid' => $bid,
-    			'uid' => $this->input->post('user_id'),
-    			'dept_id' => $this->input->post('dept_id'),
-    			'status' => 1
-    		);
-    		$this->db->insert('bulletin_check',$check_data);
     	}
+    	$check_data = array(
+    		'bid' => $bid,
+    		'uid' => $this->input->post('user_id'),
+    		'dept_id' => $this->input->post('dept_id'),
+    		'status' => 1
+    	);
+    	$this->db->insert('bulletin_check',$check_data);
     	
     	$this->db->trans_complete();//------结束事务
     	if ($this->db->trans_status() === FALSE) {
@@ -195,6 +216,8 @@ class Executive_model extends MY_Model
     	$this->db->where('id',$id);
     	$this->db->delete('bulletin');
     
+    	$this->db->delete('bulletin_check', array('bid' => $id));
+    	
     	$this->db->trans_complete();//------结束事务
     	if ($this->db->trans_status() === FALSE) {
     		return -1;

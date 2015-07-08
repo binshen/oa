@@ -12,7 +12,7 @@ class Main_model extends MY_Model
 
     public function display_bulletin() 
     {
-    	return $this->db->from('bulletin')->where('checked', 1)->order_by('cdate', 'DESC')->limit(3)->get()->result_array();
+    	return $this->db->from('bulletin')->where('checked', 1)->order_by('cdate', 'DESC')->limit(5)->get()->result_array();
     }
     
     public function display_bulletin_check() 
