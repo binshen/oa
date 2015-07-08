@@ -167,6 +167,7 @@ class Executive_model extends MY_Model
     	if($this->input->post('bulletin_title')){
     		$sql .= " t1.title like '%" . $this->input->post('bulletin_title') . "%'";
     	}
+    	$sql .= " order by t1.cdate DESC ";
     	$sql .= " limit " . $this->limit . " offset " . ($page - 1) * $this->limit;
     	$data['items'] = $this->db->query($sql)->result_array();
     	 
