@@ -222,11 +222,11 @@ class Executive_model extends MY_Model
     	return $this->db->order_by('id', 'DESC')->get_where('bulletin_check', array('bid' => $bid))->row_array();
     }
     
-    public function confirm_bulletin() {
+    public function confirm_bulletin($num) {
     	$this->db->trans_start();//--------开始事务
     	
     	$this->db->where('id', $this->input->post('id'));
-		$this->db->update('bulletin', array('checked' => 1));
+		$this->db->update('bulletin', array('checked' => 1, 'num' => $num));
     	
 		$this->db->where('id', $this->input->post('bc_id'));
 		$this->db->update('bulletin_check', array('status' => 3));
