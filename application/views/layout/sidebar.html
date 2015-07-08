@@ -6,8 +6,8 @@
       	<span class="am-icon-file"></span> 行政管理 <span class="am-icon-angle-right am-fr am-margin-right"></span>
       </a>
       <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-nav">
-        <li><a href="javascript:open_content('/xz_notice/list_notice');" class="am-cf"><span class="am-icon-check"></span> 通知列表</a></li>
-        <li><a href="javascript:open_content('/xz_bulletin/list_bulletin');" class="am-cf"><span class="am-icon-check"></span> 公告列表</a></li>
+        <li><a href="javascript:open_content('/xz_notice/list_notice');" class="am-cf menu"><span class="am-icon-check"></span> 通知列表</a></li>
+        <li><a href="javascript:open_content('/xz_bulletin/list_bulletin');" class="am-cf menu"><span class="am-icon-check"></span> 公告列表</a></li>
       </ul>
     </li>  
     <li class="admin-parent">
@@ -15,9 +15,9 @@
       	<span class="am-icon-file"></span> 权限管理 <span class="am-icon-angle-right am-fr am-margin-right"></span>
       </a>
       <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-nav8">
-        <li><a href="javascript:open_content('/rule_company/list_company');" class="am-cf"><span class="am-icon-check"></span> 公司管理<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
-        <li><a href="javascript:open_content('/rule/list_rule');" class="am-cf"><span class="am-icon-check"></span> 角色管理<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
-        <li><a href="javascript:open_content('/rule_user/list_user');" class="am-cf"><span class="am-icon-check"></span> 用户管理<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
+        <li><a href="javascript:open_content('/rule_company/list_company');" class="am-cf menu"><span class="am-icon-check"></span> 公司管理<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
+        <li><a href="javascript:open_content('/rule/list_rule');" class="am-cf menu"><span class="am-icon-check"></span> 角色管理<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
+        <li><a href="javascript:open_content('/rule_user/list_user');" class="am-cf menu"><span class="am-icon-check"></span> 用户管理<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
       </ul>
     </li>
     {{if 1|in_array:$menu}}
@@ -26,9 +26,15 @@
       	<span class="am-icon-file"></span> 基础数据 <span class="am-icon-angle-right am-fr am-margin-right"></span>
       </a>
       <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-nav9">
-        <li><a href="javascript:open_content('/basic_department/list_department');" class="am-cf"><span class="am-icon-check"></span> 部门管理<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
+        <li><a href="javascript:open_content('/basic_department/list_department');" class="am-cf menu"><span class="am-icon-check"></span> 部门管理<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
       </ul>
     </li>
     {{/if}}
   </ul>
 </div>
+<script>
+$('.menu').click(function(){
+	$('.menu').css('background-color','#FFFFFF');
+	$(this).css('background-color','#E3E3E3');
+});
+</script>
