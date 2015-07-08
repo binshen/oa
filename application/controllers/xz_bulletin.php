@@ -55,10 +55,6 @@ class Xz_bulletin extends MY_Controller {
 		$this->show('executive/edit_bulletin');
 	}
 	
-	public function edit_bulletin($id){
-		$this->show_bulletin($id);
-	}
-	
 	public function get_user_list($dept_id){
 		$users = $this->executive_model->get_user_list($dept_id);
 		echo json_encode($users);

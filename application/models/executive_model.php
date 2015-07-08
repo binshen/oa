@@ -167,19 +167,20 @@ class Executive_model extends MY_Model
     	if($this->input->post('id')){//修改
     		$this->db->where('id',$this->input->post('id'));
     		$this->db->update('bulletin',$data);
-    		//TODO
+    		
+    		$this->db->delete('bulletin_check', array('bid' => $this->input->post('id')));
+    		
     	}else{//新增
     		$this->db->insert('bulletin',$data);
     		$bid = $this->db->insert_id();
-    		
-    		$check_data = array(
-    			'bid' => $bid,
-    			'uid' => $this->input->post('user_id'),
-    			'dept_id' => $this->input->post('dept_id'),
-    			'status' => 1
-    		);
-    		$this->db->insert('bulletin_check',$check_data);
     	}
+    	$check_data = array(
+    		'bid' => $bid,
+    		'uid' => $this->input->post('user_id'),
+    		'dept_id' => $this->input->post('dept_id'),
+    		'status' => 1
+    	);
+    	$this->db->insert('bulletin_check',$check_data);
     	
     	$this->db->trans_complete();//------结束事务
     	if ($this->db->trans_status() === FALSE) {
