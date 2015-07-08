@@ -43,6 +43,7 @@ class Common_model extends MY_Model
     		$data['title'] = $this->input->post('title');
     	}
     	$this->db->where('a.uid',$user_info['id']);
+    	$this->db->order_by('cdate','desc');
     	$this->db->limit($this->limit, $offset = ($page - 1) * $this->limit);
     	$data['items'] = $this->db->get()->result_array();
     
