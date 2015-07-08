@@ -8,10 +8,10 @@
 	<div class="am-g">
       <div class="am-u-md-6">
         <div class="am-panel am-panel-default">
-          <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-1'}">
+          <div class="am-panel-hd am-cf" data-am-collapse="{target: '#bulletin-panel'}">
           	公司公告<span class="am-icon-chevron-down am-fr" ></span>
           </div>
-          <div class="am-panel-bd am-collapse am-in" id="collapse-panel-1">
+          <div class="am-panel-bd am-collapse am-in" id="bulletin-panel">
             <ul class="am-list admin-content-file">
               {{foreach from=$bulletins key=key item=item}}
               <li>
@@ -26,10 +26,10 @@
       </div>
       <div class="am-u-md-6">
         <div class="am-panel am-panel-default">
-          <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-1'}">
+          <div class="am-panel-hd am-cf" data-am-collapse="{target: '#bulletin-check-panel'}">
           	公告审批<span class="am-icon-chevron-down am-fr" ></span>
           </div>
-          <div class="am-panel-bd am-collapse am-in" id="collapse-panel-1">
+          <div class="am-panel-bd am-collapse am-in" id="bulletin-check-panel">
             <ul class="am-list admin-content-file">
               {{foreach from=$bulletin_checks key=key item=item}}
               <li>
