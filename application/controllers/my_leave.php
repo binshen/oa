@@ -17,6 +17,10 @@ class My_leave extends MY_Controller {
 		$pager = $this->pagination->getPageLink($base_url, $data['total'], $data['limit']);
 		$this->assign('pager', $pager);
 		$this->assign('data', $data);
+		
+		$leave_types = $this->document_model->get_leavetype_list();
+		$this->assign('leave_types', $leave_types);
+		
 		$this->show('/mine/list_leave');
 	}
 	
