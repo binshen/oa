@@ -47,7 +47,7 @@
               <td class="am-hide-sm-only">{{$item.start_time}}</td>
               <td class="am-hide-sm-only">{{$item.end_time}}</td>
               <td>
-              	  {{if $item.dept_checked == 1}}
+              	  {{if $item.direct_checked == 1}}
               		<font class="am-badge am-badge-success">已审核</font>
               	  {{else}}
               	  	<font class="am-badge am-badge-danger">未审核</font>
@@ -64,12 +64,8 @@
               <td>
                 <div class="am-btn-toolbar">
                   <div class="am-btn-group am-btn-group-xs">
-                  	{{if $item.checked == 1}}
-              		  <button class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="javascript:location.href='{{site_url url='my_leave/view_leave'}}/{{$item.id}}/1';"><span class="am-icon-pencil-square-o"></span> 查看</button>
-              	    {{else}}
-              	  	  <button class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="javascript:location.href='{{site_url url='my_leave/show_leave'}}/{{$item.id}}';"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-              	    {{/if}}
-                    {{if $item.checked == 0}}
+                  	<button class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="javascript:location.href='{{site_url url='my_leave/view_leave'}}/{{$item.id}}/1';"><span class="am-icon-pencil-square-o"></span> 查看</button>
+                    {{if $item.direct_checked == 0 && $item.manager_checked == 0}}
                     <button class="am-btn am-btn-default am-btn-xs am-text-danger btn_del" data-url="{{site_url url='my_leave/del_leave'}}/{{$item.id}}"><span class="am-icon-trash-o"></span> 删除</button>
                   	{{/if}}
                   </div>

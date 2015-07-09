@@ -13,16 +13,19 @@
       <div class="am-u-sm-12 am-u-md-10 am-u-md-pull-2">
         <form class="am-form am-form-horizontal" method="post" action="/my_leave/save_leave" id="addBulletinForm">
           <div class="am-u-sm-12" style="text-align: center;">
-              <h2>{{$company}}</h2>
+              <h2>{{$company_name}}</h2>
           </div>
           <div class="am-form-group">
             <label class="am-u-sm-2 am-form-label">姓名</label>
             <div class="am-u-sm-4">
-              <label class="am-form-label">{{$user}}</label>
+              <label class="am-form-label">{{$user_name}}</label>
+              <input type="hidden" name="uid" value="{{$user_id}}">
+              <input type="hidden" name="dept_id" value="{{$department_id}}">
+              <input type="hidden" name="company_id" value="{{$company_id}}">
             </div>
             <label class="am-u-sm-2 am-form-label">所属部门</label>
             <div class="am-u-sm-4">
-              <label class="am-form-label">{{$department}}</label>
+              <label class="am-form-label">{{$department_name}}</label>
             </div>
           </div>
           <div class="am-form-group">
@@ -39,7 +42,7 @@
             <label for="editor" class="am-u-sm-2 am-form-label">类别</label>
             <div class="am-form-group am-u-sm-10" style="padding-top:10px;">
 			  <label class="am-radio-inline">
-			    <input type="radio" name="type_id" value="1" data-am-ucheck>事假
+			    <input type="radio" name="type_id" value="1" data-am-ucheck checked>事假
 			  </label>
 			  <label class="am-radio-inline">
 			    <input type="radio" name="type_id" value="2" data-am-ucheck>病假
@@ -82,13 +85,13 @@
 		  <div class="am-form-group">
             <label for="dept_id" class="am-u-sm-2 am-form-label">上级审核</label>
             <div class="am-u-sm-10">
-              <select data-am-selected="{searchBox: 1, dropUp: 1, btnWidth: '250px'}" id="departmentSelect" name="dept_id">
+              <select data-am-selected="{searchBox: 1, dropUp: 1, btnWidth: '250px'}" id="departmentSelect" name="direct_dept_id">
               	<option value="-1">- 选择部门 -</option>
               	{{foreach from=$departments key=key item=item}}
               	<option value="{{$item.id}}" >{{$item.name}}</option>
               	{{/foreach}}
 			  </select>
-			  <select data-am-selected="{searchBox: 1, dropUp: 1}" id="checkerSelect" name="user_id">
+			  <select data-am-selected="{searchBox: 1, dropUp: 1}" id="checkerSelect" name="direct_uid">
 			  	<option value="-1">- 选择审核人 -</option>
 			  </select>
             </div>
@@ -127,6 +130,7 @@
 	});
 	
 	$("#confirmBtn").click(function() {
+/*
 		var title = $("#title").val();
 		if(!title){
 			easyDialog.open({
@@ -157,10 +161,11 @@
 			});
 			return;
 		}
+*/
 		easyDialog.open({
 			container : {
-			    header : '添加公告',
-			    content : '您确定要添加一个新的公告？',
+			    header : '请假单',
+			    content : '您确定要创建一个新的请假单？',
 			    yesFn : function(){
 			    	$("#addBulletinForm").attr('action', '/my_leave/save_leave');
 					$("#addBulletinForm").submit();

@@ -24,17 +24,39 @@ class My_leave extends MY_Controller {
 		$user_info = $this->session->userdata('user_info');
 		$company_id = $user_info['company_id'];
 		$dept_id = $user_info['dept_id'];
-		$rel_name = $user_info['rel_name'];
+		$user_id = $user_info['id'];
+		$user_name = $user_info['rel_name'];
 		
 		$company = $this->basic_model->get_company($company_id);
 		$department = $this->basic_model->get_department($dept_id);
-		$this->assign('user', $rel_name);
-		$this->assign('company', $company['name']);
-		$this->assign('department', $department['name']);
+		$this->assign('user_id', $user_id);
+		$this->assign('user_name', $user_name);
+		$this->assign('department_id', $dept_id);
+		$this->assign('department_name', $department['name']);
+		$this->assign('company_id', $company_id);
+		$this->assign('company_name', $company['name']);
 		
 		$departments = $this->basic_model->get_department_list();
 		$this->assign('departments', $departments);
 		
 		$this->show('mine/add_leave');
+	}
+	
+	public function save_leave(){
+		$rs = $this->document_model->save_leave();
+		if($rs == 1){
+			$this->show_message('保存成功',site_url('my_leave/list_leave'));
+		}else{
+			$this->show_message('保存失败');
+		}
+	}
+	
+	public function del_leave() {
+		$rs = $this->document_model->del_leave($id);
+		if($rs == 1){
+			$this->show_message('删除成功',site_url('my_leave/list_leave'));
+		}else{
+			$this->show_message('删除失败');
+		}
 	}
 }

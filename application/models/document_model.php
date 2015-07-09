@@ -36,4 +36,52 @@ class Document_model extends MY_Model
     
     	return $data;
     }
+    
+    public function save_leave() {
+    	$data = array(
+    		'uid'=>$this->input->post('uid'),
+    		'dept_id'=>$this->input->post('dept_id'),
+    		'company_id'=>$this->input->post('company_id'),
+    		'position'=>$this->input->post('position'),
+    		'agent'=>$this->input->post('agent'),
+    		'type_id'=>$this->input->post('type_id'),
+    		'reason'=>$this->input->post('reason'),
+    		'start_time'=>$this->input->post('start_time'),
+    		'end_time'=>$this->input->post('end_time'),
+    		'direct_uid'=>$this->input->post('direct_uid'),
+    		'direct_checked'=>0,
+    		'manager_uid'=>NULL,
+    		'manager_checked'=>0,
+    		'cdate'=>date('Y-m-d H:i:s')
+    	);
+    	 
+    	$this->db->trans_start();//--------开始事务
+    	 
+    	if($this->input->post('id')){//修改
+    		die("NOT ALLOWED");
+    	}else{//新增
+    		$this->db->insert('leave',$data);
+    	}
+    	
+    	$this->db->trans_complete();//------结束事务
+    	if ($this->db->trans_status() === FALSE) {
+    		return -1;
+    	} else {
+    		return 1;
+    	}
+    }
+    
+    public function del_leave() {
+    	$this->db->trans_start();//--------开始事务
+    	
+    	$this->db->where('id',$id);
+    	$this->db->delete('leave');
+    	 
+    	$this->db->trans_complete();//------结束事务
+    	if ($this->db->trans_status() === FALSE) {
+    		return -1;
+    	} else {
+    		return 1;
+    	}
+    }
 }
