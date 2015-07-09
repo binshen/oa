@@ -44,7 +44,7 @@
           	{{foreach from=$data.items key=key item=item}}
           	<tr>
               <td>{{$item.id}}</td>
-              <td><a href="#">{{$item.title}}</a></td>
+              <td><a href="javascript:void(0);">{{$item.title}}</a></td>
               <td>{{if $item.uname}}{{$item.uname}}{{else}}-无-{{/if}}</td>
               <td class="am-hide-sm-only">{{$item.cdate}}</td>
               <td>{{if $item.rname}}{{$item.rname}}{{else}}-无-{{/if}}</td>
