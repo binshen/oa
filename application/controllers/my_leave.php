@@ -13,7 +13,7 @@ class My_leave extends MY_Controller {
 	
 	public function list_leave($page=1) {
 		$data = $this->document_model->list_leave($page);
-		$base_url = "/basic_department/list_department";
+		$base_url = "/my_leave/list_leave";
 		$pager = $this->pagination->getPageLink($base_url, $data['total'], $data['limit']);
 		$this->assign('pager', $pager);
 		$this->assign('data', $data);
@@ -38,6 +38,9 @@ class My_leave extends MY_Controller {
 		
 		$departments = $this->basic_model->get_department_list();
 		$this->assign('departments', $departments);
+		
+		$leave_types = $this->document_model->get_leavetype_list();
+		$this->assign('leave_types', $leave_types);
 		
 		$this->show('mine/add_leave');
 	}
