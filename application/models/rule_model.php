@@ -250,6 +250,25 @@ class rule_model extends MY_Model
     			'rule_id'=>$this->input->post('rule_id'),
     			'rel_name'=>$this->input->post('rel_name')
     	);
+    	
+    	//主管必须唯一
+    	$this->db->select('count(1) num')->from('users')
+	    	->where('dept_id',$this->input->post('dept_id'))
+	    	->where('company_id',$company['id'])
+	    	->where('manager >',0);
+    	if($id)
+	    	$this->db->where('id !=',$id);
+    	$rs = $this->db->get()->row();
+    	if($rs->num > 0){
+    		return -2;
+    	}
+    	
+    	if($this->input->post('manager') > 0){
+    		$data['manager'] = $data['dept_id'];
+    	}else{
+    		$data['manager'] = -1;
+    	}
+    	
     	if($id){//修改
     		$data['status'] = $this->input->post('status');
     		$this->db->where('id',$id);

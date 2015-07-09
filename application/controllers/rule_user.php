@@ -32,6 +32,8 @@ class Rule_user extends MY_Controller {
 		$rs = $this->rule_model->save_user();
 		if($rs == 1){
 			$this->show_message('保存成功',site_url('rule_user/list_user'));
+		}else if($rs == -2){
+			$this->show_message('该部门已经存在主管，主管必须唯一！');
 		}else{
 			$this->show_message('保存失败');
 		}

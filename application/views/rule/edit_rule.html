@@ -14,33 +14,40 @@
       <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
         <form class="am-form am-form-horizontal" method="post" action="/rule/save_rule" onsubmit="return check_input(this);">
           <div class="am-form-group">
-            <label for="user-name" class="am-u-sm-3 am-form-label">角色名称</label>
-            <div class="am-u-sm-9">
+            <label for="user-name" class="am-u-sm-2 am-form-label">角色名称</label>
+            <div class="am-u-sm-10">
               <input type="text" name="mark" id="mark" placeholder="角色" value="{{$data.main.mark}}">
               <input type="hidden" name="id" value="{{$data.main.id}}">
             </div>
           </div>
+          
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-2 am-form-label"></label>
+            <div class="am-u-sm-10">
+              菜单<br />
+				<div class="am-form-group">
+				{{foreach from=$menus item=row}}
+					<label class="am-checkbox-inline">
+					  <input type="checkbox" class="mid" value="{{$row.id}}" {{if $row.id|in_array:$data.mid}}checked="checked"{{/if}}> {{$row.name}}
+					</label>
+				{{/foreach}}
+				</div>
+				
+				{{foreach from=$operation_menu item=row key=k}}
+				<p class="am-article-lead" id="operation_menu_{{$k}}" {{if !$k|in_array:$data.mid}}style="display:none"{{/if}}>
+				{{$row.0.name}}<br />
+					{{foreach from=$row item=roww}}
+					<label class="am-checkbox-inline">
+					  <input type="checkbox" value="{{$roww.operation}}" name="operation[]" {{if $roww.operation|in_array:$data.operation}}checked="checked"{{/if}}>{{$roww.mark}}
+					</label>
+					{{/foreach}}
+				</p>
+				{{/foreach}}
+            </div>
+          </div>
 
 
-		菜单<br />
-		<div class="am-form-group">
-		{{foreach from=$menus item=row}}
-			<label class="am-checkbox-inline">
-			  <input type="checkbox" class="mid" value="{{$row.id}}" {{if $row.id|in_array:$data.mid}}checked="checked"{{/if}}> {{$row.name}}
-			</label>
-		{{/foreach}}
-		</div>
 		
-		{{foreach from=$operation_menu item=row key=k}}
-		<p class="am-article-lead" id="operation_menu_{{$k}}" {{if !$k|in_array:$data.mid}}style="display:none"{{/if}}>
-		{{$row.0.name}}<br />
-			{{foreach from=$row item=roww}}
-			<label class="am-checkbox-inline">
-			  <input type="checkbox" value="{{$roww.operation}}" name="operation[]" {{if $roww.operation|in_array:$data.operation}}checked="checked"{{/if}}>{{$roww.mark}}
-			</label>
-			{{/foreach}}
-		</p>
-		{{/foreach}}
 
 
           <div class="am-form-group">

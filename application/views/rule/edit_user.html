@@ -18,6 +18,7 @@
             <label for="user-name" class="am-u-sm-3 am-form-label">用户名</label>
             <div class="am-u-sm-9">
               <input type="text" name="username" placeholder="用户名" value="{{$data.username}}" required>
+              <input type="hidden" name="id" value="{{$data.id}}" >
             </div>
           </div>
           
@@ -38,6 +39,7 @@
               {{/foreach}}
               </select>
             </div>
+			
           </div>
           
           <div class="am-form-group">
@@ -49,6 +51,18 @@
               	<option value="{{$row.id}}"  {{if $row.id == $data.rule_id}}selected='selected'{{/if}}>{{$row.mark}}</option>
               {{/foreach}}
               </select>
+            </div>
+          </div>
+          
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">是否主管</label>
+            <div class="am-u-sm-9">
+              <label class="am-radio-inline">
+				  <input type="radio" name="manager" value="-1" {{if $data.manager lt 0}}checked{{/if}}> 否
+				</label>
+				<label class="am-radio-inline">
+				 <input type="radio" name="manager" value="1" {{if $data.manager gt 0}}checked{{/if}}> 是
+				</label>
             </div>
           </div>
           
@@ -65,7 +79,7 @@
 
           <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
-              <button class="am-btn am-btn-secondary" type="submit">提交</button>
+              <button class="am-btn am-btn-secondary edit_save"  type="submit">提交</button>
               <a class="am-btn am-btn-default" href="/rule_user/list_user">返回</a>
             </div>
           </div>
@@ -75,3 +89,14 @@
     </div>
   </div>
   <!-- content end -->
+<script>
+$(function(){
+	//判断是否修改,调整界面可编辑项
+	var url = "{{segment_url c='2'}}";
+	if(url.substr(0, 5) == 'show_'){
+    	$('input,textarea,select').attr('disabled','disabled');
+    	$('.edit_save').hide();
+	}
+});
+
+</script>

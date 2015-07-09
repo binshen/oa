@@ -1,0 +1,77 @@
+<script type="text/javascript" charset="utf-8" src="/statics/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/statics/ueditor/ueditor.all.min.js"> </script>
+<!-- content start -->
+  <div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">添加任务</strong> / <small>Add task</small></div>
+    </div>
+    <hr/>
+    <div class="am-g">
+      <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+      </div>
+      <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+        <form class="am-form am-form-horizontal" method="post" action="/task/save_task" data-am-validator>
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">标题</label>
+            <div class="am-u-sm-9">
+              <input type="text" name="title" placeholder="请输入标题" required>
+              <input type="hidden" name="flag" value="2" required>
+            </div>
+          </div>
+          
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">任务等级</label>
+            <div class="am-u-sm-9">
+              <select name="lev" required>
+              	<option value="1">普通</option>
+              	<option value="2">加急</option>
+              	<option value="3">紧急</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">任务内容</label>
+            <div class="am-u-sm-9">
+              <textarea id="editor" name="content" style="height:300px;"></textarea>
+            </div>
+          </div>
+          
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">接收人</label>
+            <div class="am-u-sm-9">
+				<select data-am-selected="{searchBox: 1, dropUp: 1,maxHeight:200}" id="checkerSelect1" name="target_uid" required>
+				 <option value="">- 选择接收人 -</option>
+				 {{foreach from=$user_all item=row}}
+				 <option value="{{$row.id}}">{{$row.rel_name}}</option>
+				 {{/foreach}}
+				 </select>
+            </div>
+          </div>
+          
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">审核人</label>
+            <div class="am-u-sm-9">
+				<select data-am-selected="{searchBox: 1, dropUp: 1,maxHeight:200}" id="checkerSelect3" name="to_uid" required>
+				 <option value="">- 选择审核人 -</option>
+				 {{foreach from=$user_all item=row}}
+				 <option value="{{$row.id}}">{{$row.rel_name}}</option>
+				 {{/foreach}}
+				 </select>
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <div class="am-u-sm-9 am-u-sm-push-3">
+              <input type="submit" class="am-btn am-btn-primary" value="确认">
+              <a class="am-btn am-btn-default" href="/task/list_task">返回</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- content end -->
+<script type="text/javascript">
+	var ue = UE.getEditor('editor');
+</script>
