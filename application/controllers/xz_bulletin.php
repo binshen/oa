@@ -5,6 +5,8 @@ class Xz_bulletin extends MY_Controller {
 	
 	public function __construct() {
 		parent::__construct();
+		
+		$this->load->model('basic_model');
 		$this->load->model('executive_model');
 	}
 	
@@ -19,7 +21,7 @@ class Xz_bulletin extends MY_Controller {
 	}
 	
 	public function add_bulletin(){
-		$departments = $this->executive_model->get_department_list();
+		$departments = $this->basic_model->get_department_list();
 		$this->assign('departments', $departments);
 		$this->show('executive/add_bulletin');
 	}
@@ -46,7 +48,7 @@ class Xz_bulletin extends MY_Controller {
 		$data = $this->executive_model->get_bulletin($id);
 		$this->assign('data', $data);
 
-		$departments = $this->executive_model->get_department_list();
+		$departments = $this->basic_model->get_department_list();
 		$this->assign('departments', $departments);
 		
 		$bulletin_check = $this->executive_model->get_bulletin_check($id);
@@ -55,13 +57,8 @@ class Xz_bulletin extends MY_Controller {
 		$this->show('executive/edit_bulletin');
 	}
 	
-	public function get_user_list($dept_id){
-		$users = $this->executive_model->get_user_list($dept_id);
-		echo json_encode($users);
-	}
-	
 	public function check_bulletin($id){
-		$departments = $this->executive_model->get_department_list();
+		$departments = $this->basic_model->get_department_list();
 		$this->assign('departments', $departments);
 		
 		$data = $this->executive_model->get_bulletin($id);

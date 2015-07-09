@@ -62,7 +62,7 @@
 	$("#departmentSelect").change(function() {
 		var department_id = $(this).val();
 		if(department_id > 0) {
-			$.get('/xz_bulletin/get_user_list/' + department_id, function(data) {
+			$.get('/common/get_user_list/' + department_id, function(data) {
 				var json = JSON.parse(data);
 				$("#checkerSelect").empty();
 				$("#checkerSelect").append('<option value="-1">- 选择审核人 -</option>');

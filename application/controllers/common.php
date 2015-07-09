@@ -31,4 +31,8 @@ class Common extends MY_Controller {
 		$this->show('common/show_notice');
 	}
 	
+	public function get_user_list($dept_id){
+		$users = $this->common_model->get_user_list($dept_id);
+		echo json_encode($users);
+	}
 }
