@@ -47,4 +47,13 @@ class Task extends MY_Controller {
 		$this->show('common/show_task');
 	}
 	
+	public function list_audit_task($page=1){
+		$data = $this->task_model->list_audit_task($page);
+		$base_url = "/task/audit_task";
+		$pager = $this->pagination->getPageLink($base_url, $data['total'], $data['limit']);
+		$this->assign('pager', $pager);
+		$this->assign('data', $data);
+		$this->show('task/audit_task');
+	}
+	
 }
