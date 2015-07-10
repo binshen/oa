@@ -277,4 +277,43 @@ class Executive_model extends MY_Model
     public function get_bulletin_num($year) {
     	return $this->db->select_max('num')->from('bulletin')->where('YEAR(cdate)=' . $year)->get()->row_array()['num'];
     }
+    
+    public function list_timesheet($page)
+    {
+    	$data['limit'] = $this->limit;
+    	//获取总记录数
+    	$this->db->select('count(1) num')->from('timesheet');
+    	if($this->input->post('name')){
+    		$this->db->like('name',$this->input->post('name'));
+    	}
+    	$num = $this->db->get()->row();
+    	$data['total'] = $num->num;
+    
+    	//搜索条件
+    	$data['name'] = null;
+    
+    	//获取详细列
+    	$this->db->select()->from('timesheet');
+    	if($this->input->post('name')){
+    		$this->db->like('name',$this->input->post('name'));
+    		$data['name'] = $this->input->post('name');
+    	}
+    	$this->db->limit($this->limit, $offset = ($page - 1) * $this->limit);
+    	$data['items'] = $this->db->get()->result_array();
+    
+    	return $data;
+    }
+    
+    public function save_timesheet($data) {
+    	$this->db->trans_start();//--------开始事务
+    
+    	$this->db->insert('timesheet',$data);
+    	 
+    	$this->db->trans_complete();//------结束事务
+    	if ($this->db->trans_status() === FALSE) {
+    		return -1;
+    	} else {
+    		return 1;
+    	}
+    }
 }
