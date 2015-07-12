@@ -12,6 +12,7 @@ class My_leave extends MY_Controller {
 	}
 	
 	public function list_leave($page=1) {
+		
 		$data = $this->document_model->list_leave($page);
 		$base_url = "/my_leave/list_leave";
 		$pager = $this->pagination->getPageLink($base_url, $data['total'], $data['limit']);
