@@ -201,5 +201,35 @@ class Task_model extends MY_Model
     	return $data;
     }
     
+    public function save_my_task(){
+    	$user_info = $this->session->userdata('user_info');
+    	$this->db->trans_start();//--------开始事务
+    	if($this->input->post('id')){//修改
+    		
+    	}else{//新增
+    		$data = array(
+    			'progress'=>$this->input->post('progress'),
+    			'task_id'=>$this->input->post('task_id'),
+    			'from_name'=>$user_info['rel_name'],
+    			'cdate'=>date('Y-m-d H:i:s',time()),
+    		);
+    		
+    		$this->db->insert('task_progress',$data);
+    	}
+    	
+    	$this->db->trans_complete();//------结束事务
+    	if ($this->db->trans_status() === FALSE) {
+    		return -1;
+    	} else {
+    		return 1;
+    	}
+    }
+    
+    public function get_my_task($id){
+    	$data['main'] = $this->db->select()->from('task')->where('id',$id)->get()->row_array();
+    	$data['list'] = $this->db->select()->from('task_progress')->where('task_id',$id)->get()->result_array();
+    	return $data;
+    }
+    
 
 }

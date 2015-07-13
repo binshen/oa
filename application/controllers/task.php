@@ -92,9 +92,15 @@ class Task extends MY_Controller {
 	}
 	
 	public function edit_my_task($id){
-		$data = $this->task_model->get_audit_task($id);
-		$this->assign('data', $data);
+		$data = $this->task_model->get_my_task($id);
+		$this->assign('data', $data['main']);
+		$this->assign('list', $data['list']);
 		$this->show('task/edit_my_task');
+	}
+	
+	public function save_my_task(){
+		$rs = $this->task_model->save_my_task();
+		echo $rs;
 	}
 	
 }
