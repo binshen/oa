@@ -1,0 +1,80 @@
+  <!-- content start -->
+  <div class="admin-content" style="min-height:450px">
+
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">请假单列表</strong></div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12 am-u-md-9">&nbsp;</div>
+       <form method="post" action="{{site_url url='xz_leave/list_leave'}}" class="search_form">
+	      <div class="am-u-sm-9 am-u-md-3">
+	        <div class="am-input-group am-input-group-sm">
+	        	<label class="am-form-label">假期类型：</label>
+	        	<select data-am-selected="{btnWidth: '120', btnSize: 'sm', btnStyle: 'secondary'}">
+	        		<option value="-1">- 全选 -</option>
+	        		{{foreach from=$leave_types item=item}}
+				  	<option value="{{$item.id}}">{{$item.name}}</option>
+				  	{{/foreach}}
+				</select>
+	        </div>
+	      </div>
+      </form>
+    </div>
+    <div class="am-g">
+      <div class="am-u-sm-12">
+          <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+              <tr>
+                <th class="table-id">ID</th>
+                <th class="table-title">姓名</th>
+                <th class="table-title">类型</th>
+                <th class="table-date am-hide-sm-only">开始时间</th>
+                <th class="table-date am-hide-sm-only">结束时间</th>
+                <th class="table-title">部门</th>
+                <th class="table-title">总经理</th>
+                <th class="table-title">创建时间</th>
+                <th class="table-set">操作</th>
+              </tr>
+          </thead>
+          <tbody>
+          	{{foreach from=$data.items key=key item=item}}
+          	<tr>
+              <td>{{$item.id}}</td>
+              <td>{{$item.uname}}</td>
+              <td><a href="javascript:void(0);">{{$item.name}}</a></td>
+              <td class="am-hide-sm-only">{{$item.start_time|date_format:"%Y-%m-%d %H:%M"}}</td>
+              <td class="am-hide-sm-only">{{$item.end_time|date_format:"%Y-%m-%d %H:%M"}}</td>
+              <td>
+              	  {{if $item.direct_checked == 1}}
+              		<font class="am-badge am-badge-success">已审核</font>
+              	  {{else}}
+              	  	<font class="am-badge am-badge-danger">未审核</font>
+              	  {{/if}}
+              </td>
+              <td>
+              	  {{if $item.manager_checked == 1}}
+              		<font class="am-badge am-badge-success">已审核</font>
+              	  {{else}}
+              	  	<font class="am-badge am-badge-danger">未审核</font>
+              	  {{/if}}
+              </td>
+              <td class="am-hide-sm-only">{{$item.cdate}}</td>
+              <td>
+                <div class="am-btn-toolbar">
+                  <div class="am-btn-group am-btn-group-xs">
+                  	<button class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="javascript:location.href='{{site_url url='xz_leave/view_leave'}}/{{$item.id}}';"><span class="am-icon-pencil-square-o"></span> 查看</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            {{/foreach}}
+          </tbody>
+        </table>
+		<div class="am-cf">{{$pager}}</div>
+      </div>
+
+    </div>
+  </div>
+  <!-- content end -->
+
