@@ -328,15 +328,20 @@ class Executive_model extends MY_Model
     	$data['total'] = $num->num;
     	
     	//搜索条件
-    	$data['title'] = null;
+    	$data['uname'] = null;
+    	$data['type_id'] = null;
     	
     	//获取详细列
     	$this->db->select('a.*, b.name, c.rel_name AS uname')->from('leave a');
     	$this->db->join('leave_type b','a.type_id = b.id','left');
     	$this->db->join('users c','a.uid = c.id','left');
-    	if($this->input->post('title')){
-    		$this->db->like('title',$this->input->post('title'));
-    		$data['title'] = $this->input->post('title');
+    	if($this->input->post('uname')){
+    		$this->db->like('c.rel_name',$this->input->post('uname'));
+    		$data['uname'] = $this->input->post('uname');
+    	}
+    	if($this->input->post('type_id')){
+    		$this->db->like('a.type_id',$this->input->post('type_id'));
+    		$data['type_id'] = $this->input->post('type_id');
     	}
     	$this->db->limit($this->limit, $offset = ($page - 1) * $this->limit);
     	$data['items'] = $this->db->get()->result_array();

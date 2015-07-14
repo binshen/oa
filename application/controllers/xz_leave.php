@@ -6,7 +6,7 @@ class Xz_leave extends MY_Controller {
 	public function __construct() {
 		parent::__construct();
 		
-		$this->load->model('basic_model');
+		$this->load->model('document_model');
 		$this->load->model('executive_model');
 	}
 	
@@ -16,6 +16,9 @@ class Xz_leave extends MY_Controller {
 		$pager = $this->pagination->getPageLink($base_url, $data['total'], $data['limit']);
 		$this->assign('pager', $pager);
 		$this->assign('data', $data);
+		
+		$leave_types = $this->document_model->get_leavetype_list();
+		$this->assign('leave_types', $leave_types);
 		
 		$this->show('executive/list_leave');
 	}
