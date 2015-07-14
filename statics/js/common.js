@@ -143,9 +143,11 @@ function redirect(url) {
 //点击菜单打开ifrmae页面
 function open_content(url){
 	$("#mainFrame").attr("src",url);
-	$("#load").show();
-	$("#load").show();
+	$.AMUI.progress.start();
+	//$("#load").show();
+	//$("#load").show();
 	$("#mainFrame").load(function(){
-		$("#load").hide();
+		//$("#load").hide();
+		$.AMUI.progress.done();
     });
 }
