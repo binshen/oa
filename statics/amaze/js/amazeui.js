@@ -1525,7 +1525,8 @@ Collapse.prototype.open = function() {
     return;
   }
 
-  var actives = this.$parent && this.$parent.find('> .am-panel > .am-in');
+  var actives = this.$parent && this.$parent.find('> .am-panel > .am-in')
+  	&& this.$parent.find('> .am-panel > .admin-parent > .am-in');
 
   if (actives && actives.length) {
     var hasData = actives.data('amui.collapse');
