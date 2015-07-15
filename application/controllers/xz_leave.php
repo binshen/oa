@@ -23,9 +23,10 @@ class Xz_leave extends MY_Controller {
 		$this->show('executive/list_leave');
 	}
 	
-	public function view_leave($id) {
+	public function view_leave($id, $key=NULL) {
 		$data = $this->executive_model->get_leave($id);
 		$this->assign('data', $data);
+		$this->assign('key', $key);
 		
 		$this->show('executive/view_leave');
 	}

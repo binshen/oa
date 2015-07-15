@@ -64,7 +64,7 @@
               <td>
                 <div class="am-btn-toolbar">
                   <div class="am-btn-group am-btn-group-xs">
-                  	<button class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="javascript:location.href='{{site_url url='my_overtime/view_overtime'}}/{{$item.id}}/1';"><span class="am-icon-pencil-square-o"></span> 查看</button>
+                  	<button class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="javascript:location.href='{{site_url url='xz_overtime/view_overtime'}}/{{$item.id}}/1';"><span class="am-icon-pencil-square-o"></span> 查看</button>
                     {{if $item.direct_checked == 0 && $item.executive_checked == 0}}
                     <button class="am-btn am-btn-default am-btn-xs am-text-danger btn_del" data-url="{{site_url url='my_overtime/del_overtime'}}/{{$item.id}}"><span class="am-icon-trash-o"></span> 删除</button>
                   	{{/if}}

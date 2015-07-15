@@ -20,10 +20,11 @@ class Xz_overtime extends MY_Controller {
 		$this->show('executive/list_overtime');
 	}
 	
-	public function view_overtime($id) {
+	public function view_overtime($id, $key=NULL) {
 		$data = $this->executive_model->get_overtime($id);
 		$this->assign('data', $data);
-	
+		$this->assign('key', $key);
+		
 		$this->show('executive/view_overtime');
 	}
 }
