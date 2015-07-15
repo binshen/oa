@@ -320,9 +320,13 @@ class Executive_model extends MY_Model
     public function list_leave($page) {
     	$data['limit'] = $this->limit;
     	//获取总记录数
-    	$this->db->select('count(1) num')->from('leave');
-    	if($this->input->post('title')){
-    		$this->db->like('title',$this->input->post('title'));
+    	$this->db->select('count(1) num')->from('leave a');
+    	$this->db->join('users c','a.uid = c.id','left');
+    	if($this->input->post('uname')){
+    		$this->db->like('c.rel_name',$this->input->post('uname'));
+    	}
+    	if($this->input->post('type_id')){
+    		$this->db->where('type_id',$this->input->post('type_id'));
     	}
     	$num = $this->db->get()->row();
     	$data['total'] = $num->num;
@@ -340,7 +344,7 @@ class Executive_model extends MY_Model
     		$data['uname'] = $this->input->post('uname');
     	}
     	if($this->input->post('type_id')){
-    		$this->db->like('a.type_id',$this->input->post('type_id'));
+    		$this->db->where('a.type_id',$this->input->post('type_id'));
     		$data['type_id'] = $this->input->post('type_id');
     	}
     	$this->db->limit($this->limit, $offset = ($page - 1) * $this->limit);
