@@ -364,14 +364,14 @@ class Executive_model extends MY_Model
     	$data['total'] = $num->num;
     	 
     	//搜索条件
-    	$data['title'] = null;
+    	$data['uname'] = null;
     	 
     	//获取详细列
     	$this->db->select('a.*, b.rel_name AS uname')->from('overtime a');
     	$this->db->join('users b','a.uid = b.id','left');
-    	if($this->input->post('title')){
-    		$this->db->like('title',$this->input->post('title'));
-    		$data['title'] = $this->input->post('title');
+    	if($this->input->post('uname')){
+    		$this->db->like('b.rel_name',$this->input->post('uname'));
+    		$data['uname'] = $this->input->post('uname');
     	}
     	$this->db->limit($this->limit, $offset = ($page - 1) * $this->limit);
     	$data['items'] = $this->db->get()->result_array();
