@@ -15,21 +15,21 @@ class Document_model extends MY_Model
     	$data['limit'] = $this->limit;
     	//获取总记录数
     	$this->db->select('count(1) num')->from('leave');
-    	if($this->input->post('title')){
-    		$this->db->like('title',$this->input->post('title'));
+    	if($this->input->post('type_id')){
+    		$this->db->where('type_id',$this->input->post('type_id'));
     	}
     	$num = $this->db->get()->row();
     	$data['total'] = $num->num;
     
     	//搜索条件
-    	$data['title'] = null;
+    	$data['type_id'] = null;
     
     	//获取详细列
     	$this->db->select('a.*, b.name')->from('leave a');
     	$this->db->join('leave_type b','a.type_id = b.id','left');
-    	if($this->input->post('title')){
-    		$this->db->like('title',$this->input->post('title'));
-    		$data['title'] = $this->input->post('title');
+    	if($this->input->post('type_id')){
+    		$this->db->where('type_id',$this->input->post('type_id'));
+    		$data['type_id'] = $this->input->post('type_id');
     	}
     	$this->db->limit($this->limit, $offset = ($page - 1) * $this->limit);
     	$data['items'] = $this->db->get()->result_array();

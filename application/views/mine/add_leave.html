@@ -111,12 +111,31 @@
 	});
 	
 	$("#confirmBtn").click(function() {
-/*
-		var title = $("#title").val();
-		if(!title){
+		var reason = $("#reason").val();
+		if(!reason){
 			easyDialog.open({
 				container : {
-					content : "公告标题不能为空！"
+					content : "请假事由不能为空！"
+				},
+				autoClose : 1200,
+			});
+			return false;
+		}
+		var start_time = $("#start_time").val();
+		if(!start_time){
+			easyDialog.open({
+				container : {
+					content : "请假开始时间不能为空！"
+				},
+				autoClose : 1200,
+			});
+			return false;
+		}
+		var end_time = $("#end_time").val();
+		if(!end_time){
+			easyDialog.open({
+				container : {
+					content : "请假开始时间不能为空！"
 				},
 				autoClose : 1200,
 			});
@@ -142,7 +161,7 @@
 			});
 			return;
 		}
-*/
+
 		easyDialog.open({
 			container : {
 			    header : '请假单',
