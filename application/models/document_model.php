@@ -101,15 +101,15 @@ class Document_model extends MY_Model
     	$num = $this->db->get()->row();
     	$data['total'] = $num->num;
     
-    	//搜索条件
-    	$data['title'] = null;
+//     	//搜索条件
+//     	$data['address'] = null;
     
     	//获取详细列
     	$this->db->select()->from('overtime');
-    	if($this->input->post('title')){
-    		$this->db->like('title',$this->input->post('title'));
-    		$data['title'] = $this->input->post('title');
-    	}
+//     	if($this->input->post('address')){
+//     		$this->db->like('address',$this->input->post('address'));
+//     		$data['address'] = $this->input->post('address');
+//     	}
     	$this->db->limit($this->limit, $offset = ($page - 1) * $this->limit);
     	$data['items'] = $this->db->get()->result_array();
     
