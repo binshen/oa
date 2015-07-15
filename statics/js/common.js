@@ -109,7 +109,7 @@ $(function () {
 	
 	$(".am-pagination").find('a').click(function() {
 		if(!$(this).parent().hasClass('am-active')) {
-			parent.document.getElementById("load").style.display = 'block';
+			parent.window.jQuery.AMUI.progress.start();
 		}
     })
     
@@ -121,7 +121,6 @@ $(function () {
 				$('.search_form').submit();
 				return false;
 			}
-			
 		});
 	}
 	
