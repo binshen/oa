@@ -350,7 +350,11 @@ class Executive_model extends MY_Model
     }
     
     public function get_leave($id){
-    	return $this->db->select()->from('leave')->where('id',$id)->get()->row_array();
+    	$this->db->select('a.*, b.name AS tname, c.rel_name AS uname, d.name AS dname')->from('leave a');
+    	$this->db->join('leave_type b','a.type_id = b.id','left');
+    	$this->db->join('users c','a.uid = c.id','left');
+    	$this->db->join('department d','a.dept_id = d.id','left');
+    	return $this->db->where('a.id',$id)->get()->row_array();
     }
     
     public function list_overtime($page) {
@@ -380,6 +384,9 @@ class Executive_model extends MY_Model
     }
     
     public function get_overtime($id){
-    	return $this->db->select()->from('overtime')->where('id',$id)->get()->row_array();
+    	$this->db->select('a.*, b.rel_name AS uname, c.name AS dname')->from('overtime a');
+    	$this->db->join('users b','a.uid = b.id','left');
+    	$this->db->join('department c','a.dept_id = c.id','left');
+    	return $this->db->where('a.id',$id)->get()->row_array();
     }
 }
