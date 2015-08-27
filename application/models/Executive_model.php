@@ -175,11 +175,12 @@ class Executive_model extends MY_Model
     }
     
     public function save_bulletin() {
+    	$user_info = $this->session->userdata('user_info');
     	$data = array(
     		'title'=>$this->input->post('title'),
     		'content'=>$this->input->post('editorValue'),
     		'cdate'=>date('Y-m-d H:i:s'),
-    		'from_uid'=>$this->session->userdata('user_info')['id'],
+    		'from_uid'=>$user_info['id'],
     		'num' => $this->input->post('num'),
     	);
     	

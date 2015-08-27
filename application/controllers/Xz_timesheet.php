@@ -85,6 +85,7 @@ class Xz_timesheet extends MY_Controller {
  			$column8 = trim($currentSheet->getCell("H".$currentRow)->getValue());
  			$column9 = trim($currentSheet->getCell("I".$currentRow)->getValue());
  			
+ 			$user_info = $this->session->userdata('user_info');
  			$data = array(
  				'dept' => $column1,
  				'name' => $column2,
@@ -95,7 +96,7 @@ class Xz_timesheet extends MY_Controller {
  				'num' => $column7,
  				'method' => $column8,
  				'card' => $column9,
- 				'import_uid' => $this->session->userdata('user_info')['id'],
+ 				'import_uid' => $user_info['id'],
  				'uid' => null,
  				'cdate' => date('Y-m-d H:i:s')
  			);
