@@ -4,7 +4,7 @@ if (! defined ( 'BASEPATH' ))
 	// 以下是加载smarty的类文件
 require_once (APPPATH . 'libraries/smarty/Smarty.class.php');
 // 定义cismarty类，继承smarty类
-class cismarty extends Smarty {
+class Cismarty extends Smarty {
 	// 定义一个受保护的变量,
 	protected $ci;
 	protected $complie_dir;
