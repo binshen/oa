@@ -71,7 +71,8 @@ class Common_model extends MY_Model
     }
     
     public function get_user_list($dept_id) {
-    	$user_id = $this->session->userdata('user_info')['id'];
+    	$user_info = $this->session->userdata('user_info');
+    	$user_id = $user_info['id'];
     	return $this->db->select('id, rel_name')->get_where('users', array('dept_id' => $dept_id, 'id <>' => $user_id))->result_array();
     }
 }
