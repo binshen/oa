@@ -276,7 +276,8 @@ class Executive_model extends MY_Model
     }
     
     public function get_bulletin_num($year) {
-    	return $this->db->select_max('num')->from('bulletin')->where('YEAR(cdate)=' . $year)->get()->row_array()['num'];
+    	$result = $this->db->select_max('num')->from('bulletin')->where('YEAR(cdate)=' . $year)->get()->row_array();
+    	return $result['num'];
     }
     
     public function list_timesheet($page)
