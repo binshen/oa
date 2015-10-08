@@ -14,7 +14,7 @@ class Finance_model extends MY_Model
     	
     	$data['limit'] = $this->limit;
     	//获取总记录数
-    	$this->db->select('a.*, b.rel_name, c.name')->from('brokerage a');
+    	$this->db->select('count(1) num')->from('brokerage a');
     	$this->db->join('users b', 'a.user_id = b.id', 'left');
     	$this->db->join('house c', 'a.house_id = c.id', 'left');
     	if($this->input->post('house_id')){
@@ -46,5 +46,12 @@ class Finance_model extends MY_Model
     	$data['items'] = $this->db->get()->result_array();
     	
     	return $data;
+    }
+    
+    public function get_brokerage($id) {
+    	$this->db->select('a.*, b.rel_name, c.name')->from('brokerage a');
+    	$this->db->join('users b', 'a.user_id = b.id', 'left');
+    	$this->db->join('house c', 'a.house_id = c.id', 'left');
+    	return $this->db->where('a.id', $id)->get()->row_array();
     }
 }

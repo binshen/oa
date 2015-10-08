@@ -24,4 +24,12 @@ class Cw_brokerage extends MY_Controller {
 		
 		$this->show('finance/list_brokerage');
 	}
+	
+	public function view_brokerage($id) {
+		
+		$data = $this->finance_model->get_brokerage($id);
+		$this->assign('data', $data);
+		
+		$this->show('finance/view_brokerage');
+	}
 }
