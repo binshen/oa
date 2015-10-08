@@ -27,6 +27,6 @@ class My_brokerage extends MY_Controller {
 	
 	public function add_brokerage() {
 		
-		echo "123123123";
+		$this->show('/mine/add_brokerage');
 	}
 }
