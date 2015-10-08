@@ -88,4 +88,8 @@ class Basic_model extends MY_Model
     	$where .= ' left join company on department.pid = company.id ';
     	return $this->db->query($where)->result_array();
     }
+    
+    public function get_house_list() {
+    	return $this->db->select()->from('house')->get()->result_array();
+    }
 }
