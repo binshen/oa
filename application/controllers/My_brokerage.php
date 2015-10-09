@@ -29,4 +29,22 @@ class My_brokerage extends MY_Controller {
 		
 		$this->show('/mine/add_brokerage');
 	}
+	
+	public function save_brokerage(){
+		$rs = $this->finance_model->save_brokerage();
+		if($rs == 1){
+			$this->show_message('保存成功',site_url('my_brokerage/list_brokerage'));
+		}else{
+			$this->show_message('保存失败');
+		}
+	}
+	
+	public function del_brokerage() {
+		$rs = $this->finance_model->del_brokerage($id);
+		if($rs == 1){
+			$this->show_message('删除成功',site_url('my_brokerage/list_brokerage'));
+		}else{
+			$this->show_message('删除失败');
+		}
+	}
 }

@@ -54,4 +54,58 @@ class Finance_model extends MY_Model
     	$this->db->join('house c', 'a.house_id = c.id', 'left');
     	return $this->db->where('a.id', $id)->get()->row_array();
     }
+    
+    
+    public function save_brokerage(){
+    	$user_info = $this->session->userdata('user_info');
+    	$user_id = $user_info['id'];
+    	$data = array(
+    			'customer'=>$this->input->post('customer'),
+    			'phone'=>$this->input->post('phone'),
+    			'house_no'=>$this->input->post('house_no'),
+    			'acreage'=>$this->input->post('acreage'),
+    			'total_price'=>$this->input->post('total_price'),
+    			'retailer'=>$this->input->post('retailer'),
+    			'retailer_tel'=>$this->input->post('retailer_tel'),
+    			'status'=>$this->input->post('status'),
+    			'item1'=>$this->input->post('item1'),
+    			'item2'=>$this->input->post('item2'),
+    			'item3'=>$this->input->post('item3'),
+    			'item4'=>$this->input->post('item4'),
+    			'item5'=>$this->input->post('item5'),
+    			'item6'=>$this->input->post('item6'),
+    			'house_id'=>$this->input->post('house_id'),
+    			'user_id'=>$user_id
+    	);
+    
+    	$this->db->trans_start();//--------开始事务
+    
+    	if($this->input->post('id')){//修改
+    		$this->db->where('id', $this->input->post('id'));
+    		$this->db->update('brokerage',$data);
+    	}else{//新增
+    		$this->db->insert('brokerage',$data);
+    	}
+    
+    	$this->db->trans_complete();//------结束事务
+    	if ($this->db->trans_status() === FALSE) {
+    		return -1;
+    	} else {
+    		return 1;
+    	}
+    }
+    
+    public function del_brokerage($id) {
+    	$this->db->trans_start();//--------开始事务
+    	
+    	$this->db->where('id',$id);
+    	$this->db->delete('brokerage');
+    	
+    	$this->db->trans_complete();//------结束事务
+    	if ($this->db->trans_status() === FALSE) {
+    		return -1;
+    	} else {
+    		return 1;
+    	}
+    }
 }
