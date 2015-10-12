@@ -45,7 +45,7 @@ class My_brokerage extends MY_Controller {
 		}
 	}
 	
-	public function del_brokerage() {
+	public function del_brokerage($id) {
 		$rs = $this->finance_model->del_brokerage($id);
 		if($rs == 1){
 			$this->show_message('删除成功',site_url('my_brokerage/list_brokerage'));
