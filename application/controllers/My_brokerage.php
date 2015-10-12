@@ -13,7 +13,9 @@ class My_brokerage extends MY_Controller {
 	
 	public function list_brokerage($page=1) {
 		
-		$data = $this->finance_model->list_brokerage($page);
+		$user_info = $this->session->userdata('user_info');
+		$user_id = $user_info['id'];
+		$data = $this->finance_model->list_brokerage($page, $user_id);
 		$base_url = "/my_brokerage/list_brokerage";
 		$pager = $this->pagination->getPageLink($base_url, $data['total'], $data['limit']);
 		$this->assign('pager', $pager);
