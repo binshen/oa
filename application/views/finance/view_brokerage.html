@@ -9,72 +9,66 @@
       </div>
       <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
 	  	<div class="am-form-group">
-            <label class="am-u-sm-2">客户姓名:</label>
-            <label class="am-u-sm-10">{{$data.customer}}</label>
+            <label class="am-u-sm-3">客户姓名:</label>
+            <label class="am-u-sm-9">{{$data.customer}}&nbsp;</label>
         </div>
         <div class="am-form-group">
-            <label class="am-u-sm-2">客户电话:</label>
-            <label class="am-u-sm-10">{{$data.phone}}</label>
+            <label class="am-u-sm-3">客户电话:</label>
+            <label class="am-u-sm-9">{{$data.phone}}&nbsp;</label>
         </div>
         <div class="am-form-group">
-            <label class="am-u-sm-2">楼盘:</label>
-            <label class="am-u-sm-10">{{$data.name}}</label>
+            <label class="am-u-sm-3">楼盘:</label>
+            <label class="am-u-sm-9">{{$data.name}}&nbsp;</label>
         </div>
         <div class="am-form-group">
-            <label class="am-u-sm-2">房号:</label>
-            <label class="am-u-sm-10">{{$data.house_no}}</label>
+            <label class="am-u-sm-3">房号:</label>
+            <label class="am-u-sm-9">{{$data.house_no}}&nbsp;</label>
         </div>
         <div class="am-form-group">
-            <label class="am-u-sm-2">面积:</label>
-            <label class="am-u-sm-10">{{$data.acreage}}</label>
+            <label class="am-u-sm-3">面积:</label>
+            <label class="am-u-sm-9">{{$data.acreage}}&nbsp;</label>
         </div>
         <div class="am-form-group">
-            <label class="am-u-sm-2">总价:</label>
-            <label class="am-u-sm-10">{{$data.total_price}}</label>
+            <label class="am-u-sm-3">总价:</label>
+            <label class="am-u-sm-9">{{$data.total_price}}&nbsp;</label>
         </div>
         <div class="am-form-group">
-            <label class="am-u-sm-2">业务员:</label>
-            <label class="am-u-sm-10">{{$data.rel_name}}</label>
+            <label class="am-u-sm-3">业务员:</label>
+            <label class="am-u-sm-9">{{$data.rel_name}}&nbsp;</label>
         </div>
         <div class="am-form-group">
-            <label class="am-u-sm-2">订购日期:</label>
-            <label class="am-u-sm-10">{{$data.date}}</label>
+            <label class="am-u-sm-3">订购日期:</label>
+            <label class="am-u-sm-9">{{$data.date}}&nbsp;</label>
         </div>
         <div class="am-form-group">
-            <label class="am-u-sm-2">分销公司:</label>
-            <label class="am-u-sm-10">{{$data.retailer}}</label>
+            <label class="am-u-sm-3">分销公司:</label>
+            <label class="am-u-sm-9">{{$data.retailer}}&nbsp;</label>
         </div>
         <div class="am-form-group">
-            <label class="am-u-sm-2">是否请佣:</label>
-            <label class="am-u-sm-10">{{if $data.status == 0}}否{{else}}是{{/if}}</label>
+            <label class="am-u-sm-3">是否请佣:</label>
+            <label class="am-u-sm-9">{{if $data.status == 0}}否{{else}}是{{/if}}&nbsp;</label>
         </div>
         <div class="am-form-group">
-            <label class="am-u-sm-2">请佣金额:</label>
-            <label class="am-u-sm-10">{{$data.item1}}&nbsp;</label>
+            <label class="am-u-sm-3">请佣金额:</label>
+            <label class="am-u-sm-3">{{$data.item1}}&nbsp;</label>
+            <label class="am-u-sm-3">丙方佣金:</label>
+            <label class="am-u-sm-3">{{$data.item2}}&nbsp;</label>
         </div>
         <div class="am-form-group">
-            <label class="am-u-sm-2">丙方佣金:</label>
-            <label class="am-u-sm-10">{{$data.item2}}&nbsp;</label>
+            <label class="am-u-sm-3">渠道佣金:</label>
+            <label class="am-u-sm-3">{{$data.item3}}&nbsp;</label>
+            <label class="am-u-sm-3">客服佣金:</label>
+            <label class="am-u-sm-3">{{$data.item4}}&nbsp;</label>
         </div>
         <div class="am-form-group">
-            <label class="am-u-sm-2">渠道佣金:</label>
-            <label class="am-u-sm-10">{{$data.item3}}&nbsp;</label>
+            <label class="am-u-sm-3">副总监佣金:</label>
+            <label class="am-u-sm-3">{{$data.item5}}&nbsp;</label>
+            <label class="am-u-sm-3">总监佣金:</label>
+            <label class="am-u-sm-3">{{$data.item6}}&nbsp;</label>
         </div>
-        <div class="am-form-group">
-            <label class="am-u-sm-2">客服佣金:</label>
-            <label class="am-u-sm-10">{{$data.item4}}&nbsp;</label>
-        </div>
-        <div class="am-form-group">
-            <label class="am-u-sm-2">副总监佣金:</label>
-            <label class="am-u-sm-10">{{$data.item5}}&nbsp;</label>
-        </div>
-        <div class="am-form-group">
-            <label class="am-u-sm-2">总监佣金:</label>
-            <label class="am-u-sm-10">{{$data.item6}}&nbsp;</label>
-        </div>
-        
         <br>
-        <a type="button" class="am-btn am-btn-default" href="/cw_brokerage/list_brokerage">返回</a>
+        <br>
+        <a type="button" class="am-btn am-btn-default" href="{{if $key=1}}/my_brokerage/list_brokerage{{else}}/cw_brokerage/list_brokerage{{/if}}">返回</a>
       </div>
     </div>
   </div>

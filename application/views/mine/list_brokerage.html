@@ -17,7 +17,7 @@
 	      <div class="am-u-sm-12 am-u-md-4">
 	        <div class="am-input-group am-input-group-sm">
 	        	楼盘：
-	        	<select data-am-selected="{btnWidth: '120', btnSize: 'sm', btnStyle: 'default'}" name="house_id">
+	        	<select name="house_id">
 	        		<option value="">- 全选 -</option>
 	        		{{foreach from=$houses item=item}}
 				  	<option value="{{$item.id}}" {{if $item.id == $data.house_id}}selected{{/if}}>{{$item.name}}</option>
@@ -67,7 +67,7 @@
               <td>
                 <div class="am-btn-toolbar">
                   <div class="am-btn-group am-btn-group-xs">
-                  	<button class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="javascript:location.href='{{site_url url='cw_brokerage/view_brokerage'}}/{{$item.id}}';"><span class="am-icon-pencil-square-o"></span> 查看</button>
+                  	<button class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="javascript:location.href='{{site_url url='cw_brokerage/view_brokerage'}}/{{$item.id}}/1';"><span class="am-icon-pencil-square-o"></span> 查看</button>
                   </div>
                 </div>
               </td>

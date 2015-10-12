@@ -68,6 +68,7 @@ class Finance_model extends MY_Model
     			'retailer'=>$this->input->post('retailer'),
     			'retailer_tel'=>$this->input->post('retailer_tel'),
     			'status'=>$this->input->post('status'),
+    			'date'=>$this->input->post('date'),
     			'item1'=>$this->input->post('item1'),
     			'item2'=>$this->input->post('item2'),
     			'item3'=>$this->input->post('item3'),

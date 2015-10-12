@@ -26,7 +26,12 @@
           <div class="am-form-group">
             <label for="position" class="am-u-sm-2 am-form-label">楼盘</label>
             <div class="am-u-sm-4">
-              <input type="text" name="house_id" id="house_id">
+              <select data-am-selected="{btnWidth: '120', btnSize: 'sm', btnStyle: 'default'}" name="house_id">
+	        		<option value="">- 全选 -</option>
+	        		{{foreach from=$houses item=item}}
+				  	<option value="{{$item.id}}" {{if $item.id == $house_id}}selected{{/if}}>{{$item.name}}</option>
+				  	{{/foreach}}
+				</select>
             </div>
             <label for="house_no" class="am-u-sm-2 am-form-label">房号</label>
             <div class="am-u-sm-4">
@@ -59,7 +64,7 @@
           <div class="am-form-group">
             <label for="acreage" class="am-u-sm-2 am-form-label">订购日期</label>
             <div class="am-u-sm-4">
-              <input type="text" name="date" id="date">
+              <input type="text" name="date" id="date" class="am-form-field" data-am-datepicker readonly>
             </div>
             <label for="total_price" class="am-u-sm-2 am-form-label">是否请佣</label>
             <div class="am-u-sm-4">

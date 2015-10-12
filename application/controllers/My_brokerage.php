@@ -27,6 +27,10 @@ class My_brokerage extends MY_Controller {
 	
 	public function add_brokerage() {
 		
+		$houses = $this->basic_model->get_house_list();
+		$this->assign('houses', $houses);
+		
+		$this->assign('house_id', null);
 		$this->show('/mine/add_brokerage');
 	}
 	
