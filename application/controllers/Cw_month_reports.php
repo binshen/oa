@@ -18,6 +18,9 @@ class Cw_month_reports extends MY_Controller {
 		$this->assign('pager', $pager);
 		$this->assign('data', $data);
 		
+		$this->assign('year', $this->input->post('year'));
+		$this->assign('month', $this->input->post('month'));
+		
 		$this->show('finance/list_month_reports');
 	}
 	
