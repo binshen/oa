@@ -23,6 +23,12 @@ class Cw_month_reports extends MY_Controller {
 	
 	public function add_month_reports(){
 		
+		$year = date('Y');
+		$month = intval(date('m'));
+		
+		$this->assign('year', $year);
+		$this->assign('month', $month);
+		
 		$this->show('finance/add_month_reports');
 	}
 	
@@ -36,6 +42,9 @@ class Cw_month_reports extends MY_Controller {
 		move_uploaded_file($path, $uploadFile);
 		
 		$this->finance_model->save_month_reports($uploadFile);
+		
+		unset($_POST['year']);
+		unset($_POST['month']);
 		
 		$this->list_month_reports();
 	}
