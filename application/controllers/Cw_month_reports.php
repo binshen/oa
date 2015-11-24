@@ -38,4 +38,11 @@ class Cw_month_reports extends MY_Controller {
 		
 		$this->list_month_reports();
 	}
+	
+	public function delete_month_reports($id) {
+		
+		$this->finance_model->delete_month_reports($id);
+		
+		$this->list_month_reports();
+	}
 }
