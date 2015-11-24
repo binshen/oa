@@ -66,11 +66,11 @@
           <table class="am-table am-table-striped am-table-hover table-main">
             <thead>
               <tr>
-                <th class="table-id">ID</th>
-                <th class="table-title">年份</th>
-                <th class="table-title">月份</th>
-                <th class="table-date am-hide-sm-only">上传时间</th>
-                <th class="table-date am-hide-sm-only">上传者</th>
+                <th class="table-id" width="15%">ID</th>
+                <th class="table-title" width="15%">年份</th>
+                <th class="table-title" width="15%">月份</th>
+                <th class="table-date am-hide-sm-only" width="20%">上传时间</th>
+                <th class="table-date am-hide-sm-only" width="15%">上传者</th>
                 <th class="table-set">操作</th>
               </tr>
           </thead>
@@ -81,12 +81,12 @@
               <td><a href="#">{{$item.year}}</a></td>
               <td>{{$item.month}}</td>
               <td class="am-hide-sm-only">{{$item.created}}</td>
-              <td>{{$item.user_id}}</td>
+              <td>{{$item.user_name}}</td>
               <td>
                 <div class="am-btn-toolbar">
                   <div class="am-btn-group am-btn-group-xs">
                     <button class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="download('/{{$item.file}}');"><span class="am-icon-pencil-square-o"></span> 下载</button>
-                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="javascript:location.href='{{site_url url='cw_month_reports/delete_month_reports'}}/{{$item.id}}';"><span class="am-icon-pencil-square-o"></span> 删除</button>
+                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary btn_del" onclick="javascript:location.href='{{site_url url='cw_month_reports/delete_month_reports'}}/{{$item.id}}';"><span class="am-icon-pencil-square-o"></span> 删除</button>
                   </div>
                 </div>
               </td>
