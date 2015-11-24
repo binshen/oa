@@ -115,4 +115,36 @@ class Finance_model extends MY_Model
     		return 1;
     	}
     }
+    
+    public function list_month_reports($page) {
+    	
+    	$data['limit'] = $this->limit;
+    	//获取总记录数
+    	$this->db->select('count(1) num')->from('month_reports');
+    	if($this->input->post('year')){
+    		$this->db->where('year',$this->input->post('year'));
+    	}
+    	if($this->input->post('month')){
+    		$this->db->like('month',$this->input->post('month'));
+    	}
+    	$num = $this->db->get()->row();
+    	$data['total'] = $num->num;
+    	 
+    	//搜索条件
+    	$data['year'] = null;
+    	$data['month'] = null;
+    	 
+    	//获取详细列
+    	$this->db->from('month_reports');
+    	if($this->input->post('year')){
+    		$this->db->where('year',$this->input->post('year'));
+    	}
+    	if($this->input->post('month')){
+    		$this->db->like('month',$this->input->post('month'));
+    	}
+    	$this->db->limit($this->limit, $offset = ($page - 1) * $this->limit);
+    	$data['items'] = $this->db->get()->result_array();
+    	 
+    	return $data;
+    }
 }

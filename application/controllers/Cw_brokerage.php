@@ -14,7 +14,7 @@ class Cw_brokerage extends MY_Controller {
 	public function list_brokerage($page=1) {
 		
 		$data = $this->finance_model->list_brokerage($page);
-		$base_url = "/cw_brokerage_report/list_brokerage_report";
+		$base_url = "/cw_brokerage/list_brokerage";
 		$pager = $this->pagination->getPageLink($base_url, $data['total'], $data['limit']);
 		$this->assign('pager', $pager);
 		$this->assign('data', $data);
