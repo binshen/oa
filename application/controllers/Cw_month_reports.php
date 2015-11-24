@@ -31,7 +31,8 @@ class Cw_month_reports extends MY_Controller {
 		$file = $_FILES['uploadFile'];
 		$name = $file['name'];
 		$path = $file['tmp_name'];
-		$uploadFile = "upload/month_reports/" . date("Ym") . "." . explode('.', $name)[1];
+		$extension = explode('.', $name)[1];
+		$uploadFile = "upload/month_reports/" . date("Ym") . "." . $extension;
 		move_uploaded_file($path, $uploadFile);
 		
 		$this->finance_model->save_month_reports($uploadFile);
