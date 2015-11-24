@@ -1,10 +1,102 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-123123123123123213123123
-</body>
-</html>
+  <!-- content start -->
+  <div class="admin-content">
+
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">月度财务报表一览</strong></div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12 am-u-md-4">
+        <div class="am-btn-toolbar">
+          <div class="am-btn-group am-btn-group-xs">
+            <a type="button" class="am-btn am-btn-default" href="{{site_url url='cw_month_reports/add_month_reports'}}"><span class="am-icon-plus"></span> 新增</a>
+          </div>
+        </div>
+      </div>
+       <form method="post" action="{{site_url url='cw_month_reports/list_month_reports'}}" class="search_form">
+	      <div class="am-u-sm-12 am-u-md-3">
+	      	<div class="am-input-group am-input-group-sm">
+	        	年份：
+	        	<select data-am-selected="{btnWidth: '60', btnSize: 'sm', btnStyle: 'default'}" name="house_id">
+	        		<option value="">- 全选 -</option>
+	        		<option value="2011">2011</option>
+	        		<option value="2012">2012</option>
+	        		<option value="2013">2013</option>
+	        		<option value="2014">2014</option>
+	        		<option value="2015">2015</option>
+	        		<option value="2016">2016</option>
+	        		<option value="2017">2017</option>
+	        		<option value="2018">2018</option>
+	        		<option value="2019">2019</option>
+	        		<option value="2020">2020</option>
+				</select>
+		    </div>
+	      </div>
+      	  <div class="am-u-sm-12 am-u-md-3">
+		    <div class="am-input-group am-input-group-sm">
+	        	月份：
+	        	<select data-am-selected="{btnWidth: '60', btnSize: 'sm', btnStyle: 'default'}" name="house_id">
+	        		<option value="">- 全选 -</option>
+	        		<option value="1">1</option>
+	        		<option value="2">2</option>
+	        		<option value="3">3</option>
+	        		<option value="4">4</option>
+	        		<option value="5">5</option>
+	        		<option value="6">6</option>
+	        		<option value="7">7</option>
+	        		<option value="8">8</option>
+	        		<option value="9">9</option>
+	        		<option value="10">10</option>
+	        		<option value="11">11</option>
+	        		<option value="12">12</option>
+				</select>
+		    </div>
+	      </div>
+	      <div class="am-u-sm-12 am-u-md-2">
+	        <div class="am-input-group am-input-group-sm">
+	          <span class="am-input-group-btn">
+	            <input type="submit" class="am-btn am-btn-default" value="搜索" />
+	          </span>
+	        </div>
+	      </div>
+      </form>
+    </div>
+    <div class="am-g">
+      <div class="am-u-sm-12">
+          <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+              <tr>
+                <th class="table-id">ID</th>
+                <th class="table-title">年份</th>
+                <th class="table-title">月份</th>
+                <th class="table-date am-hide-sm-only">上传时间</th>
+                <th class="table-date am-hide-sm-only">上传者</th>
+                <th class="table-set">操作</th>
+              </tr>
+          </thead>
+          <tbody>
+          	{{foreach from=$data.items key=key item=item}}
+          	<tr>
+              <td>{{$item.id}}</td>
+              <td><a href="#">{{$item.year}}</a></td>
+              <td>{{$item.month}}</td>
+              <td class="am-hide-sm-only">{{$item.created}}</td>
+              <td>{{$item.user_id}}</td>
+              <td>
+                <div class="am-btn-toolbar">
+                  <div class="am-btn-group am-btn-group-xs">
+                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="javascript:location.href='{{site_url url='cw_month_reports/list_month_reports'}}/{{$item.id}}';"><span class="am-icon-pencil-square-o"></span> 下载</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            {{/foreach}}
+          </tbody>
+        </table>
+		<div class="am-cf">{{$pager}}</div>
+      </div>
+
+    </div>
+  </div>
+  <!-- content end -->
+

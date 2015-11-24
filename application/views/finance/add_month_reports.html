@@ -1,0 +1,63 @@
+<!-- content start -->
+<div class="admin-content">
+    <div class="am-cf am-padding">
+      	<div class="am-fl am-cf">
+      		<strong class="am-text-primary am-text-lg">上传月度财务报表</strong>
+      	</div>
+    </div>
+    <div class="am-g">
+       	<form method="post" action="{{site_url url='cw_month_reports/upload_month_reports'}}" class="add_report_form" enctype="multipart/form-data">
+          <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+	      </div>
+	      <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+		  	<div class="am-form-group">
+	            <label class="am-u-sm-2 am-form-label">年份: </label>
+	            <div class="am-u-sm-10">
+	              <input type="text" name="year" id="year">
+	              <input type="hidden" name="user_id" value="{{$user_id}}">
+	            </div>
+	        </div>
+	        <br>
+	        <div class="am-form-group">
+	            <label class="am-u-sm-2 am-form-label">月份: </label>
+	            <div class="am-u-sm-10">
+	               <input type="text" name="month" id="month">
+	            </div>
+	        </div>
+	        <br>
+	        <div class="am-form-group">
+	            <div class="am-form-group am-form-file ">
+			  		<button type="button" class="am-btn am-btn-danger am-btn-sm">
+			  		<i class="am-icon-cloud-upload"></i> 选择要上传的文件</button>
+			  		<input id="upload_file" type="file" name="uploadFile">
+				</div>
+				<div class="am-u-sm-12 am-u-md-6">
+		       		<div class="am-form-group am-form-file">
+				  		<div id="file-list"></div>
+					</div>
+	       		</div>
+	       		<br>
+				<script>
+				  	$(function() {
+				    	$('#upload_file').on('change', function() {
+				      		var fileNames = '';
+				      		$.each(this.files, function() {
+				        		fileNames += '<span class="am-badge">' + this.name + '</span> ';
+				      		});
+				      		$('#file-list').html(fileNames);
+				    	});
+				  	});
+				</script>
+	        </div>
+	        <div class="am-form-group">
+	             <div class="am-btn-toolbar">
+		          	<div class="am-btn-group am-btn-group-xs">
+		          		<button type="submit" class="am-btn am-btn-secondary"> 提    交 </button>
+		          	</div>
+		        </div>
+	        </div>
+	      </div>
+	    </form>
+	</div>
+</div>
+<!-- content end -->
