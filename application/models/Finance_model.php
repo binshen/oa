@@ -147,4 +147,40 @@ class Finance_model extends MY_Model
     	 
     	return $data;
     }
+    
+    public function save_month_reports($file) {
+    	
+    	$user_info = $this->session->userdata('user_info');
+    	$user_id = $user_info['id'];
+    	
+    	$year = $this->input->post('year');
+    	$month = $this->input->post('month');
+    	$data = $this->db->from('month_reports')->where('year', $year)->where('month', $month)->get()->row_array();
+    	if(empty($data)) {
+    		$data = array(
+	    		'year'=>$year,
+	    		'month'=>$month,
+	    		'created'=>date('Y-m-d H:i:s'),
+	    	);
+    	}
+    	$data['file'] = $file;
+    	$data['user_id'] = $user_id;
+    	$data['updated'] = date('Y-m-d H:i:s');
+    
+    	$this->db->trans_start();//--------开始事务
+    	
+    	if(isset($data['id'])){//修改
+    		$this->db->where('id', $data['id']);
+    		$this->db->update('month_reports',$data);
+    	}else{//新增
+    		$this->db->insert('month_reports',$data);
+    	}
+    
+    	$this->db->trans_complete();//------结束事务
+    	if ($this->db->trans_status() === FALSE) {
+    		return -1;
+    	} else {
+    		return 1;
+    	}
+    }
 }

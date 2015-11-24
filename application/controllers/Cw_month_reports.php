@@ -23,13 +23,19 @@ class Cw_month_reports extends MY_Controller {
 	
 	public function add_month_reports(){
 		
-		$this->assign('user_id', 123);
-		
 		$this->show('finance/add_month_reports');
 	}
 	
 	public function upload_month_reports(){
 		
-		var_dump($_POST);
+		$file = $_FILES['uploadFile'];
+		$name = $file['name'];
+		$path = $file['tmp_name'];
+		$uploadFile = "upload/month_reports/" . date("Ym") . "." . end(explode('.', $name));
+		move_uploaded_file($path, $uploadFile);
+		
+		$this->finance_model->save_month_reports($uploadFile);
+		
+		$this->list_month_reports();
 	}
 }
