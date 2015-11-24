@@ -85,7 +85,7 @@
               <td>
                 <div class="am-btn-toolbar">
                   <div class="am-btn-group am-btn-group-xs">
-                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="javascript:location.href='/{{$item.file}}';"><span class="am-icon-pencil-square-o"></span> 下载</button>
+                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="download('{{$item.file}}');"><span class="am-icon-pencil-square-o"></span> 下载</button>
                     <button class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="javascript:location.href='{{site_url url='cw_month_reports/delete_month_reports'}}/{{$item.id}}';"><span class="am-icon-pencil-square-o"></span> 删除</button>
                   </div>
                 </div>
@@ -96,8 +96,11 @@
         </table>
 		<div class="am-cf">{{$pager}}</div>
       </div>
-
     </div>
   </div>
   <!-- content end -->
-
+<script>
+function download(file) {
+	window.open(file, 'download');
+}
+</script>
