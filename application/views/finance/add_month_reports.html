@@ -6,26 +6,50 @@
       	</div>
     </div>
     <div class="am-g">
-       	<form method="post" action="{{site_url url='cw_month_reports/upload_month_reports'}}" class="add_report_form" enctype="multipart/form-data">
+       	<form id="addReportForm" method="post" action="{{site_url url='cw_month_reports/upload_month_reports'}}" class="add_report_form" enctype="multipart/form-data">
           <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
 	      </div>
 	      <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
 		  	<div class="am-form-group">
 	            <label class="am-u-sm-2 am-form-label">年份: </label>
 	            <div class="am-u-sm-10">
-	              <input type="text" name="year" id="year">
+	              <select data-am-selected="{btnWidth: '60', btnSize: 'sm', btnStyle: 'default'}" name="year">
+	        		<option value="2011">2011</option>
+	        		<option value="2012">2012</option>
+	        		<option value="2013">2013</option>
+	        		<option value="2014">2014</option>
+	        		<option value="2015">2015</option>
+	        		<option value="2016">2016</option>
+	        		<option value="2017">2017</option>
+	        		<option value="2018">2018</option>
+	        		<option value="2019">2019</option>
+	        		<option value="2020">2020</option>
+				</select>
 	            </div>
 	        </div>
 	        <br>
 	        <div class="am-form-group">
 	            <label class="am-u-sm-2 am-form-label">月份: </label>
 	            <div class="am-u-sm-10">
-	               <input type="text" name="month" id="month">
+	               <select data-am-selected="{btnWidth: '60', btnSize: 'sm', btnStyle: 'default'}" name="month">
+	        		<option value="1">1</option>
+	        		<option value="2">2</option>
+	        		<option value="3">3</option>
+	        		<option value="4">4</option>
+	        		<option value="5">5</option>
+	        		<option value="6">6</option>
+	        		<option value="7">7</option>
+	        		<option value="8">8</option>
+	        		<option value="9">9</option>
+	        		<option value="10">10</option>
+	        		<option value="11">11</option>
+	        		<option value="12">12</option>
+				</select>
 	            </div>
 	        </div>
 	        <br>
 	        <div class="am-form-group">
-	            <div class="am-form-group am-form-file ">
+	            <div class="am-form-group am-form-file">
 			  		<button type="button" class="am-btn am-btn-danger am-btn-sm">
 			  		<i class="am-icon-cloud-upload"></i> 选择要上传的文件</button>
 			  		<input id="upload_file" type="file" name="uploadFile">
@@ -45,13 +69,28 @@
 				      		});
 				      		$('#file-list').html(fileNames);
 				    	});
+				    	
+				    	$("#btnSubmit").click(function() {
+				    		var file = $("#upload_file").val();
+				    		if(file == "") {
+				    			easyDialog.open({
+				    				container : {
+				    					content : "请选择需要上传的文件！"
+				    				},
+				    				autoClose : 1200,
+				    			});
+				    			return false;
+				    		} else {
+				    			$("#addReportForm").submit();
+				    		}
+				    	});
 				  	});
 				</script>
 	        </div>
 	        <div class="am-form-group">
 	             <div class="am-btn-toolbar">
 		          	<div class="am-btn-group am-btn-group-xs">
-		          		<button type="submit" class="am-btn am-btn-secondary"> 提    交 </button>
+		          		<button type="button" class="am-btn am-btn-secondary" id="btnSubmit"> 提    交 </button>
 		          	</div>
 		        </div>
 	        </div>
