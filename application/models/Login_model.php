@@ -65,6 +65,7 @@ class Login_model extends MY_Model
             $data['operation'] = $operation;
             $data['menu'] = $menu;
             $data['user_info'] = $rs;
+            $data['supper'] = $rs['supper'];
             $this->session->set_userdata($data);
             return 1;
         }else{

@@ -28,7 +28,7 @@ class Task_model extends MY_Model
     
     	//获取详细列
     	$this->db->select('a.id,a.title,a.cdate,a.lev,a.status,to_uid,b.rel_name,close_name')->from('task a');
-    	$this->db->join('users b','a.to_uid=b.id','left');
+    	$this->db->join('users b','a.target_uid=b.id','left');
     	if($this->input->post('title')){
     		$this->db->like('a.title',$this->input->post('title'));
     		$data['title'] = $this->input->post('title');
@@ -130,7 +130,6 @@ class Task_model extends MY_Model
     public function audit_task(){
     	$user_info = $this->session->userdata('user_info');
     	$data = array(
-    			'to_uid'=>$this->input->post('to_uid'),
     			'target_uid'=>$this->input->post('target_uid'),
     			'lev'=>$this->input->post('lev'),
     			'title'=>$this->input->post('title'),
@@ -186,7 +185,7 @@ class Task_model extends MY_Model
     	$data['title'] = null;
     	 
     	//获取详细列
-    	$this->db->select('a.id,a.title,a.cdate,a.lev,a.status,to_uid,b.rel_name,from_name')->from('task a');
+    	$this->db->select('a.id,a.title,a.cdate,a.lev,a.status,to_uid,b.rel_name,from_name,close_name')->from('task a');
     	$this->db->join('users b','a.to_uid=b.id','left');
     	if($this->input->post('title')){
     		$this->db->like('a.title',$this->input->post('title'));

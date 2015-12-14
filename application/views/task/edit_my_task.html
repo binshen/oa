@@ -52,7 +52,7 @@
 		  
 		  <div class="am-tabs-bd">
 		  {{foreach from=$list item=item key=k}}
-		  <div class="am-tab-panel"{{if $k == 0}}class="am-active"{{/if}}>{{$item.progress}}</div>
+		  <div class="am-tab-panel {{if $k == 0}}am-active am-in{{/if}}">{{$item.progress}}</div>
 		  {{/foreach}}
 		  </div>
 		</div>
@@ -107,7 +107,21 @@ function save_progress(obj){
 	task_id = $('[name="id"]').val();
 	progress = $(obj).parent().find('[name="progress[]"]').val();
 	$.post("/task/save_my_task",{progress:progress,task_id:task_id},function(data){
-	    alert(data);
+	    if(data == '1'){
+	    	easyDialog.open({
+					container : {
+						content : "保存成功！"
+					},
+					autoClose : 1200,
+				});
+	    }else{
+	    	easyDialog.open({
+				container : {
+					content : "保存失败！"
+				},
+				autoClose : 1200,
+			});
+	    }
 	});
 }
 </script>
