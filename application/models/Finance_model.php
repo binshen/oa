@@ -115,4 +115,88 @@ class Finance_model extends MY_Model
     		return 1;
     	}
     }
+    
+    public function list_month_reports($page) {
+    	
+    	$data['limit'] = $this->limit;
+    	//获取总记录数
+    	$this->db->select('count(1) num')->from('month_reports');
+    	if($this->input->post('year')){
+    		$this->db->where('year',$this->input->post('year'));
+    	}
+    	if($this->input->post('month')){
+    		$this->db->like('month',$this->input->post('month'));
+    	}
+    	$num = $this->db->get()->row();
+    	$data['total'] = $num->num;
+    	 
+    	//搜索条件
+    	$data['year'] = null;
+    	$data['month'] = null;
+    	 
+    	//获取详细列
+    	$this->db->select('a.*, b.rel_name as user_name');
+    	$this->db->from('month_reports a');
+    	$this->db->join('users b', 'a.user_id = b.id');
+    	if($this->input->post('year')){
+    		$this->db->where('a.year',$this->input->post('year'));
+    	}
+    	if($this->input->post('month')){
+    		$this->db->like('a.month',$this->input->post('month'));
+    	}
+    	$this->db->limit($this->limit, $offset = ($page - 1) * $this->limit);
+    	$data['items'] = $this->db->get()->result_array();
+    	 
+    	return $data;
+    }
+    
+    public function save_month_reports($file) {
+    	
+    	$user_info = $this->session->userdata('user_info');
+    	$user_id = $user_info['id'];
+    	
+    	$year = $this->input->post('year');
+    	$month = $this->input->post('month');
+    	$data = $this->db->from('month_reports')->where('year', $year)->where('month', $month)->get()->row_array();
+    	if(empty($data)) {
+    		$data = array(
+	    		'year'=>$year,
+	    		'month'=>$month,
+	    		'created'=>date('Y-m-d H:i:s'),
+	    	);
+    	}
+    	$data['file'] = $file;
+    	$data['user_id'] = $user_id;
+    	$data['updated'] = date('Y-m-d H:i:s');
+    
+    	$this->db->trans_start();//--------开始事务
+    	
+    	if(isset($data['id'])){//修改
+    		$this->db->where('id', $data['id']);
+    		$this->db->update('month_reports',$data);
+    	}else{//新增
+    		$this->db->insert('month_reports',$data);
+    	}
+    
+    	$this->db->trans_complete();//------结束事务
+    	if ($this->db->trans_status() === FALSE) {
+    		return -1;
+    	} else {
+    		return 1;
+    	}
+    }
+    
+    public function delete_month_reports($id) {
+    	$this->db->trans_start();//--------开始事务
+    	 
+    	$this->db->where('id',$id);
+    	$this->db->delete('month_reports');
+    	 
+    	$this->db->trans_complete();//------结束事务
+    	if ($this->db->trans_status() === FALSE) {
+    		return -1;
+    	} else {
+    		return 1;
+    	}
+    }
 }

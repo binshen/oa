@@ -1,0 +1,101 @@
+<!-- content start -->
+<div class="admin-content">
+    <div class="am-cf am-padding">
+      	<div class="am-fl am-cf">
+      		<strong class="am-text-primary am-text-lg">上传月度财务报表</strong>
+      	</div>
+    </div>
+    <div class="am-g" style="height:530px">
+       	<form id="addReportForm" method="post" action="{{site_url url='cw_month_reports/upload_month_reports'}}" class="add_report_form" enctype="multipart/form-data">
+          <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+	      </div>
+	      <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+		  	<div class="am-form-group">
+	            <label class="am-u-sm-2 am-form-label">年份: </label>
+	            <div class="am-u-sm-10">
+	              <select data-am-selected="{btnWidth: '60', btnSize: 'sm', btnStyle: 'default'}" name="year">
+	        		<option value="2011" {{if $year==2011}}selected{{/if}}>2011</option>
+	        		<option value="2012" {{if $year==2012}}selected{{/if}}>2012</option>
+	        		<option value="2013" {{if $year==2013}}selected{{/if}}>2013</option>
+	        		<option value="2014" {{if $year==2014}}selected{{/if}}>2014</option>
+	        		<option value="2015" {{if $year==2015}}selected{{/if}}>2015</option>
+	        		<option value="2016" {{if $year==2016}}selected{{/if}}>2016</option>
+	        		<option value="2017" {{if $year==2017}}selected{{/if}}>2017</option>
+	        		<option value="2018" {{if $year==2018}}selected{{/if}}>2018</option>
+	        		<option value="2019" {{if $year==2019}}selected{{/if}}>2019</option>
+	        		<option value="2020" {{if $year==2020}}selected{{/if}}>2020</option>
+				</select>
+	            </div>
+	        </div>
+	        <br>
+	        <div class="am-form-group">
+	            <label class="am-u-sm-2 am-form-label">月份: </label>
+	            <div class="am-u-sm-10">
+	               <select data-am-selected="{btnWidth: '60', btnSize: 'sm', btnStyle: 'default'}" name="month">
+	        		<option value="1" {{if $month==1}}selected{{/if}}>1</option>
+	        		<option value="2" {{if $month==2}}selected{{/if}}>2</option>
+	        		<option value="3" {{if $month==3}}selected{{/if}}>3</option>
+	        		<option value="4" {{if $month==4}}selected{{/if}}>4</option>
+	        		<option value="5" {{if $month==5}}selected{{/if}}>5</option>
+	        		<option value="6" {{if $month==6}}selected{{/if}}>6</option>
+	        		<option value="7" {{if $month==7}}selected{{/if}}>7</option>
+	        		<option value="8" {{if $month==8}}selected{{/if}}>8</option>
+	        		<option value="9" {{if $month==9}}selected{{/if}}>9</option>
+	        		<option value="10" {{if $month==10}}selected{{/if}}>10</option>
+	        		<option value="11" {{if $month==11}}selected{{/if}}>11</option>
+	        		<option value="12" {{if $month==12}}selected{{/if}}>12</option>
+				</select>
+	            </div>
+	        </div>
+	        <br>
+	        <div class="am-form-group">
+	            <div class="am-form-group am-form-file">
+			  		<button type="button" class="am-btn am-btn-danger am-btn-sm">
+			  		<i class="am-icon-cloud-upload"></i> 选择要上传的文件</button>
+			  		<input id="upload_file" type="file" name="uploadFile">
+				</div>
+				<div class="am-u-sm-12 am-u-md-6">
+		       		<div class="am-form-group am-form-file">
+				  		<div id="file-list"></div>
+					</div>
+	       		</div>
+	       		<br>
+				<script>
+				  	$(function() {
+				    	$('#upload_file').on('change', function() {
+				      		var fileNames = '';
+				      		$.each(this.files, function() {
+				        		fileNames += '<span class="am-badge">' + this.name + '</span> ';
+				      		});
+				      		$('#file-list').html(fileNames);
+				    	});
+				    	
+				    	$("#btnSubmit").click(function() {
+				    		var file = $("#upload_file").val();
+				    		if(file == "") {
+				    			easyDialog.open({
+				    				container : {
+				    					content : "请选择需要上传的文件！"
+				    				},
+				    				autoClose : 1200,
+				    			});
+				    			return false;
+				    		} else {
+				    			$("#addReportForm").submit();
+				    		}
+				    	});
+				  	});
+				</script>
+	        </div>
+	        <div class="am-form-group">
+	             <div class="am-btn-toolbar">
+		          	<div class="am-btn-group am-btn-group-xs">
+		          		<button type="button" class="am-btn am-btn-secondary" id="btnSubmit"> 提    交 </button>
+		          	</div>
+		        </div>
+	        </div>
+	      </div>
+	    </form>
+	</div>
+</div>
+<!-- content end -->
