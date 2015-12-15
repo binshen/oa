@@ -1,1 +1,20 @@
 /* Write your styles */
+
+#month-plan-content .am-input-group .select-month .am-form-field{ width:200px;}
+#month-plan-content .month-txt{margin-right:20px; float: left;
+    display: block;
+    line-height: 38px;}
+#month-plan-content .am-datepicker-date{
+    margin-bottom: 20px;}
+#month-plan-content .am-btn-group-xs{
+    margin-bottom: 10px;}
+
+/*#month-plan-content .am-btn-group-xs{margin-top:5px;}*/
+
+#month-plan-content .widTit{width:350px;padding:.3rem;}
+#month-plan-content .widLevel{width:150px;padding:.3rem;}
+#month-plan-content .widScore{width:150px;padding:.3rem;}
+
+#month-plan-content .other-options{
+    float: right;
+    margin: 20px 50px 0 0;}

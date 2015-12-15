@@ -1,7 +1,7 @@
 <script type="text/javascript" charset="utf-8" src="/statics/ueditor/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8" src="/statics/ueditor/ueditor.all.min.js"> </script>
 <!-- content start -->
-  <div class="admin-content">
+  <div class="admin-content" id="month-plan-content">
     <div class="am-cf am-padding">
       <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">添加月计划</strong> / <small>Add task</small></div>
     </div>
@@ -9,29 +9,72 @@
     <div class="am-g">
       <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
       </div>
-      <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-
-        <form action="" class="am-form" data-am-validator>
-          <p>
-            <input type="text" class="am-form-field" placeholder="日历组件" data-am-datepicker readonly required />
-          </p>
-          <p><button class="am-btn am-btn-primary">提交</button></p>
-        </form>
+      <div class="am-u-sm-12">
+          <form class="am-form am-form-horizontal" method="post" action="/kpi/save_kpi_month" data-am-validator>
+            <div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm', viewMode: 'years', minViewMode: 'months'}">
+              <span class="month-txt">月份:</span>
+              <span class="select-month"><input type="text" class="am-form-field" placeholder="选择月份" readonly></span>
+              <span class="am-input-group-btn am-datepicker-add-on">
+              <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
+            </span>
+            </div>
+            <div class="am-btn-group am-btn-group-xs">
+              <a  class="am-btn am-btn-default" id="add-btn" href="javascrpt:void(0)"><span class="am-icon-plus"></span> 新增</a>
+            </div>
+            <div class="am-u-sm-12">
+              <table class="am-table am-table-striped am-table-hover table-main" id="month-plan-data">
+                <thead>
+                <tr>
+                  <th width="35%">标题</th>
+                  <th width="20%">等级</th>
+                  <th width="20%">分数</th>
+                  <th width="25%">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><input type="text" value="" placeholder="请输入标题" class="widTit" /></td>
+                  <td>
+                      <select class="widLevel">
+                          <option value="">请输入等级</option>
+                          <option value="一级">一级</option>
+                          <option value="二级">二级</option>
+                          <option value="三级">三级</option>
+                          <option value="四级">四级</option>
+                      </select>
+                  </td>
+                  <td><input type="text" value="" placeholder="请输入分数" class="widScore" /></td>
+                  <td>
+                    <div class="am-btn-toolbar">
+                      <div class="am-btn-group am-btn-group-xs">
+                        <button class="am-btn am-btn-default am-btn-xs am-text-danger btn_del" id="delete-month-list"><span class="am-icon-trash-o"></span> 删除</button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <div class="am-cf">共 1 条记录<div class="am-fr"><ul class="am-pagination"></ul></div></div>
+            </div>
+              <div class="other-options">
+                  <button type="button" class="am-btn am-btn-primary am-radius">保存</button>
+                  <button type="button" class="am-btn am-btn-default am-radius">返回</button>
+              </div>
+          </form>
         <!-- -->
-        <!--<form class="am-form am-form-horizontal" method="post" action="/kpi/save_kpi_month" data-am-validator>-->
-          <!--<div class="am-form-group">-->
-            <!--<label class="am-u-sm-3 am-form-label">月份</label>-->
-            <!--<div class="am-u-sm-9">-->
-              <!--<input type="text" class="am-form-field" required pattern="^\d{6}$" minlength="6" maxlength="6"/>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="am-form-group">-->
-            <!--<label class="am-u-sm-3 am-form-label">月份</label>-->
-            <!--<div class="am-u-sm-9">-->
-              <!--<button>增加</button>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</form>-->
+      <script>
+          $('#add-btn').click(function(){
+            var htmls =
+                    '<tr><td><input type="text" value="" placeholder="请输入标题" class="widTit" /></td><td><select class="widLevel"><option value="">请输入等级</option><option value="一级">一级</option> <option value="二级">二级</option><option value="三级">三级</option><option value="四级">四级</option> </select></td><td><input type="text" value="" placeholder="请输入分数" class="widScore" /></td><td><div class="am-btn-toolbar"><div class="am-btn-group am-btn-group-xs"><button class="am-btn am-btn-default am-btn-xs am-text-danger btn_del" data-url="http://localhost:1988/my_leave/del_leave/1"><span class="am-icon-trash-o"></span> 删除</button></div></div></td></tr>'
+                    $('#month-plan-data tbody').append(htmls);
+          });
+//        $('#delete-month-list').click(function(){
+//
+//          $(this).parents('tr').remove();
+//        });
+      </script>
+
+
       </div>
     </div>
   </div>
