@@ -25,12 +25,12 @@ class MY_Controller extends CI_Controller
 		$notice_count = $this->common_model->get_notice_count();
 		$this->cismarty->assign('notice_count',$notice_count);
 		
-		
-		
+		$user_info = $this->session->userdata('user_info');
 		$this->cismarty->assign('menu',$this->session->userdata('menu'));
 		$this->cismarty->assign('user_info',$this->session->userdata('user_info'));
 		$this->cismarty->assign('operation',$this->session->userdata('operation'));
 		$this->cismarty->assign('company',$this->session->userdata('company'));
+		$this->cismarty->assign('dept_id',$user_info['dept_id']);
 	}
 
 
@@ -176,7 +176,7 @@ class MY_Controller extends CI_Controller
 		$config['charset'] = 'utf-8';
 		$config['wordwrap'] = TRUE;
 		$config['mailtype'] = 'html';
-		$this->email->initialize($config);			
+		$this->email->initialize($config);
 		
 		//以下设置Email内容
 		$this->email->from($from_mail, $name);
