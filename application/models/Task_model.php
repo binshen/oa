@@ -52,6 +52,7 @@ class Task_model extends MY_Model
 				'content'=>$this->input->post('content',true),
 				'from_name'=>$user_info['rel_name'],
 				'status'=>1,
+				'audit'=>2,
 				'cdate'=>date('Y-m-d H:i:s',time())
 		);
 		
@@ -82,7 +83,7 @@ class Task_model extends MY_Model
     	$rs = $this->db->select('id,rel_name')->from('users')
     	->where('company_id',$user_info['company_id'])
     	->where('id !=',$user_info['id'])
-    	->where('dept_id !=',$user_info['dept_id'])
+    	->where('dept_id',$user_info['dept_id'])
     	->where('supper',0)
     	->get()->result_array();
     	return $rs;
@@ -172,12 +173,10 @@ class Task_model extends MY_Model
     	$data['limit'] = $this->limit;
     	//获取总记录数
     	$this->db->select('count(1) num')->from('task');
-    	$this->db->where('to_uid',$user_info['id']);
     	if($this->input->post('title')){
     		$this->db->like('title',$this->input->post('title'));
     	}
     	$this->db->where('target_uid',$user_info['id']);
-    	$this->db->where('audit >',0);
     	$num = $this->db->get()->row();
     	$data['total'] = $num->num;
     	 
@@ -192,7 +191,6 @@ class Task_model extends MY_Model
     		$data['title'] = $this->input->post('title');
     	}
     	$this->db->where('target_uid',$user_info['id']);
-    	$this->db->where('audit >',0);
     	$this->db->order_by('cdate','desc');
     	$this->db->limit($this->limit, $offset = ($page - 1) * $this->limit);
     	$data['items'] = $this->db->get()->result_array();
