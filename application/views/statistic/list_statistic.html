@@ -9,7 +9,7 @@
       <div class="am-u-sm-12 am-u-md-9">
         <div class="am-btn-toolbar">
           <div class="am-btn-group am-btn-group-xs">
-            <a type="button" class="am-btn am-btn-default" href="{{site_url url='my_overtime/add_overtime'}}"><span class="am-icon-plus"></span> 新增</a>
+            <button type="button" class="am-btn am-btn-danger" id="btnAddStatistic"><span class="am-icon-plus"></span> 新增</button>
           </div>
         </div>
       </div> 
@@ -75,3 +75,22 @@
     </div>
   </div>
   <!-- content end -->
+<script>
+var btnFn = function(e){
+	alert(e.target);
+	return false;
+};
+
+$("#btnAddStatistic").click(function() {
+	$.get('/cw_statistic/add_statistic', function(data) {
+		easyDialog.open({
+			container : {
+				header : '添加统计数据',
+				content : data,
+				yesFn : btnFn,
+				noFn : true
+			}
+		});
+	});
+});
+</script>

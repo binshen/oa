@@ -25,4 +25,8 @@ class Cw_statistic extends MY_Controller {
 		
 		$this->show('statistic/list_statistic');
 	}
+	
+	public function add_statistic() {
+		$this->show('statistic/add_statistic');
+	}
 }
