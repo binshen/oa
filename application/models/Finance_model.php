@@ -219,9 +219,10 @@ class Finance_model extends MY_Model
     	$data['month'] = null;
     
     	//获取详细列
-    	$this->db->select('a.*, b.rel_name as user_name');
+    	$this->db->select('a.*, b.rel_name as user_name, c.name as house_name');
     	$this->db->from('statistics a');
     	$this->db->join('users b', 'a.user_id = b.id');
+    	$this->db->join('house c', 'a.house_id = c.id');
     	if($this->input->post('year')){
     		$this->db->where('a.year',$this->input->post('year'));
     	}
@@ -232,5 +233,10 @@ class Finance_model extends MY_Model
     	$data['items'] = $this->db->get()->result_array();
     
     	return $data;
+    }
+    
+    public function get_house_list() {
+    	$this->db->from('house');
+    	return $this->db->get()->result_array();
     }
 }

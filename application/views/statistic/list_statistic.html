@@ -44,11 +44,11 @@
           	{{foreach from=$data.items key=key item=item}}
           	<tr>
               <td>{{$item.id}}</td>
-              <td>{{$item.house_id}}</td>
+              <td>{{$item.house_name}}</td>
               <td>{{$item.amount}}</td>
               <td class="am-hide-sm-only">{{$item.date}}</td>
               <td>{{$item.store_info}}</td>
-              <td>{{$item.user_id}}</td>
+              <td>{{$item.user_name}}</td>
               <td>{{$item.contract_no}}</td>
               <td>
               	  {{if $item.status == 1}}
@@ -89,7 +89,10 @@ $("#btnAddStatistic").click(function() {
 				content : data,
 				yesFn : btnFn,
 				noFn : true
-			}
+			},
+			follow : 'btnAddStatistic',
+			followX : 300,
+			followY : -50
 		});
 	});
 });

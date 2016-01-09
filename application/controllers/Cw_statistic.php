@@ -27,6 +27,10 @@ class Cw_statistic extends MY_Controller {
 	}
 	
 	public function add_statistic() {
+		
+		$houseList = $this->finance_model->get_house_list();
+		$this->assign('houseList', $houseList);
+		
 		$this->show('statistic/add_statistic');
 	}
 }
