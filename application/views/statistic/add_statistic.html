@@ -33,7 +33,13 @@
   </tr>
   <tr>
     <td>业务员：</td>
-    <td><input type="text" name="user_id" id="user_id"></td>
+    <td>
+    	<select id="user_id" name="user_id">
+    		{{foreach from=$userList key=key item=item}}
+    		<option value="{{$item.id}}">{{$item.rel_name}}</option>
+    		{{/foreach}}
+    	</select>
+    </td>
   </tr>
   <tr>
     <td>所属门店：</td>

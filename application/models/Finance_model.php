@@ -239,4 +239,9 @@ class Finance_model extends MY_Model
     	$this->db->from('house');
     	return $this->db->get()->result_array();
     }
+    
+    public function get_user_list() {
+    	$this->db->from('users');
+    	return $this->db->get()->result_array();
+    }
 }
