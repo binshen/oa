@@ -77,8 +77,39 @@
   <!-- content end -->
 <script>
 var btnFn = function(e){
-	alert(e.target);
-	return false;
+	var house_no = $("#house_no").val();
+	if(house_no == "") {
+		alert("请输入楼栋号");
+		return false;
+	}
+	var room_no = $("#room_no").val();
+	if(room_no == "") {
+		alert("请输入房号");
+		return false;
+	}
+	var date = $("#date").val();
+	if(date == "") {
+		alert("请输入成交日期");
+		return false;
+	}
+	var amount = $("#amount").val();
+	if(amount == "") {
+		alert("请输入成交金额");
+		return false;
+	}
+	var store_info = $("#store_info").val();
+	if(store_info == "") {
+		alert("请输入所属门店");
+		return false;
+	}
+	var contract_no = $("#contract_no").val();
+	if(contract_no == "") {
+		alert("请输入合同编号");
+		return false;
+	}
+	$.post('/cw_statistic/edit_statistic', $("#statisticForm").serialize(), function(data) {
+		return true;
+    });
 };
 
 $("#btnAddStatistic").click(function() {

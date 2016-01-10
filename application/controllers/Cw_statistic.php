@@ -36,4 +36,10 @@ class Cw_statistic extends MY_Controller {
 		
 		$this->show('statistic/add_statistic');
 	}
+	
+	public function edit_statistic() {
+		
+		//var_dump($_POST);
+		echo json_encode($_POST);
+	}
 }

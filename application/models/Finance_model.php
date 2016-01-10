@@ -244,4 +244,8 @@ class Finance_model extends MY_Model
     	$this->db->from('users');
     	return $this->db->get()->result_array();
     }
+    
+    public function edit_statistic() {
+    	
+    }
 }
