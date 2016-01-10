@@ -248,4 +248,10 @@ class Finance_model extends MY_Model
     public function edit_statistic() {
     	
     }
+    
+    public function get_statistic($id) {
+    	$this->db->from('statistics');
+    	$this->db->where('id', $id);
+    	return $this->db->get()->result();
+    }
 }

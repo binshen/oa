@@ -37,8 +37,22 @@ class Cw_statistic extends MY_Controller {
 		$this->show('statistic/add_statistic');
 	}
 	
-	public function edit_statistic() {
+	public function edit_statistic($id) {
 		
+		$houseList = $this->finance_model->get_house_list();
+		$this->assign('houseList', $houseList);
+		
+		$userList = $this->finance_model->get_user_list();
+		$this->assign('userList', $userList);
+		
+		$statistic = $this->finance_model->get_statistic($id);
+		$this->assign('statistic', $statistic);
+		
+		$this->show('statistic/add_statistic');
+	}
+	
+	public function update_statistic() {
+	
 		//var_dump($_POST);
 		echo json_encode($_POST);
 	}
