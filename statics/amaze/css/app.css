@@ -18,3 +18,29 @@
 #month-plan-content .other-options{
     float: right;
     margin: 20px 50px 0 0;}
+
+
+/*费用报销*/
+.reimbursement-table th,.reimbursement-table td{text-align: center;}
+.reimbursement-table .table-id,.reimbursement-table .table-time{width:100px;}
+.reimbursement-table .table-department,.reimbursement-table .table-apply-name{width:120px;}
+.reimbursement-table .table-mony,.reimbursement-table .table-abstract{width: 150px;}
+.reimbursement-table .table-option{width:210px;}
+
+/*创建费用报销单*/
+#add-reimbursement .clear{clear:both;}
+#add-reimbursement h3{ text-align: center;}
+#add-reimbursement .reimbursement-items-div{ margin-top:50px;}
+#add-reimbursement .div-cost{margin:0 10%;width:30%;dispaly:inline-block; float: left;
+    color: #0e90d2;font-size: 2rem; }
+
+#add-reimbursement .div-cost .choose-cost-style{ display: block; padding:.5rem 0 ; background:#fff;text-align: center; }
+#add-reimbursement .div-cost .choose-cost-style.current,#add-reimbursement .div-cost .choose-cost-style:hover{ background:#0e90d2;
+    color: #fff;}
+
+
+/*#add-reimbursement .am-radio{ display: inline-block;padding-top:0;}*/
+
+/*#add-reimbursement .am-radio .radio-txt{ vertical-align: top; font-style: normal;*/
+    /*color: #fff;*/
+    /*font-size: 2rem;}*/
