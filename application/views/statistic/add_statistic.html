@@ -12,7 +12,7 @@
 	    <td>
 			<select id="house_id" name="house_id">
 	    		{{foreach from=$houseList key=key item=item}}
-	    		<option value="{{$item.id}}">{{$item.name}}</option>
+	    		<option value="{{$item.id}}" {{if $statistic.house_id == $item.id}}selected{{/if}}>{{$item.name}}</option>
 	    		{{/foreach}}
 	    	</select>
 		</td>
@@ -41,7 +41,7 @@
 	    <td>
 	    	<select id="user_id" name="user_id">
 	    		{{foreach from=$userList key=key item=item}}
-	    		<option value="{{$item.id}}">{{$item.rel_name}}</option>
+	    		<option value="{{$item.id}}" {{if $statistic.user_id == $item.id}}selected{{/if}}>{{$item.rel_name}}</option>
 	    		{{/foreach}}
 	    	</select>
 	    </td>
@@ -58,8 +58,8 @@
 	    <td>付款状况：</td>
 	    <td>
 	    	<select id="status" name="status">
-	    		<option value="1">已付款</option>
-	    		<option value="2">未付款</option>
+	    		<option value="1" {{if $statistic.status == 1}}selected{{/if}}>已付款</option>
+	    		<option value="2" {{if $statistic.status == 2}}selected{{/if}}>未付款</option>
 	    	</select>
 	    </td>
 	  </tr>
