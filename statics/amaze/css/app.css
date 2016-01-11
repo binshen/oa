@@ -37,8 +37,6 @@
 #add-reimbursement .div-cost .choose-cost-style{ display: block; padding:.5rem 0 ; background:#fff;text-align: center; }
 #add-reimbursement .div-cost .choose-cost-style.current,#add-reimbursement .div-cost .choose-cost-style:hover{ background:#0e90d2;
     color: #fff;}
-
-
 /*#add-reimbursement .am-radio{ display: inline-block;padding-top:0;}*/
 
 /*#add-reimbursement .am-radio .radio-txt{ vertical-align: top; font-style: normal;*/
