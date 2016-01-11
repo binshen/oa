@@ -56,4 +56,13 @@ class Cw_statistic extends MY_Controller {
 		echo $this->finance_model->update_statistic();
 		die;
 	}
+	
+	public function del_statistic($id) {
+		$rs = $this->finance_model->del_statistic($id);
+		if($rs == 1){
+			$this->show_message('删除成功',site_url('statistic/list_statistic'));
+		}else{
+			$this->show_message('删除失败');
+		}
+	}
 }
