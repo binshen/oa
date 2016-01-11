@@ -107,9 +107,23 @@ var btnFn = function(e){
 		alert("请输入合同编号");
 		return false;
 	}
+	
 	$.post('/cw_statistic/update_statistic', $("#statisticForm").serialize(), function(data) {
-		return true;
+		window.location.reload();
     });
+	return true;
+	/*
+	$.ajax({ 
+		type: 'POST', 
+		url: '/cw_statistic/update_statistic', 
+		data: $("#statisticForm").serialize(), 
+		success: function(data) {
+			window.location.reload();
+			return true;
+		},
+		async:false 
+	});
+	*/
 };
 
 $("#btnAddStatistic").click(function() {

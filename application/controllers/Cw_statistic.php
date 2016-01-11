@@ -53,7 +53,7 @@ class Cw_statistic extends MY_Controller {
 	
 	public function update_statistic() {
 	
-		//var_dump($_POST);
-		echo json_encode($_POST);
+		echo $this->finance_model->update_statistic();
+		die;
 	}
 }

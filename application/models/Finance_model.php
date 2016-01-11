@@ -254,4 +254,35 @@ class Finance_model extends MY_Model
     	$this->db->where('id', $id);
     	return $this->db->get()->row_array();
     }
+    
+    public function update_statistic() {
+    	$data = array(
+    		'house_id'=>$this->input->post('house_id'),
+    		'house_no'=>$this->input->post('house_no'),
+    		'room_no'=>$this->input->post('room_no'),
+    		'date'=>$this->input->post('date'),
+    		'amount'=>$this->input->post('amount'),
+    		'user_id'=>$this->input->post('user_id'),
+    		'store_info'=>$this->input->post('store_info'),
+    		'contract_no'=>$this->input->post('contract_no'),
+    		'status'=>$this->input->post('status'),
+    		'remark'=>$this->input->post('remark')
+    	);
+    	
+    	$this->db->trans_start();//--------开始事务
+    	
+    	if($this->input->post('id')){//修改
+    		$this->db->where('id', $this->input->post('id'));
+    		$this->db->update('statistics',$data);
+    	}else{//新增
+    		$this->db->insert('statistics',$data);
+    	}
+    	
+    	$this->db->trans_complete();//------结束事务
+    	if ($this->db->trans_status() === FALSE) {
+    		return -1;
+    	} else {
+    		return 1;
+    	}
+    }
 }
