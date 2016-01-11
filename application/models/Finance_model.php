@@ -252,6 +252,6 @@ class Finance_model extends MY_Model
     public function get_statistic($id) {
     	$this->db->from('statistics');
     	$this->db->where('id', $id);
-    	return $this->db->get()->result();
+    	return $this->db->get()->row_array();
     }
 }
