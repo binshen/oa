@@ -10,7 +10,6 @@
     margin-bottom: 10px;}
 
 /*#month-plan-content .am-btn-group-xs{margin-top:5px;}*/
-
 #month-plan-content .widTit{width:350px;padding:.3rem;}
 #month-plan-content .widLevel{width:150px;padding:.3rem;}
 #month-plan-content .widScore{width:150px;padding:.3rem;}
@@ -18,7 +17,6 @@
 #month-plan-content .other-options{
     float: right;
     margin: 20px 50px 0 0;}
-
 
 /*费用报销*/
 .reimbursement-table th,.reimbursement-table td{text-align: center;}
