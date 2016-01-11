@@ -1,3 +1,59 @@
-1111111
-<br>
-<a href="/My_reimbursement/add_reimbursement">Add</a>
+<!-- content start -->
+<div class="admin-content" style="min-height:450px">
+    <div class="am-cf am-padding">
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">费用报销 </strong></div>
+    </div>
+    <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-5">
+            <div class="am-btn-toolbar">
+                <div class="am-btn-group am-btn-group-xs">
+                    <a type="button" class="am-btn am-btn-default" href="/My_reimbursement/add_reimbursement"><span class="am-icon-plus"></span> 新增</a>
+                </div>
+            </div>
+        </div>
+     </div>
+    <div class="am-g">
+        <div class="am-u-sm-12">
+            <table class="am-table am-table-striped am-table-hover table-main reimbursement-table">
+                <thead>
+                <tr>
+                    <th class="table-id">单号</th>
+                    <th class="table-time">时间</th>
+                    <th class="table-department">部门</th>
+                    <th class="table-apply-name">申报人</th>
+                    <th class="table-abstract">摘要</th>
+                    <th class="table-mony">金额</th>
+                    <th class="table-option">操作</th>
+                    <th class="table-state">状态</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr>
+                    <td>D00001</td>
+                    <td>02016.1.1</td>
+                    <td>技术部</td>
+                    <td>周小惠</td>
+                    <td>研究开发费</td>
+                    <td>1000</td>
+                    <td>
+                        <div class="am-btn-toolbar">
+                            <div class="am-btn-group am-btn-group-xs">
+                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-search"></span> 查看</button>
+                                <button class="am-btn am-btn-default am-btn-xs am-text-danger btn_del" data-url=""><span class="am-icon-trash-o"></span> 删除</button>
+                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <font class="am-badge am-badge-success">已审核</font>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+<!-- content end -->
+

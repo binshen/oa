@@ -1,0 +1,89 @@
+
+<script type="text/javascript" charset="utf-8" src="/statics/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/statics/ueditor/ueditor.all.min.js"> </script>
+<!-- content start -->
+  <div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">添加会议</strong> / <small>Add meeting</small></div>
+    </div>
+
+    <hr/>
+
+    <div class="am-g">
+
+      <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+
+      </div>
+      <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+        <form class="am-form am-form-horizontal" method="post" action="/xz_meeting/save_meeting" >
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-2 am-form-label">标题</label>
+            <div class="am-u-sm-10">
+              <input type="text" name="title" id="title" placeholder="标题">
+            </div>
+          </div>
+          
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-2 am-form-label">内容</label>
+            <div class="am-u-sm-10">
+              <textarea id="editor" name="content" style="height:300px;"></textarea>
+            </div>
+          </div>
+          
+          
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-2 am-form-label">参会人员</label>
+            <div class="am-u-sm-10">
+            
+            {{foreach from=$data item=row key=k name=foo}}
+            <div id="all_company_{{$smarty.foreach.foo.index}}">
+            <label class="am-checkbox-inline">
+				<input type="checkbox" class="select_all" select_option="all_company_{{$smarty.foreach.foo.index}}"><b>{{$k}}</b>
+			</label>
+            <HR align=left width=490 color=#990099 size=3 noShade>
+            	{{foreach from=$row item=roww key=kk name=fooo}}
+				<p class="am-article-lead" id="">
+				{{$kk}}
+				  <label class="am-checkbox-inline">
+					  <input type="checkbox" class="select_all" select_option="all_dept_{{$smarty.foreach.foo.index}}_{{$smarty.foreach.fooo.index}}">全选
+					</label>
+				<br />
+				<span id="all_dept_{{$smarty.foreach.foo.index}}_{{$smarty.foreach.fooo.index}}">
+					{{foreach from=$roww item=rowww}}
+					<label class="am-checkbox-inline">
+					  <input type="checkbox" value="{{$rowww.id}}" name="uid[]" >{{$rowww.rel_name}}
+					</label>
+					{{/foreach}}
+				</span>
+				</p>
+				{{/foreach}}
+			</div>
+			{{/foreach}}
+				
+				
+            </div>
+          </div>
+          
+
+          <div class="am-form-group">
+            <div class="am-u-sm-9 am-u-sm-push-3">
+              <input type="submit" class="am-btn am-btn-primary" value="确认">
+              <a class="am-btn am-btn-default" href="/rule_company/list_company">返回</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- content end -->
+<script type="text/javascript">
+	var ue = UE.getEditor('editor');
+	$(".select_all").click(function(){
+		id = $(this).attr('select_option');
+		if($(this).is(':checked')){
+			$('#'+id).find('input').prop("checked", true);
+		}else{
+			$('#'+id).find('input').prop("checked", false);
+		}
+	});
+</script>
