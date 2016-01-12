@@ -34,6 +34,8 @@ class Cw_statistic extends MY_Controller {
 		$userList = $this->finance_model->get_user_list();
 		$this->assign('userList', $userList);
 		
+		$this->assign('statistic', array('house_id'=>null, 'user_id'=>null, 'status'=>null));
+		
 		$this->show('statistic/add_statistic');
 	}
 	
