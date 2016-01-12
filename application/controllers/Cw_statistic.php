@@ -12,7 +12,13 @@ class Cw_statistic extends MY_Controller {
 
 	public function index($page=1) {
 		
+		$data = $this->finance_model->list_statistic($page);
+		$base_url = "/cw_statistic/list_statistic";
+		$pager = $this->pagination->getPageLink($base_url, $data['total'], $data['limit']);
+		$this->assign('pager', $pager);
+		$this->assign('data', $data);
 		
+		$this->show('finance/list_statistic');
 	}
 	
 	public function list_statistic($page=1) {

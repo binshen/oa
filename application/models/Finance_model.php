@@ -204,30 +204,26 @@ class Finance_model extends MY_Model
     	 
     	$data['limit'] = $this->limit;
     	//获取总记录数
-    	$this->db->select('count(1) num')->from('statistics');
-    	if($this->input->post('year')){
-    		$this->db->where('year',$this->input->post('year'));
-    	}
-    	if($this->input->post('month')){
-    		$this->db->like('month',$this->input->post('month'));
+    	$this->db->select('count(1) num');
+    	$this->db->from('statistics a');
+    	$this->db->join('house c', 'a.house_id = c.id');
+    	if($this->input->post('house_name')){
+    		$this->db->like('c.name',$this->input->post('house_name'));
     	}
     	$num = $this->db->get()->row();
     	$data['total'] = $num->num;
     
     	//搜索条件
-    	$data['year'] = null;
-    	$data['month'] = null;
+    	$data['house_name'] = null;
     
     	//获取详细列
     	$this->db->select('a.*, b.rel_name as user_name, c.name as house_name');
     	$this->db->from('statistics a');
     	$this->db->join('users b', 'a.user_id = b.id');
     	$this->db->join('house c', 'a.house_id = c.id');
-    	if($this->input->post('year')){
-    		$this->db->where('a.year',$this->input->post('year'));
-    	}
-    	if($this->input->post('month')){
-    		$this->db->like('a.month',$this->input->post('month'));
+    	if($this->input->post('house_name')){
+    		$data['house_name'] = $this->input->post('house_name');
+    		$this->db->like('c.name',$this->input->post('house_name'));
     	}
     	$this->db->limit($this->limit, $offset = ($page - 1) * $this->limit);
     	$data['items'] = $this->db->get()->result_array();
