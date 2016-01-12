@@ -20,4 +20,9 @@ class My_reimbursement extends MY_Controller {
 	
 		$this->show('/mine/add_reimbursement');
 	}
+	
+	public function view_reimbursement() {
+	
+		$this->show('/mine/view_reimbursement');
+	}
 }
