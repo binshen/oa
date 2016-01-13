@@ -6,17 +6,22 @@
     </div>
 
     <div class="am-g">
-      <div class="am-u-sm-12 am-u-md-9">
+      <div class="am-u-sm-12 am-u-md-7">
         <div class="am-btn-toolbar">
           <div class="am-btn-group am-btn-group-xs">
             <button type="button" class="am-btn am-btn-danger" id="btnAddStatistic"><span class="am-icon-plus"></span> 新增</button>
           </div>
         </div>
-      </div> 
-       <form method="post" action="{{site_url url='cw_statistic/list_statistic'}}" class="search_form">
-	      <div class="am-u-sm-12 am-u-md-3">
+      </div>
+       <form method="post" action="{{site_url url='cw_statistic/'}}" class="search_form">
+	      <div class="am-u-sm-12 am-u-md-2">
+	      	<div class="am-input-group am-datepicker-date">
+			  <input type="text" class="am-form-field" placeholder="成交月份" data-am-datepicker="{format: 'yyyy-mm', viewMode: 'years', minViewMode: 'months'}" readonly>
+		    </div>
+		  </div>
+		  <div class="am-u-sm-12 am-u-md-3">
 	        <div class="am-input-group am-input-group-sm">
-	          <input type="text" class="am-form-field" name="house_name" value="{{$data.house_name}}">
+	          <input type="text" class="am-form-field" name="house_name" placeholder="楼盘名称" value="{{$data.house_name}}">
 	          <span class="am-input-group-btn">
 	            <input type="submit" class="am-btn am-btn-default" value="搜索" />
 	          </span>
