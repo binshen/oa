@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//application/controllers/Cw_statistic.php=UTF-8
 encoding//application/models/Finance_model.php=UTF-8
 encoding//application/views=UTF-8
 encoding//application/views/finance/add_month_reports.html=UTF-8
@@ -16,5 +17,5 @@ encoding//application/views/mine/list_reimbursement.html=UTF-8
 encoding//application/views/mine/view_reimbursement.html=UTF-8
 encoding//application/views/statistic/add_statistic.html=UTF-8
 encoding//application/views/statistic/list_statistic.html=UTF-8
-encoding/<project>=GBK
+encoding/<project>=UTF-8
 separateDerivedEncodings=true

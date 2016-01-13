@@ -16,7 +16,7 @@
        <form method="post" action="{{site_url url='cw_statistic/'}}" class="search_form">
 	      <div class="am-u-sm-12 am-u-md-2">
 	      	<div class="am-input-group am-datepicker-date">
-			  <input type="text" class="am-form-field" placeholder="成交月份" data-am-datepicker="{format: 'yyyy-mm', viewMode: 'years', minViewMode: 'months'}" readonly>
+			  <input type="text" name="query_month" value="{{$data.query_month}}" class="am-form-field" placeholder="成交月份" data-am-datepicker="{format: 'yyyy-mm', viewMode: 'years', minViewMode: 'months'}" readonly>
 		    </div>
 		  </div>
 		  <div class="am-u-sm-12 am-u-md-3">

@@ -210,11 +210,15 @@ class Finance_model extends MY_Model
     	if($this->input->post('house_name')){
     		$this->db->like('c.name',$this->input->post('house_name'));
     	}
+    	if($this->input->post('query_month')){
+    		$this->db->where("DATE_FORMAT(a.date, '%Y-%m') = '" . $this->input->post('query_month') . "'");
+    	}
     	$num = $this->db->get()->row();
     	$data['total'] = $num->num;
     
     	//搜索条件
     	$data['house_name'] = null;
+    	$data['query_month'] = null;
     
     	//获取详细列
     	$this->db->select('a.*, b.rel_name as user_name, c.name as house_name');
@@ -224,6 +228,10 @@ class Finance_model extends MY_Model
     	if($this->input->post('house_name')){
     		$data['house_name'] = $this->input->post('house_name');
     		$this->db->like('c.name',$this->input->post('house_name'));
+    	}
+    	if($this->input->post('query_month')){
+    		$data['query_month'] = $this->input->post('query_month');
+    		$this->db->where("DATE_FORMAT(a.date, '%Y-%m') = '" . $this->input->post('query_month') . "'");
     	}
     	$this->db->limit($this->limit, $offset = ($page - 1) * $this->limit);
     	$data['items'] = $this->db->get()->result_array();
