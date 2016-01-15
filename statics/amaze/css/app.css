@@ -18,12 +18,23 @@
     margin: 20px 50px 0 0;}
 
 /*费用报销*/
-.reimbursement-table th,.reimbursement-table td{text-align: center;}
-.reimbursement-table .table-id,.reimbursement-table .table-time{width:100px;}
-.reimbursement-table .table-department,.reimbursement-table .table-apply-name{width:120px;}
-.reimbursement-table .table-mony,.reimbursement-table .table-abstract{width: 150px;}
-.reimbursement-table .table-option{width:210px;}
+#list-reimbursement-table th,#list-reimbursement-table td{text-align: center;}
+#list-reimbursement-table .table-id,#list-reimbursement-table .table-time{width:100px;}
+#list-reimbursement-table .table-department,#list-reimbursement-table .table-apply-name{width:120px;}
+#list-reimbursement-table .table-money,#list-reimbursement-table .table-abstract{width: 150px;}
+#list-reimbursement-table .table-option{width:210px;}
 
+
+#add-reimbursement-table th,#add-reimbursement-table td{text-align: center;}
+#add-reimbursement-table .table-id{width:200px}
+#add-reimbursement-table .table-time{width:110px;}
+#add-reimbursement-table .table-money{width: 180px;}
+#add-reimbursement-table .table-freestyle{width:180px;}
+#add-reimbursement-table .table-abstract{width:180px;}
+
+.am-u-lis{margin-top:30px;}
+.am-u-lis li{margin-bottom:10px; list-style: none;}
+.am-u-lis .s-tit{display:inline-block; width: 70px;}
 /*创建费用报销单*/
 #add-reimbursement .clear{clear:both;}
 #add-reimbursement h3{ text-align: center;}
@@ -34,6 +45,16 @@
 #add-reimbursement .div-cost .choose-cost-style{ display: block; padding:.5rem 0 ; background:#fff;text-align: center; }
 #add-reimbursement .div-cost .choose-cost-style.current,#add-reimbursement .div-cost .choose-cost-style:hover{ background:#0e90d2;
     color: #fff;}
+
+#applyUserInput{ width: 200px; display:inline-block;}
+.am-cost-total{margin:0 100px 100px 0; text-align: right;}
+/*popup*/
+#commItemTable {margin: 0 0 20px 100px;}
+#commItemTable td{padding:0.5rem 0;}
+#addBulletinForm table th{ width:145px;padding:0 1.2rem; text-align: right;}
+#addBulletinForm table td{padding:0.5rem 0; text-align: left;}
+ .am-modal{ width: 450px;}
+ #itemInput,#itemTime,#moneyInput{ width: 200px;}
 /*#add-reimbursement .am-radio{ display: inline-block;padding-top:0;}*/
 
 /*#add-reimbursement .am-radio .radio-txt{ vertical-align: top; font-style: normal;*/
