@@ -8,7 +8,7 @@ class My_reimbursement extends MY_Controller {
 		parent::__construct();
 		
 		$this->load->model('basic_model');
-		$this->load->model('document_model');
+		$this->load->model('finance_model');
 	}
 	
 	public function list_reimbursement($page=1) {
@@ -18,11 +18,21 @@ class My_reimbursement extends MY_Controller {
 	
 	public function add_reimbursement() {
 	
+		$style_list = $this->finance_model->get_expense_style_list();
+		$this->assign('style_list', $style_list);
+		
 		$this->show('/mine/add_reimbursement');
 	}
+	
 	
 	public function view_reimbursement() {
 	
 		$this->show('/mine/view_reimbursement');
+	}
+	
+	public function get_reimbursement_type_list($style_id) {
+		
+		$type_list = $this->finance_model->get_expense_type_list($style_id);
+		echo json_encode($type_list);
 	}
 }

@@ -303,4 +303,18 @@ class Finance_model extends MY_Model
     		return 1;
     	}
     }
+    
+    public function get_expense_style_list() {
+    	
+    	$this->db->from('expense_style');
+    	return $this->db->get()->result_array();
+    }
+    
+    public function get_expense_type_list($style_id) {
+    	
+    	$this->db->select('id, name');
+    	$this->db->from('expense_type');
+    	$this->db->where('style_id', $style_id);
+    	return $this->db->get_where()->result_array();
+    }
 }
