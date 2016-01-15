@@ -5,31 +5,57 @@
     </div>
     <hr/>
     <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-5">
+            <div class="am-btn-toolbar">
+                <div class="am-btn-group am-btn-group-xs">
+                    <a type="button" class="am-btn am-btn-default" id="add-reim-btn" href="javascript:"><span class="am-icon-plus"></span> 新增</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--popup-->
+    <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">Amaze UI</div>
+            <div class="am-modal-bd">
+                Hello world！
+            </div>
+            <div class="am-modal-footer">
+                <span class="am-modal-btn">确定</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">Amaze UI</div>
+            <div class="am-modal-bd">
+                Hello world！
+            </div>
+            <div class="am-modal-footer">
+                <span class="am-modal-btn">确定</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="am-g">
         <div class="am-u-sm-12 am-u-md-2 am-u-md-push-10">
         </div>
         <div class="am-u-sm-12 am-u-md-10 am-u-md-pull-2" id="add-reimbursement">
             <form class="am-form am-form-horizontal" method="post" action="/my_overtime/save_overtime" id="addBulletinForm">
-                    <h3>选择费用类型</h3>
-                <!--<div class="div-cost">-->
-                    <!--<label class="am-radio">-->
-                        <!--<input type="radio" name="radio1" id="" value="" data-am-ucheck>-->
-                     <!--<em class="radio-txt">管理费用</em></label>-->
-                <!--</div>-->
-                <!--<div class="div-cost">-->
-                    <!--<label class="am-radio"><input type="radio" name="radio1" value="" data-am-ucheck checked>-->
-                        <!--<em class="radio-txt">运营费用</em> </label>-->
-                 <!--</div>-->
-
-                <div class="div-cost "><a href="javascript:" rel="0" class="choose-cost-style">管理费用</a></label>
-                </div>
-                <div class="div-cost"><a href="javascript:" rel="1" class="choose-cost-style">运营费用</a></label>
-                </div>
-                <div class="clear"></div>
-                <div class="reimbursement-items-div" style="display: none;">
                     <div class="am-form-group">
                         <label for="itemInput" class="am-u-sm-2 am-form-label">项目</label>
                         <div class="am-u-sm-4">
                             <input type="text" name="position" id="itemInput"  placeholder="项目">
+                        </div>
+                        <div class="am-u-sm-6">
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="itemInput" class="am-u-sm-2 am-form-label">日期</label>
+                        <div class="am-u-sm-4">
+                            <input type="text" class="am-form-field" id="itemTime123" placeholder="日历组件" data-am-datepicker readonly required />
                         </div>
                         <div class="am-u-sm-6">
                         </div>
@@ -54,25 +80,20 @@
                         </div>
                     </div>
                     <div class="am-form-group">
+                        <label for="applyUserInput" class="am-u-sm-2 am-form-label">费用类型</label>
+                        <div class="am-u-sm-4">
+                            <select data-am-selected="{searchBox: 1, dropUp: 1, btnWidth: '250px'}" id="costTypeInput" name="itemStyle_id">
+                                <option value="-1">- 选择费用类型 -</option>
+                            </select>
+                        </div>
+                        <div class="am-u-sm-6">
+                        </div>
+                    </div>
+                    <div class="am-form-group">
                         <label for="detailInput" class="am-u-sm-2 am-form-label">摘要</label>
                         <div class="am-u-sm-10">
-                            <select data-am-selected="{searchBox: 1, dropUp: 1, btnWidth: '250px'}" id="detailInput" name="direct_dept_id">
+                            <select data-am-selected="{searchBox: 1, dropUp: 1, btnWidth: '250px'}" id="detailInput" name="detailInput_id">
                                 <option value="-1">- 选择摘要 -</option>
-                                <!--<option value="工资" >工资</option>-->
-                                <!--<option value="福利费" >福利费</option>-->
-                                <!--<option value="招待费" >招待费</option>-->
-                                <!--<option value="办公费" >办公费</option>-->
-                                <!--<option value="差旅费" >差旅费</option>-->
-                                <!--<option value="汽车费" >汽车费</option>-->
-                                <!--<option value="邮电费" >邮电费</option>-->
-                                <!--<option value="研究开发费" >研究开发费</option>-->
-                                <!--<option value="修理费" >修理费</option>-->
-                                <!--<option value="租赁费" >租赁费</option>-->
-                                <!--<option value="物业费" >物业费</option>-->
-                                <!--<option value="水电费" >水电费</option>-->
-                                <!--<option value="税费" >税费</option>-->
-                                <!--<option value="暂支" >暂支</option>-->
-                                <!--<option value="其他" >其他</option>-->
                             </select>
                         </div>
                     </div>
@@ -84,37 +105,54 @@
                         <div class="am-u-sm-6">
                         </div>
                     </div>
-                <div class="am-form-group">
-                    <div class="am-u-sm-9 am-u-sm-push-3">
-                        <input type="button" class="am-btn am-btn-primary" value="确认" id="confirmBtn">
-                        <a class="am-btn am-btn-default" href="/my_leave/list_leave">返回</a>
+                    <div class="am-form-group">
+                        <div class="am-u-sm-9 am-u-sm-push-3">
+                            <input type="button" class="am-btn am-btn-primary" value="添加" id="confirmBtn">
+                            <a class="am-btn am-btn-default" href="/my_leave/list_leave">返回</a>
+                        </div>
                     </div>
-                </div>
-                </div>
             </form>
-    </div>
-</div></div>
-<script type="application/javascript">
-    var managementItems = ["工资","福利费","招待费","办公费","差旅费","汽车费","邮电费","研究开发费","修理费","租赁费","物业费","水电费","税费","暂支","其他"],
-            operatingItmes = ["对外服务费","员工服务费","税费","其他"];
-    $(".choose-cost-style").click(function() {
-        $(".choose-cost-style").removeClass("current");
-        $(this).addClass("current");
-        $(".reimbursement-items-div").fadeIn();
-        $("#detailInput").empty();
-        $("#detailInput").html('<option value="-1">- 选择摘要 -</option>');
-        if ($(this).attr("rel") == 0) {
-            for (var i = 0; i < managementItems.length; i++) {
-                $("#detailInput").append("<option value='"+managementItems[i]+"'>" + managementItems[i] + "</option>");
-            }
-        }
-       else if ($(this).attr("rel") == 1) {
-            for (var i = 0; i < operatingItmes.length; i++) {
-                $("#detailInput").append("<option value='"+operatingItmes[i]+"'>" + operatingItmes[i] + "</option>");
-            }
-        }
-    });
+        </div>
+    </div></div>
 
+
+
+    <div class="am-g">
+        <div class="am-u-sm-12">
+            <table class="am-table am-table-striped am-table-hover table-main reimbursement-table" id="add-reimbursement-table">
+                <thead>
+                <tr>
+                    <th class="table-id">项目</th>
+                    <th class="table-time">日期</th>
+                    <th class="table-freestyle">费用类型</th>
+                    <th class="table-abstract">摘要</th>
+                    <th class="table-money">金额</th>
+                    <th class="table-option">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                       <td>研究开发</td>
+                       <td>2016.01.14</td>
+                       <td>管理费用</td>
+                       <td>研究开发费</td>
+                       <td>￥1000.00</td>
+                       <td><button class="am-btn am-btn-default am-btn-xs am-text-danger btn_del" data-url=""><span class="am-icon-trash-o"></span> 删除</button>
+                           <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="am-g">
+        <div class="am-u-sm-12">
+           <p class="am-cost-total"> 总计：￥<span class="total"></span></p>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
     $("#confirmBtn").click(function() {
         var itemInput = $("#itemInput").val();
         if (!itemInput) {
@@ -126,6 +164,16 @@
             });
             return false;
         }
+        var itemTime = $("#itemTime").val();
+            if (!itemTime) {
+                easyDialog.open({
+                    container: {
+                        content: "时间不能为空！"
+                    },
+                    autoClose: 1200,
+                });
+                return false;
+            }
         var departmentSelect = $("#departmentSelect").val();
         if (departmentSelect<0) {
             easyDialog.open({
@@ -141,6 +189,16 @@
             easyDialog.open({
                 container: {
                     content: '制单人不能为空！'
+                },
+                autoClose: 1500
+            });
+            return;
+        }
+        var costTypeInput = $("costTypeInput").val();
+        if (costTypeInput < 0) {
+            easyDialog.open({
+                container: {
+                    content: '请选择费用类型！'
                 },
                 autoClose: 1500
             });
@@ -166,21 +224,78 @@
             });
             return;
         }
-        easyDialog.open({
-            container : {
-                header : '更新公告',
-                content : '您确定要更新该公告？',
-                yesFn : function(){
-                    $("#editBulletinForm").attr('action', '/xz_bulletin/save_bulletin');
-                    $("#editBulletinForm").submit();
-                },
-                noFn : true
-            }
-        });
+    var tdhtml =' <tr><td>'+itemInput+'</td><td>'+itemTime+'</td><td>'+costTypeInput+
+        '</td><td>'+detailInput+'</td><td>'+moneyInput+'</td><td><button class="am-btn am-btn-default am-btn-xs am-text-danger btn_del" data-url=""><span class="am-icon-trash-o"></span> 删除</button>'+
+        '<button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button></td>'+
+        '</tr>';
+    $("#add-reimbursement-table tbody").append(tdhtml);
+//        easyDialog.open({
+//            container : {
+//                header : '更新公告',
+//                content : '您确定要更新该公告？',
+//                yesFn : function(){
+//                    $("#editBulletinForm").attr('action', '/xz_bulletin/save_bulletin');
+//                    $("#editBulletinForm").submit();
+//                },
+//                noFn : true
+//            }
+//        });
     })
+//    var htmlAd ='<tr><td><input type="text" name="itemInput" class="am-form-field" id="itemInput"  placeholder="项目"></td>'+
+//            '<td><input type="text" class="am-form-field" id="itemTime" placeholder="日历组件" data-am-datepicker readonly required /></td>'+
+//            '<td><select data-am-selected="{searchBox: 1, dropUp: 1, btnWidth: }" id="itemStyle" name="itemStyle_id"><option value="-1">- 选择费用类型 -</option></select>'+
+//            '</td><td><select data-am-selected="{searchBox: 1, dropUp: 1, btnWidth:}" id="detailInput" name="detailInput_id"><option value="-1">- 选择摘要 -</option>'+
+//            '</select></td><td><input type="text" name="position" class="am-form-field" id="moneyInput"  placeholder="金额"></td>'+
+//            '<td><div class="am-btn-toolbar"><div class="am-btn-group am-btn-group-xs">'+
+//            '<button class="am-btn am-btn-default am-btn-xs am-text-danger btn_del" data-url=""><span class="am-icon-trash-o"></span> 删除</button>'+
+//            '</div></td><td><font class="am-badge am-badge-success">已审核</font></td></tr>';
+//    $("#add-reim-btn").click(function(){
+//
+//        $("#add-reimbursement-table tbody").append(htmlAd);
+//    });
+    var itemStyle = document.getElementById('costTypeInput');
+    var detailInput  = document.getElementById('detailInput');
+    //费用类型
+    var itemStyleArr = [];
+    itemStyleArr[0] = ['管理费用'];
+    itemStyleArr[1] = ['运营费用'];
+    var detailInputArr = [];
+    detailInputArr[0] =["管理费用","工资","福利费","招待费","办公费","差旅费","汽车费","邮电费","研究开发费","修理费","租赁费","物业费","水电费","税费","暂支","其他"];
+    detailInputArr[1] = ["运营费用","对外服务费","员工服务费","税费","其他"];
 
+    //生成选择费用类型
+    for(var key in itemStyleArr) {
+        var itemStyleOption = document.createElement('option');
+        itemStyleOption.value = itemStyleOption.text = itemStyleArr[key];
+        itemStyle.options.add(itemStyleOption);
+    }
 
+    //@current为当前选择的select节点，即父类节点
+    //@child为子类点
+    //@childArr为子节点数组
+    function showChild(current,child,childArr) {
+        var currentValue = current.value;
+        var count = childArr.length;
+        child.length = 1;
+        for(var i = 0; i < count; i++) {
+            //判断所选的值即父类，与当前节点第一个数组元素是否相市'
+            if(currentValue == childArr[i][0]) {
+                //不取第一个数组元市'因为第一个是父类，所以j市'开始，而不市'
+                for(var j = 1; j < childArr[i].length; j++) {
+                    var childOption = document.createElement('option');
+                    //ie不支持option对象的value,所以加childOption.text
+                    childOption.value = childOption.text = childArr[i][j];
+                    child.options.add(childOption);
 
+                }
+            }
+        }
+    }
+    //费用类型改变摘要
+    itemStyle.onchange = function() {
+        showChild(itemStyle,detailInput,detailInputArr);
+    }
 
 </script>
-<!-- content end -->
+
+    <!-- content end -->
