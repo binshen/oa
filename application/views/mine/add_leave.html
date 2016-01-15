@@ -35,7 +35,9 @@
             </div>
             <label for="agent" class="am-u-sm-2 am-form-label">工作代理人</label>
             <div class="am-u-sm-4">
-              <input type="text" name="agent" id="agent" placeholder="代理人">
+				<select data-am-selected="{searchBox: 1, dropUp: 1}" id="agentSelect" name="agent_id">
+					<option value="-1">- 选择代理人 -</option>
+				</select>
             </div>
           </div>
           <div class="am-form-group">
@@ -94,6 +96,14 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#dtBox").DateTimePicker();
+		$.get('/common/get_user_list/{{$dept_id}}', function(data) {
+			var json = JSON.parse(data);
+			$("#agentSelect").empty();
+			$("#agentSelect").append('<option value="-1">- 选择代理人 -</option>');
+			for(var i=0; i<json.length; i++) {
+				$("#agentSelect").append('<option value="' + json[i].id + '">' + json[i].rel_name + '</option>');
+			}
+		});
 	});
 	
 	$("#departmentSelect").change(function() {
