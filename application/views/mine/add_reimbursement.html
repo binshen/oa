@@ -59,7 +59,7 @@
                         <tr>
                             <th>日期：</th>
                            	<td>
-                               	<input type="text" class="am-form-field" id="date" name="date" placeholder="日期" data-am-datepicker readonly required />
+                               	<input type="text" class="am-form-field" id="date" name="date" placeholder="日期" data-am-datepicker readonly required value="{{$today}}"/>
                            	</td>
                         </tr>
                         <tr>
@@ -92,19 +92,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                	
+                	{{foreach from=$expense_list item=item}}
                     <tr>
-                       <td>研究开发</td>
-                       <td>2016-01-14</td>
-                       <td>管理费用</td>
-                       <td>研究开发费</td>
-                       <td>1000</td>
+                       <td>{{$item.project}}</td>
+                       <td>{{$item.date}}</td>
+                       <td>{{$item.style_id}}</td>
+                       <td>{{$item.type_id}}</td>
+                       <td>{{$item.amount}}</td>
                        <td>
-                       	<button class="am-btn am-btn-default am-btn-xs am-text-danger btn_del" data-url=""><span class="am-icon-trash-o"></span> 删除</button>
-                        <button  type="button"class="am-btn am-btn-default am-btn-xs am-text-secondary"  data-am-modal="{target: '#my-alert'}"><span class="am-icon-pencil-square-o"></span>编辑</button>
+                       	<button class="am-btn am-btn-default am-btn-xs am-text-danger btn_del" onclick="delete_reimbursement(this);"><span class="am-icon-trash-o"></span> 删除</button>
+                        <button type="button"class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="view_reimbursement(this);"><span class="am-icon-pencil-square-o"></span>编辑</button>
                        </td>
                     </tr>
-                    
+                    {{/foreach}}
                 </tbody>
             </table>
         </div>
@@ -117,70 +117,92 @@
 </div>
 
 <script type="text/javascript">
+	var today = '{{$today}}';
+	
 	function showAlert(message) {
 		easyDialog.open({ container: { content: message }, autoClose: 1200 });
 	}
 	
-	$("#style_id").change(function() {
-		var style_id = $(this).val();
-		$.get('/my_reimbursement/get_reimbursement_type_list/' + style_id, function(data) {
-			var html = '<option value="-1">- 选择摘要 -</option>';
-			var data = JSON.parse(data);
-			for(var i in data) {
-				html += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+	$(function() {
+		$("#style_id").change(function() {
+			var style_id = $(this).val();
+			$.get('/my_reimbursement/get_reimbursement_type_list/' + style_id, function(data) {
+				var html = '<option value="-1">- 选择摘要 -</option>';
+				var data = JSON.parse(data);
+				for(var i in data) {
+					html += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+				}
+				$("#type_id").html(html);
+			});
+		});
+		
+		$("#btnConfirm").click(function() {
+			clear_popup_items();
+			
+			var style_id = $("#style_id").val();
+	        if (style_id < 0) {
+	            showAlert("请选择费用类型！");
+	            return;
+	        }
+	        
+	        var type_id = $("#type_id").val();
+	        if (type_id < 0) {
+	            showAlert("请选择摘要！");
+	            return;
+	        }
+	        
+	        var project = $("#project").val();
+			if (!project) {
+				showAlert("项目不能为空！");
+				return false;
 			}
-			$("#type_id").html(html);
+			
+			var date = $("#date").val();
+			if (!date) {
+				showAlert("日期不能为空！");
+				return false;
+			}
+	        
+	        var amount = $("#amount").val();
+			if (!amount) {
+				showAlert("金额不能为空！");
+				return false;
+			}
+			
+			var html = "<tr>";
+			html += "<td>" + project + "</td>";
+			html += "<td>" + date + "</td>";
+			html += "<td>" + $("#style_id").find("option:selected").text() + "</td>";
+			html += "<td>" + $("#type_id").find("option:selected").text() + "</td>";
+			html += "<td>" + amount + "</td>";
+			html += "<td>";
+			html += "<button class='am-btn am-btn-default am-btn-xs am-text-danger btn_del' onclick='delete_reimbursement(this);'><span class='am-icon-trash-o'></span> 删除</button>";
+			html += "<button class='am-btn am-btn-default am-btn-xs am-text-secondary' onclick='view_reimbursement(this);'><span class='am-icon-pencil-square-o'></span> 编辑</button>";
+			html += "</td>";
+			$("#add-reimbursement-table tbody").append(html);
+			
+			$("#my-alert").modal('close');
+		});
+		
+		$("#btnClose").click(function() {
+			$("#my-alert").modal('close');
 		});
 	});
 	
-	$("#btnConfirm").click(function() {
-		var style_id = $("#style_id").val();
-        if (style_id < 0) {
-            showAlert("请选择费用类型！");
-            return;
-        }
-        
-        var type_id = $("#type_id").val();
-        if (type_id < 0) {
-            showAlert("请选择摘要！");
-            return;
-        }
-        
-        var project = $("#project").val();
-		if (!project) {
-			showAlert("项目不能为空！");
-			return false;
-		}
-		
-		var date = $("#date").val();
-		if (!date) {
-			showAlert("日期不能为空！");
-			return false;
-		}
-        
-        var amount = $("#amount").val();
-		if (!amount) {
-			showAlert("金额不能为空！");
-			return false;
-		}
-		
-		var html = "<tr>";
-		html += "<td>" + project + "</td>";
-		html += "<td>" + date + "</td>";
-		html += "<td>" + $("#style_id").find("option:selected").text() + "</td>";
-		html += "<td>" + $("#type_id").find("option:selected").text() + "</td>";
-		html += "<td>" + amount + "</td>";
-		html += "<td>";
-		html += "<button class='am-btn am-btn-default am-btn-xs am-text-danger btn_del' data-url=''><span class='am-icon-trash-o'></span> 删除</button>";
-		html += "<button class='am-btn am-btn-default am-btn-xs am-text-secondary'><span class='am-icon-pencil-square-o'></span> 编辑</button>";
-		html += "</td>";
-		$("#add-reimbursement-table tbody").append(html);
-		
-		$("#my-alert").modal('close');
-	});
+	function clear_popup_items() {
+		$("#style_id").val(-1);
+		$("#type_id").val(-1);
+		$("#project").val('');
+		$("#date").val(today);
+		$("#amount").val('');
+	}
 	
-	$("#btnClose").click(function() {
-		$("#my-alert").modal('close');
-	});
+	function view_reimbursement(obj) {
+		alert(obj);
+	}
+	
+	function delete_reimbursement(obj) {
+		$(obj).parent().parent().remove();
+	}
 </script>
 <!-- content end -->

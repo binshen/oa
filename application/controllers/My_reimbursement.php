@@ -16,10 +16,18 @@ class My_reimbursement extends MY_Controller {
 		$this->show('/mine/list_reimbursement');
 	}
 	
-	public function add_reimbursement() {
+	public function add_reimbursement($expense_id=NULL) {
 	
+		$this->assign('today', date('Y-m-d'));
+		
 		$style_list = $this->finance_model->get_expense_style_list();
 		$this->assign('style_list', $style_list);
+		
+		$expense_list = array();
+		if(!empty($expense_id)) {
+			$expense_list = $this->finance_model->get_expense_list($expense_id);
+		}
+		$this->assign('expense_list', $expense_list);
 		
 		$this->show('/mine/add_reimbursement');
 	}

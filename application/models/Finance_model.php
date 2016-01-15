@@ -317,4 +317,11 @@ class Finance_model extends MY_Model
     	$this->db->where('style_id', $style_id);
     	return $this->db->get_where()->result_array();
     }
+    
+    public function get_expense_list($expense_id) {
+    	
+    	$this->db->from('expense_list');
+    	$this->db->where('expense_id', $expense_id);
+    	return $this->db->get_where()->result_array();
+    }
 }
