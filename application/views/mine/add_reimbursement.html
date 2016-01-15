@@ -94,7 +94,14 @@
                 <tbody>
                 	{{foreach from=$expense_list item=item}}
                     <tr>
-                       <td>{{$item.project}}</td>
+                       <td>
+                       		{{$item.project}}
+                       		<input type="hidden" name="project[]" value="{{$item.project}}">
+                       		<input type="hidden" name="date[]" value="{{$item.date}}">
+                       		<input type="hidden" name="style_id[]" value="{{$item.style_id}}">
+                       		<input type="hidden" name="type_id[]" value="{{$item.type_id}}">
+                       		<input type="hidden" name="amount[]" value="{{$item.amount}}">
+                       </td>
                        <td>{{$item.date}}</td>
                        <td>{{$item.style_id}}</td>
                        <td>{{$item.type_id}}</td>
@@ -137,8 +144,6 @@
 		});
 		
 		$("#btnConfirm").click(function() {
-			clear_popup_items();
-			
 			var style_id = $("#style_id").val();
 	        if (style_id < 0) {
 	            showAlert("请选择费用类型！");
@@ -170,18 +175,27 @@
 			}
 			
 			var html = "<tr>";
-			html += "<td>" + project + "</td>";
+			html += "<td>";
+			html += project;
+			html += "<input type='hidden' name='project[]' value='" + project + "'>";
+			html += "<input type='hidden' name='date[]' value='" + date + "'>";
+			html += "<input type='hidden' name='style_id[]' value='" + style_id + "'>";
+			html += "<input type='hidden' name='type_id[]' value='" + type_id + "'>";
+			html += "<input type='hidden' name='amount[]' value='" + amount + "'>";
+			html += "</td>";
 			html += "<td>" + date + "</td>";
 			html += "<td>" + $("#style_id").find("option:selected").text() + "</td>";
 			html += "<td>" + $("#type_id").find("option:selected").text() + "</td>";
 			html += "<td>" + amount + "</td>";
 			html += "<td>";
-			html += "<button class='am-btn am-btn-default am-btn-xs am-text-danger btn_del' onclick='delete_reimbursement(this);'><span class='am-icon-trash-o'></span> 删除</button>";
-			html += "<button class='am-btn am-btn-default am-btn-xs am-text-secondary' onclick='view_reimbursement(this);'><span class='am-icon-pencil-square-o'></span> 编辑</button>";
+			html += " <button class='am-btn am-btn-default am-btn-xs am-text-danger btn_del' onclick='delete_reimbursement(this);'><span class='am-icon-trash-o'></span> 删除</button>";
+			html += " <button class='am-btn am-btn-default am-btn-xs am-text-secondary' onclick='view_reimbursement(this);'><span class='am-icon-pencil-square-o'></span> 编辑</button>";
 			html += "</td>";
 			$("#add-reimbursement-table tbody").append(html);
-			
+
 			$("#my-alert").modal('close');
+			
+			clear_popup_items();
 		});
 		
 		$("#btnClose").click(function() {
@@ -198,7 +212,12 @@
 	}
 	
 	function view_reimbursement(obj) {
-		alert(obj);
+		$("#amount").val($(obj).parent().prev().text());
+		//$("#style_id").val($(obj).parent().prev().prev().text());
+		//$("#style_id").val($(obj).parent().prev().prev().prev().text());
+		$("#date").val($(obj).parent().prev().prev().prev().prev().text());
+		$("#project").val($(obj).parent().prev().prev().prev().prev().prev().text());
+		$("#my-alert").modal();
 	}
 	
 	function delete_reimbursement(obj) {
