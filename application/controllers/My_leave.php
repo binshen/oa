@@ -23,6 +23,19 @@ class My_leave extends MY_Controller {
 		
 		$this->show('/mine/list_leave');
 	}
+	public function list_confirm_leave($page=1) {
+		$data = $this->document_model->list_confirm_leave($page);
+		$base_url = "/my_leave/list_leave";
+		$pager = $this->pagination->getPageLink($base_url, $data['total'], $data['limit']);
+		$this->assign('pager', $pager);
+		$this->assign('data', $data);
+
+		$leave_types = $this->document_model->get_leavetype_list();
+		$this->assign('leave_types', $leave_types);
+
+		$this->show('/mine/list_confirm_leave');
+	}
+
 	
 	public function add_leave() {
 		$user_info = $this->session->userdata('user_info');
@@ -48,6 +61,15 @@ class My_leave extends MY_Controller {
 		
 		$this->show('mine/add_leave');
 	}
+
+	public function confirm_leave($id){
+		$rs = $this->document_model->confirm_leave($id);
+		if($rs == 1){
+			$this->show_message('确认成功',site_url('my_leave/list_confirm_leave'));
+		}else{
+			$this->show_message('确认失败');
+		}
+	}
 	
 	public function save_leave(){
 		$rs = $this->document_model->save_leave();
@@ -58,7 +80,7 @@ class My_leave extends MY_Controller {
 		}
 	}
 	
-	public function del_leave() {
+	public function del_leave($id) {
 		$rs = $this->document_model->del_leave($id);
 		if($rs == 1){
 			$this->show_message('删除成功',site_url('my_leave/list_leave'));
