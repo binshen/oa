@@ -50,6 +50,7 @@
 .am-cost-total{margin:0 100px 100px 0; text-align: right;}
 /*popup*/
 #commItemTable {margin: 0 0 20px 100px;}
+#commItemTable th{width:80px;}
 #commItemTable td{padding:0.5rem 0;}
 #addBulletinForm table th{ width:145px;padding:0 1.2rem; text-align: right;}
 #addBulletinForm table td{padding:0.5rem 0; text-align: left;}
