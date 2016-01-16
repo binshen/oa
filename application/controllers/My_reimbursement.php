@@ -29,6 +29,11 @@ class My_reimbursement extends MY_Controller {
 		$expense_list = array();
 		if(!empty($expense_id)) {
 			$expense_list = $this->finance_model->get_expense_list($expense_id);
+			$total = 0;
+			foreach ($expense_list as $expense) {
+				$total += $expense['amount'];
+			}
+			$this->assign('total', $total);
 		}
 		$this->assign('expense_list', $expense_list);
 		

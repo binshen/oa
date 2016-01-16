@@ -82,7 +82,7 @@
     </div>
     <div class="am-g">
         <div class="am-u-sm-12">
-        	<form class="am-form am-form-horizontal" method="post" action="/my_reimbursement/save_reimbursement" id="reimbursementForm">
+        	<form class="am-form am-form-horizontal" method="post" id="reimbursementForm">
 	            <table class="am-table am-table-striped am-table-hover table-main reimbursement-table" id="add-reimbursement-table">
 	                <thead>
 	                <tr>
@@ -101,7 +101,7 @@
 	                       	<td>{{$item.date}}</td>
 	                       	<td>{{$item.style_id}}</td>
 	                       	<td>{{$item.type_id}}</td>
-	                       	<td>{{$item.amount}}</td>
+	                       	<td class='amountClass'>{{$item.amount}}</td>
 	                       	<td>
 	                       		<input type="hidden" name="project[]" value="{{$item.project}}">
 	                      		<input type="hidden" name="date[]" value="{{$item.date}}">
@@ -109,7 +109,7 @@
 	                      		<input type="hidden" name="type_id[]" value="{{$item.type_id}}">
 	                      		<input type="hidden" name="amount[]" value="{{$item.amount}}">
 	                       		<button class="am-btn am-btn-default am-btn-xs am-text-danger btn_del" onclick="delete_reimbursement(this);"><span class="am-icon-trash-o"></span> 删除</button>
-	                        	<button type="button"class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="view_reimbursement(this);"><span class="am-icon-pencil-square-o"></span>编辑</button>
+	                        	<button type="button"class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="view_reimbursement(this); return false;"><span class="am-icon-pencil-square-o"></span>编辑</button>
 	                       	</td>
 	                    </tr>
 	                    {{/foreach}}
@@ -120,7 +120,7 @@
     </div>
     <div class="am-g">
         <div class="am-u-sm-10">
-        	<p class="am-cost-total"> 总计：￥<span class="total"></span></p>
+        	<p class="am-cost-total"> 总计：￥<span class="total">{{$total|default:0}}</span></p>
         </div>
         <div class="am-u-sm-2">
         	<button  type="button" class="am-btn am-btn-danger" id="btnCreate">生成报销单</button>
@@ -199,7 +199,7 @@
 				html += "<td>" + date + "</td>";
 				html += "<td>" + $("#style_id").find("option:selected").text() + "</td>";
 				html += "<td>" + $("#type_id").find("option:selected").text() + "</td>";
-				html += "<td>" + amount + "</td>";
+				html += "<td class='amountClass'>" + amount + "</td>";
 				html += "<td>";
 				html += " <input type='hidden' name='project[]' value='" + project + "'>";
 				html += " <input type='hidden' name='date[]' value='" + date + "'>";
@@ -207,7 +207,7 @@
 				html += " <input type='hidden' name='type_id[]' value='" + type_id + "'>";
 				html += " <input type='hidden' name='amount[]' value='" + amount + "'>";
 				html += " <button class='am-btn am-btn-default am-btn-xs am-text-danger btn_del' onclick='delete_reimbursement(this);'><span class='am-icon-trash-o'></span> 删除</button>";
-				html += " <button class='am-btn am-btn-default am-btn-xs am-text-secondary' onclick='view_reimbursement(this);'><span class='am-icon-pencil-square-o'></span> 编辑</button>";
+				html += " <button class='am-btn am-btn-default am-btn-xs am-text-secondary' onclick='view_reimbursement(this); return false;'><span class='am-icon-pencil-square-o'></span> 编辑</button>";
 				html += "</td>";
 				$("#add-reimbursement-table tbody").append(html);
 			} else {
@@ -222,6 +222,9 @@
 				currentObj.find('td').eq(3).text($("#type_id").find("option:selected").text());
 				currentObj.find('td').eq(4).text(amount);
 			}
+			
+			reset_total_amount();
+			
 			$("#my-alert").modal('close');
 		});
 		
@@ -257,7 +260,7 @@
 			$('#my-confirm').modal({
 		        relatedTarget: this,
 		        onConfirm: function(options) {
-		          	$("#reimbursementForm").submit();
+		          	$("#reimbursementForm").attr('action', '/my_reimbursement/save_reimbursement').submit();
 		        },
 		        //closeOnConfirm: false,
 		        onCancel: function() {}
@@ -272,6 +275,14 @@
 		$("#date").val(today);
 		$("#amount").val('');
 	}
+	
+	function reset_total_amount() {
+		var total = 0;
+		$('.amountClass').each(function() {
+			total += parseInt($(this).text());
+		});
+		$(".total").text(total);
+	}	
 	
 	function view_reimbursement(obj) {
 		currentObj = $(obj).parent().parent();
@@ -295,6 +306,7 @@
 	}
 	
 	function delete_reimbursement(obj) {
+		reset_total_amount();
 		$(obj).parent().parent().remove();
 	}
 </script>
