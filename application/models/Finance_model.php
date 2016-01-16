@@ -328,8 +328,11 @@ class Finance_model extends MY_Model
     
     public function get_expense_list($expense_id) {
     	
-    	$this->db->from('expense_list');
-    	$this->db->where('expense_id', $expense_id);
+    	$this->db->select('a.*, b.name AS style_name, c.name AS type_name');
+    	$this->db->from('expense_list a');
+    	$this->db->join('expense_style b', 'a.style_id = b.id', 'left');
+    	$this->db->join('expense_type c', 'a.type_id = c.id', 'left');
+    	$this->db->where('a.expense_id', $expense_id);
     	return $this->db->get_where()->result_array();
     }
     
@@ -384,8 +387,11 @@ class Finance_model extends MY_Model
     }
     
     public function get_reimbursement($id) {
-    	$this->db->from('expense');
-    	return $this->db->where('id', $id)->get()->row_array();
+    	$this->db->select('a.*, b.name AS dept_name, c.name AS company_name');
+    	$this->db->from('expense a');
+    	$this->db->join('department b', 'a.dept_id = b.id', 'left');
+    	$this->db->join('company c', 'b.pid = c.id', 'left');
+    	return $this->db->where('a.id', $id)->get()->row_array();
     }
     
     public function get_reimbursement_list() {
