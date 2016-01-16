@@ -207,6 +207,9 @@ class Finance_model extends MY_Model
     	$this->db->select('count(1) num');
     	$this->db->from('statistics a');
     	$this->db->join('house c', 'a.house_id = c.id');
+    	if($this->input->post('search_user_id')){
+    		$this->db->like('a.user_id',$this->input->post('search_user_id'));
+    	}
     	if($this->input->post('house_name')){
     		$this->db->like('c.name',$this->input->post('house_name'));
     	}
@@ -217,6 +220,7 @@ class Finance_model extends MY_Model
     	$data['total'] = $num->num;
     
     	//搜索条件
+    	$data['search_user_id'] = null;
     	$data['house_name'] = null;
     	$data['query_month'] = null;
     
@@ -225,6 +229,10 @@ class Finance_model extends MY_Model
     	$this->db->from('statistics a');
     	$this->db->join('users b', 'a.user_id = b.id');
     	$this->db->join('house c', 'a.house_id = c.id');
+    	if($this->input->post('search_user_id')){
+    		$data['search_user_id'] = $this->input->post('search_user_id');
+    		$this->db->like('a.user_id',$this->input->post('search_user_id'));
+    	}
     	if($this->input->post('house_name')){
     		$data['house_name'] = $this->input->post('house_name');
     		$this->db->like('c.name',$this->input->post('house_name'));

@@ -12,6 +12,14 @@ class Cw_statistic extends MY_Controller {
 
 	public function index($page=1) {
 		
+		$houseList = $this->finance_model->get_house_list();
+		$this->assign('houseList', $houseList);
+		
+		$userList = $this->finance_model->get_user_list();
+		$this->assign('userList', $userList);
+		
+		$this->assign('statistic', array('house_id'=>null, 'user_id'=>null, 'status'=>null));
+		
 		$data = $this->finance_model->list_statistic($page);
 		$base_url = "/cw_statistic/list_statistic";
 		$pager = $this->pagination->getPageLink($base_url, $data['total'], $data['limit']);
