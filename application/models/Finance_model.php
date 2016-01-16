@@ -400,6 +400,10 @@ class Finance_model extends MY_Model
     	$this->db->from('expense a');
     	$this->db->join('department b', 'a.dept_id = b.id', 'left');
     	$this->db->join('company c', 'b.pid = c.id', 'left');
+    	
+    	if($this->input->post('reporter_name')){
+    		$this->db->like('a.creator', $this->input->post('reporter_name'));
+    	}
     	return $this->db->get()->result_array();
     }
     

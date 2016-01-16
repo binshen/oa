@@ -15,6 +15,8 @@ class Cw_reimbursement extends MY_Controller {
 		$reimbursement_list = $this->finance_model->get_reimbursement_list();
 		$this->assign('reimbursement_list', $reimbursement_list);
 		
+		$this->assign('reporter_name', $this->input->post('reporter_name'));
+		
 		$this->show('/finance/list_reimbursement');
 	}
 }
