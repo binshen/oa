@@ -324,4 +324,53 @@ class Finance_model extends MY_Model
     	$this->db->where('expense_id', $expense_id);
     	return $this->db->get_where()->result_array();
     }
+    
+    public function save_reimbursement() {
+    	
+    	$user_info = $this->session->userdata('user_info');
+    	$user_id = $user_info['id'];
+    	
+    	$this->db->trans_start();//--------开始事务
+    	
+    	$expense = array(
+    		'dept_id' => $_POST['dept_id'],
+    		'creator' => $_POST['creator'],
+    		'user_id' => $user_id,
+    		'status'  => 0,
+    		'created' => date('Y-m-d H:i:s')
+    	);
+    	
+    	$expense_id = $_POST['expense_id'];
+    	if(!empty($expense_id)) {
+    		$this->db->where('id', $expense_id);
+    		$this->db->update('expense', $expense);
+    		
+    		$this->db->where('expense_id', $expense_id);
+    		$this->db->delete('expense_list');
+    	} else {
+    		$this->db->insert('expense', $expense);
+    		
+    		$expense_id = $this->db->insert_id();
+    	}
+    	
+    	$amounts = $_POST['amount'];
+    	foreach ($amounts as $idx => $amount) {
+    		$data = array();
+    		$data['amount'] = $amount;
+    		$data['project'] = $_POST['project'][$idx];
+    		$data['date'] = $_POST['date'][$idx];
+    		$data['style_id'] = $_POST['style_id'][$idx];
+    		$data['type_id'] = $_POST['type_id'][$idx];
+    		$data['expense_id'] = $expense_id;
+    		$data['created'] = date('Y-m-d H:i:s');
+    		$this->db->insert('expense_list', $data);
+    	}
+    	
+    	$this->db->trans_complete();//------结束事务
+    	if ($this->db->trans_status() === FALSE) {
+    		return -1;
+    	} else {
+    		return 1;
+    	}
+    }
 }

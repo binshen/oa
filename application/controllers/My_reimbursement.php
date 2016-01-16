@@ -37,9 +37,10 @@ class My_reimbursement extends MY_Controller {
 		}
 		$this->assign('expense_list', $expense_list);
 		
+		$this->assign('expense_id', $expense_id);
+		
 		$this->show('/mine/add_reimbursement');
 	}
-	
 	
 	public function view_reimbursement() {
 	
@@ -54,6 +55,7 @@ class My_reimbursement extends MY_Controller {
 	
 	public function save_reimbursement() {
 		
-		var_dump($_POST);
+		$this->finance_model->save_reimbursement();
+		redirect('/my_reimbursement/list_reimbursement');
 	}
 }

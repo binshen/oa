@@ -10,7 +10,7 @@
                 <tr>
                     <th>部门：</th>
                     <td style="padding-right:30px">
-                    	<select class="chosen-select" id="dept_id" name="dept_id">
+                    	<select class="chosen-select" id="department_id" name="department_id">
                     		<option value="-1">- 选择部门 -</option>
                     		{{foreach from=$dept_list item=item}}
                             	<option value="{{$item.id}}">{{$item.name}}</option>
@@ -18,7 +18,7 @@
                     	</select>
                     </td>
                     <th>制单人：</th>
-                    <td><input type="text" name="creator" id="creator"  placeholder="制单人">
+                    <td><input type="text" name="reporter" id="reporter"  placeholder="制单人">
                     </td>
                     <th></th>
                     <td><button  type="button" class="am-btn am-btn-primary" id="btnAdd">添加</button></td>
@@ -83,6 +83,9 @@
     <div class="am-g">
         <div class="am-u-sm-12">
         	<form class="am-form am-form-horizontal" method="post" id="reimbursementForm">
+        		<input type="hidden" name="expense_id" id="expense_id" value="{{$expense_id}}">
+        		<input type="hidden" name="dept_id" id="dept_id" value="">
+        		<input type="hidden" name="creator" id="creator" value="">
 	            <table class="am-table am-table-striped am-table-hover table-main reimbursement-table" id="add-reimbursement-table">
 	                <thead>
 	                <tr>
@@ -239,14 +242,14 @@
 		});
 		
 		$("#btnCreate").click(function() {
-			var dept_id = $("#dept_id").val();
-			if (dept_id < 0) {
+			var department_id = $("#department_id").val();
+			if (department_id < 0) {
 	            showAlert("请选择部门！");
 	            return;
 	        }
 			
-			var creator = $("#creator").val();
-			if(!creator) {
+			var reporter = $("#reporter").val();
+			if(!reporter) {
 				showAlert("制单人不能为空！");
 	            return;
 			}
@@ -260,6 +263,8 @@
 			$('#my-confirm').modal({
 		        relatedTarget: this,
 		        onConfirm: function(options) {
+		        	$("#dept_id").val(department_id);
+		        	$("#creator").val(reporter);
 		          	$("#reimbursementForm").attr('action', '/my_reimbursement/save_reimbursement').submit();
 		        },
 		        //closeOnConfirm: false,
