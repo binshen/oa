@@ -44,7 +44,11 @@
 	                        </div>
 	                    </td>
 	                    <td>
-	                        <font class="am-badge am-badge-success">已审核</font>
+	                    	{{if $item.status == 1}}
+	                        	<font class="am-badge am-badge-success">已审核</font>
+	                        {{else}}
+	                        	<font class="am-badge">未审核</font>
+	                        {{/if}}
 	                    </td>
 	                </tr>
 	                {{/foreach}}
