@@ -13,6 +13,9 @@ class My_reimbursement extends MY_Controller {
 	
 	public function list_reimbursement($page=1) {
 		
+		$reimbursement_list = $this->finance_model->get_reimbursement_list();
+		$this->assign('reimbursement_list', $reimbursement_list);
+		
 		$this->show('/mine/list_reimbursement');
 	}
 	
@@ -28,6 +31,10 @@ class My_reimbursement extends MY_Controller {
 		
 		$expense_list = array();
 		if(!empty($expense_id)) {
+			$expense = $this->finance_model->get_reimbursement($expense_id);
+			$this->assign('dept_id', $expense['dept_id']);
+			$this->assign('creator', $expense['creator']);
+			
 			$expense_list = $this->finance_model->get_expense_list($expense_id);
 			$total = 0;
 			foreach ($expense_list as $expense) {
@@ -35,6 +42,7 @@ class My_reimbursement extends MY_Controller {
 			}
 			$this->assign('total', $total);
 		}
+		//$this->assign('expense', $expense);
 		$this->assign('expense_list', $expense_list);
 		
 		$this->assign('expense_id', $expense_id);

@@ -21,34 +21,33 @@
                     <th class="table-time">时间</th>
                     <th class="table-department">部门</th>
                     <th class="table-apply-name">申报人</th>
-                    <th class="table-abstract">摘要</th>
                     <th class="table-money">金额</th>
                     <th class="table-option">操作</th>
                     <th class="table-state">状态</th>
                 </tr>
                 </thead>
                 <tbody>
-
-                <tr>
-                    <td>D00001</td>
-                    <td>02016.1.1</td>
-                    <td>技术部</td>
-                    <td>周小惠</td>
-                    <td>研究开发费</td>
-                    <td>1000</td>
-                    <td>
-                        <div class="am-btn-toolbar">
-                            <div class="am-btn-group am-btn-group-xs">
-                                <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="/my_reimbursement/view_reimbursement"><span class="am-icon-search"></span> 查看</a>
-                                <button class="am-btn am-btn-default am-btn-xs am-text-danger btn_del" data-url=""><span class="am-icon-trash-o"></span> 删除</button>
-                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <font class="am-badge am-badge-success">已审核</font>
-                    </td>
-                </tr>
+					{{foreach from=$reimbursement_list item=item}}
+	                <tr>
+	                    <td>{{$item.id}}</td>
+	                    <td>{{$item.created|date_format:"%Y-%m-%d"}}</td>
+	                    <td>{{$item.company_name}}-{{$item.dept_name}}</td>
+	                    <td>{{$item.creator}}</td>
+	                    <td>{{$item.total}}</td>
+	                    <td>
+	                        <div class="am-btn-toolbar">
+	                            <div class="am-btn-group am-btn-group-xs">
+	                                <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="/my_reimbursement/view_reimbursement"><span class="am-icon-search"></span> 查看</a>
+	                                <button class="am-btn am-btn-default am-btn-xs am-text-danger btn_del" data-url=""><span class="am-icon-trash-o"></span> 删除</button>
+	                                <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="/my_reimbursement/add_reimbursement/{{$item.id}}"><span class="am-icon-pencil-square-o"></span> 编辑</a>
+	                            </div>
+	                        </div>
+	                    </td>
+	                    <td>
+	                        <font class="am-badge am-badge-success">已审核</font>
+	                    </td>
+	                </tr>
+	                {{/foreach}}
                 </tbody>
             </table>
         </div>

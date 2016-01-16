@@ -13,12 +13,12 @@
                     	<select class="chosen-select" id="department_id" name="department_id">
                     		<option value="-1">- 选择部门 -</option>
                     		{{foreach from=$dept_list item=item}}
-                            	<option value="{{$item.id}}">{{$item.name}}</option>
+                            	<option value="{{$item.id}}" {{if $dept_id == $item.id}}selected='selected'{{/if}}>{{$item.name}}</option>
                             {{/foreach}}
                     	</select>
                     </td>
                     <th>制单人：</th>
-                    <td><input type="text" name="reporter" id="reporter"  placeholder="制单人">
+                    <td><input type="text" name="reporter" id="reporter" placeholder="制单人" value="{{$creator|default:''}}">
                     </td>
                     <th></th>
                     <td><button  type="button" class="am-btn am-btn-primary" id="btnAdd">添加</button></td>
@@ -86,6 +86,7 @@
         		<input type="hidden" name="expense_id" id="expense_id" value="{{$expense_id}}">
         		<input type="hidden" name="dept_id" id="dept_id" value="">
         		<input type="hidden" name="creator" id="creator" value="">
+        		<input type="hidden" name="total" id="total" value="">
 	            <table class="am-table am-table-striped am-table-hover table-main reimbursement-table" id="add-reimbursement-table">
 	                <thead>
 	                <tr>
@@ -265,6 +266,7 @@
 		        onConfirm: function(options) {
 		        	$("#dept_id").val(department_id);
 		        	$("#creator").val(reporter);
+		        	$("#total").val($(".total").text());
 		          	$("#reimbursementForm").attr('action', '/my_reimbursement/save_reimbursement').submit();
 		        },
 		        //closeOnConfirm: false,
@@ -284,7 +286,7 @@
 	function reset_total_amount() {
 		var total = 0;
 		$('.amountClass').each(function() {
-			total += parseInt($(this).text());
+			total += parseFloat($(this).text());
 		});
 		$(".total").text(total);
 	}	

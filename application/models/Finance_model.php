@@ -336,6 +336,7 @@ class Finance_model extends MY_Model
     		'dept_id' => $_POST['dept_id'],
     		'creator' => $_POST['creator'],
     		'user_id' => $user_id,
+    		'total'   => $_POST['total'],
     		'status'  => 0,
     		'created' => date('Y-m-d H:i:s')
     	);
@@ -372,5 +373,19 @@ class Finance_model extends MY_Model
     	} else {
     		return 1;
     	}
+    }
+    
+    public function get_reimbursement($id) {
+    	$this->db->from('expense');
+    	return $this->db->where('id', $id)->get()->row_array();
+    }
+    
+    public function get_reimbursement_list() {
+    	
+    	$this->db->select('a.*, b.name AS dept_name, c.name AS company_name');
+    	$this->db->from('expense a');
+    	$this->db->join('department b', 'a.dept_id = b.id', 'left');
+    	$this->db->join('company c', 'b.pid = c.id', 'left');
+    	return $this->db->get()->result_array();
     }
 }
