@@ -23,6 +23,14 @@ class Cw_statistic extends MY_Controller {
 	
 	public function list_statistic($page=1) {
 		
+		$houseList = $this->finance_model->get_house_list();
+		$this->assign('houseList', $houseList);
+		
+		$userList = $this->finance_model->get_user_list();
+		$this->assign('userList', $userList);
+		
+		$this->assign('statistic', array('house_id'=>null, 'user_id'=>null, 'status'=>null));
+		
 		$data = $this->finance_model->list_statistic($page);
 		$base_url = "/cw_statistic/list_statistic";
 		$pager = $this->pagination->getPageLink($base_url, $data['total'], $data['limit']);
@@ -32,31 +40,10 @@ class Cw_statistic extends MY_Controller {
 		$this->show('statistic/list_statistic');
 	}
 	
-	public function add_statistic() {
-		
-		$houseList = $this->finance_model->get_house_list();
-		$this->assign('houseList', $houseList);
-		
-		$userList = $this->finance_model->get_user_list();
-		$this->assign('userList', $userList);
-		
-		$this->assign('statistic', array('house_id'=>null, 'user_id'=>null, 'status'=>null));
-		
-		$this->show('statistic/add_statistic');
-	}
-	
 	public function edit_statistic($id) {
 		
-		$houseList = $this->finance_model->get_house_list();
-		$this->assign('houseList', $houseList);
-		
-		$userList = $this->finance_model->get_user_list();
-		$this->assign('userList', $userList);
-		
 		$statistic = $this->finance_model->get_statistic($id);
-		$this->assign('statistic', $statistic);
-		
-		$this->show('statistic/add_statistic');
+		echo json_encode($statistic);
 	}
 	
 	public function update_statistic() {

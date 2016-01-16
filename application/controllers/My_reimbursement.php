@@ -42,7 +42,6 @@ class My_reimbursement extends MY_Controller {
 			}
 			$this->assign('total', $total);
 		}
-		//$this->assign('expense', $expense);
 		$this->assign('expense_list', $expense_list);
 		
 		$this->assign('expense_id', $expense_id);
