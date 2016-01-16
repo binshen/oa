@@ -20,6 +20,9 @@ class My_reimbursement extends MY_Controller {
 	
 		$this->assign('today', date('Y-m-d'));
 		
+		$dept_list = $this->basic_model->get_department_list();
+		$this->assign('dept_list', $dept_list);
+		
 		$style_list = $this->finance_model->get_expense_style_list();
 		$this->assign('style_list', $style_list);
 		
@@ -42,5 +45,10 @@ class My_reimbursement extends MY_Controller {
 		
 		$type_list = $this->finance_model->get_expense_type_list($style_id);
 		echo json_encode($type_list);
+	}
+	
+	public function save_reimbursement() {
+		
+		var_dump($_POST);
 	}
 }
