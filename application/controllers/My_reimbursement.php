@@ -65,4 +65,13 @@ class My_reimbursement extends MY_Controller {
 		$this->finance_model->save_reimbursement();
 		redirect('/my_reimbursement/list_reimbursement');
 	}
+	
+	public function del_reimbursement($id) {
+		$rs = $this->finance_model->del_reimbursement($id);
+		if($rs == 1){
+			$this->show_message('删除成功',site_url('my_reimbursement/list_reimbursement'));
+		}else{
+			$this->show_message('删除失败');
+		}
+	}
 }

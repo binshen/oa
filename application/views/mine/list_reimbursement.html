@@ -37,8 +37,8 @@
 	                    <td>
 	                        <div class="am-btn-toolbar">
 	                            <div class="am-btn-group am-btn-group-xs">
-	                                <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="/my_reimbursement/view_reimbursement"><span class="am-icon-search"></span> 查看</a>
-	                                <button class="am-btn am-btn-default am-btn-xs am-text-danger btn_del" data-url=""><span class="am-icon-trash-o"></span> 删除</button>
+	                                <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="/my_reimbursement/view_reimbursement/{{$item.id}}"><span class="am-icon-search"></span> 查看</a>
+	                                <button class="am-btn am-btn-default am-btn-xs am-text-danger btn_del" data-url="/my_reimbursement/del_reimbursement/{{$item.id}}"><span class="am-icon-trash-o"></span> 删除</button>
 	                                <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="/my_reimbursement/add_reimbursement/{{$item.id}}"><span class="am-icon-pencil-square-o"></span> 编辑</a>
 	                            </div>
 	                        </div>

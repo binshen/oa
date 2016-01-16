@@ -396,4 +396,21 @@ class Finance_model extends MY_Model
     	$this->db->join('company c', 'b.pid = c.id', 'left');
     	return $this->db->get()->result_array();
     }
+    
+    public function del_reimbursement($id) {
+    	$this->db->trans_start();//--------开始事务
+    	
+    	$this->db->where('expense_id', $id);
+    	$this->db->delete('expense_list');
+    	
+    	$this->db->where('id', $id);
+    	$this->db->delete('expense');
+    	
+    	$this->db->trans_complete();//------结束事务
+    	if ($this->db->trans_status() === FALSE) {
+    		return -1;
+    	} else {
+    		return 1;
+    	}
+    }
 }
