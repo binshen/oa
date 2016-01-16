@@ -1,0 +1,62 @@
+<!-- content start -->
+<div class="admin-content" style="min-height:450px">
+    <div class="am-cf am-padding">
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">费用报销 </strong></div>
+    </div>
+    <div class="am-g">
+		  <div class="am-u-sm-12 am-u-md-4">
+		        <div class="am-input-group am-input-group-sm">
+		          <input type="text" class="am-form-field" name="house_name" placeholder="楼盘名称" value="">
+		          <span class="am-input-group-btn">
+		            <input type="submit" class="am-btn am-btn-default" value="搜索" />
+		          </span>
+		        </div>
+	      </div>
+     </div>
+    <div class="am-g">
+        <div class="am-u-sm-12">
+            <table class="am-table am-table-striped am-table-hover table-main reimbursement-table" id="list-reimbursement-table">
+                <thead>
+                <tr>
+                    <th class="table-id">单号</th>
+                    <th class="table-time">时间</th>
+                    <th class="table-department">部门</th>
+                    <th class="table-apply-name">申报人</th>
+                    <th class="table-money">金额</th>
+                    <th class="table-option">操作</th>
+                    <th class="table-state">状态</th>
+                </tr>
+                </thead>
+                <tbody>
+					{{foreach from=$reimbursement_list item=item}}
+	                <tr>
+	                    <td>{{$item.id}}</td>
+	                    <td>{{$item.created|date_format:"%Y-%m-%d"}}</td>
+	                    <td>{{$item.company_name}}-{{$item.dept_name}}</td>
+	                    <td>{{$item.creator}}</td>
+	                    <td>{{$item.total}}</td>
+	                    <td>
+	                        <div class="am-btn-toolbar">
+	                            <div class="am-btn-group am-btn-group-xs">
+	                                <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="/my_reimbursement/view_reimbursement/{{$item.id}}"><span class="am-icon-search"></span> 查看</a>
+	                                <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="/my_reimbursement/add_reimbursement/{{$item.id}}"><span class="am-icon-pencil-square-o"></span> 编辑</a>
+	                                <button class="am-btn am-btn-default am-btn-xs am-text-danger btn_del" data-url="/my_reimbursement/del_reimbursement/{{$item.id}}"><span class="am-icon-trash-o"></span> 删除</button>
+	                            </div>
+	                        </div>
+	                    </td>
+	                    <td>
+	                    	{{if $item.status == 1}}
+	                        	<font class="am-badge am-badge-success">已审核</font>
+	                        {{else}}
+	                        	<font class="am-badge">未审核</font>
+	                        {{/if}}
+	                    </td>
+	                </tr>
+	                {{/foreach}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- content end -->
+

@@ -4,6 +4,7 @@ encoding//application/models/Finance_model.php=UTF-8
 encoding//application/views=UTF-8
 encoding//application/views/finance/add_month_reports.html=UTF-8
 encoding//application/views/finance/list_brokerage.html=UTF-8
+encoding//application/views/finance/list_reimbursement.html=UTF-8
 encoding//application/views/finance/list_statistic.html=UTF-8
 encoding//application/views/finance/view_brokerage.html=UTF-8
 encoding//application/views/index.html=UTF-8
