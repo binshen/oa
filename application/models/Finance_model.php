@@ -241,7 +241,9 @@ class Finance_model extends MY_Model
     		$data['query_month'] = $this->input->post('query_month');
     		$this->db->where("DATE_FORMAT(a.date, '%Y-%m') = '" . $this->input->post('query_month') . "'");
     	}
-    	$this->db->limit($this->limit, $offset = ($page - 1) * $this->limit);
+    	if($page > 0) {
+    		$this->db->limit($this->limit, $offset = ($page - 1) * $this->limit);
+    	}
     	$data['items'] = $this->db->get()->result_array();
     
     	return $data;

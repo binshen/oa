@@ -10,7 +10,7 @@ class Cw_statistic extends MY_Controller {
 		$this->load->model('finance_model');
 	}
 
-	public function index($page=1) {
+	public function index() {
 		
 		$houseList = $this->finance_model->get_house_list();
 		$this->assign('houseList', $houseList);
@@ -20,7 +20,7 @@ class Cw_statistic extends MY_Controller {
 		
 		$this->assign('statistic', array('house_id'=>null, 'user_id'=>null, 'status'=>null));
 		
-		$data = $this->finance_model->list_statistic($page);
+		$data = $this->finance_model->list_statistic(0);
 		$base_url = "/cw_statistic/list_statistic";
 		$pager = $this->pagination->getPageLink($base_url, $data['total'], $data['limit']);
 		$this->assign('pager', $pager);

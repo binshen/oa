@@ -15,7 +15,7 @@
       </div>
 		<div class="am-g">
 			<div class="am-u-sm-7">
-       <form method="post" action="{{site_url url='cw_statistic/list_statistic'}}" class="search_form" id="search-statistic-form">
+       <form method="post" action="{{site_url url='cw_statistic'}}" class="search_form" id="search-statistic-form">
 		   <div class="am-u-sm-12 am-u-md-4" id="search-statistic-user">
 			   <div class="am-input-group am-datepicker-date">
 				   <select class="chosen-select" id="search_user_id" name="search_user_id">
@@ -88,7 +88,6 @@
             {{/foreach}}
           </tbody>
         </table>
-		<div class="am-cf">{{$pager}}</div>
       </div>
 
     </div>
@@ -166,7 +165,14 @@
 			  </div>
 		  </div>
 	  </div>
-
+	  <div class="am-g">
+        <div class="am-u-sm-10">
+        	<p class="am-cost-total"> 总计：￥<span class="total">{{$total|default:0}}</span></p>
+        </div>
+        <div class="am-u-sm-2">
+        	<button  type="button" class="am-btn am-btn-danger" id="btnDownload">下载统计表</button>
+        </div>
+    </div>
   </div>
   <!-- content end -->
 <script>
