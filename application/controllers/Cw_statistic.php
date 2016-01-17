@@ -26,6 +26,13 @@ class Cw_statistic extends MY_Controller {
 // 		$this->assign('pager', $pager);
 		$this->assign('data', $data);
 		
+		$items = $data['items'];
+		$total = 0;
+		foreach ($items as $d) {
+			$total += $d['amount'];
+		}
+		$this->assign('total', $total);
+		
 		$this->show('finance/list_statistic');
 	}
 	
