@@ -159,7 +159,10 @@
 							  </td>
 						  </tr>
 						  <tr>
-							  <td colspan="4"><input type="button" class="am-btn am-btn-primary" value="确认" id="btnAdd"> </td>
+							  <td colspan="4">
+							  		<input type="button" class="am-btn am-btn-primary" value="确认" id="btnAdd">
+							  		<input type="button" class="am-btn" value="关闭" id="btnClose"> 
+							  </td>
 						  </tr>
 					  </table>
 				  </form>
@@ -209,6 +212,10 @@ $(function() {
 			window.location.reload();
 	    });
 		return true;
+	});
+	
+	$("#btnClose").click(function() {
+		$("#am-modal-statistic").modal('close');
 	});
 });
 
