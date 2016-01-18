@@ -67,6 +67,11 @@ $db['default'] = array(
 	'hostname' => '121.40.97.183',
 	'username' => 'root',
 	'password' => 'soukecsk',
+
+// 	'hostname' => 'localhost',
+// 	'username' => 'root',
+// 	'password' => '',
+		
 	'database' => 'oa_db',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

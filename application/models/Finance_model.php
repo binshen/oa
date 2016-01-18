@@ -207,6 +207,9 @@ class Finance_model extends MY_Model
     	$this->db->select('count(1) num');
     	$this->db->from('statistics a');
     	$this->db->join('house c', 'a.house_id = c.id');
+    	if($this->input->post('search_user_id')){
+    		$this->db->like('a.user_id',$this->input->post('search_user_id'));
+    	}
     	if($this->input->post('house_name')){
     		$this->db->like('c.name',$this->input->post('house_name'));
     	}
@@ -217,6 +220,7 @@ class Finance_model extends MY_Model
     	$data['total'] = $num->num;
     
     	//搜索条件
+    	$data['search_user_id'] = null;
     	$data['house_name'] = null;
     	$data['query_month'] = null;
     
@@ -225,6 +229,10 @@ class Finance_model extends MY_Model
     	$this->db->from('statistics a');
     	$this->db->join('users b', 'a.user_id = b.id');
     	$this->db->join('house c', 'a.house_id = c.id');
+    	if($this->input->post('search_user_id')){
+    		$data['search_user_id'] = $this->input->post('search_user_id');
+    		$this->db->like('a.user_id',$this->input->post('search_user_id'));
+    	}
     	if($this->input->post('house_name')){
     		$data['house_name'] = $this->input->post('house_name');
     		$this->db->like('c.name',$this->input->post('house_name'));
@@ -233,7 +241,9 @@ class Finance_model extends MY_Model
     		$data['query_month'] = $this->input->post('query_month');
     		$this->db->where("DATE_FORMAT(a.date, '%Y-%m') = '" . $this->input->post('query_month') . "'");
     	}
-    	$this->db->limit($this->limit, $offset = ($page - 1) * $this->limit);
+    	if($page > 0) {
+    		$this->db->limit($this->limit, $offset = ($page - 1) * $this->limit);
+    	}
     	$data['items'] = $this->db->get()->result_array();
     
     	return $data;
@@ -320,8 +330,99 @@ class Finance_model extends MY_Model
     
     public function get_expense_list($expense_id) {
     	
-    	$this->db->from('expense_list');
-    	$this->db->where('expense_id', $expense_id);
+    	$this->db->select('a.*, b.name AS style_name, c.name AS type_name');
+    	$this->db->from('expense_list a');
+    	$this->db->join('expense_style b', 'a.style_id = b.id', 'left');
+    	$this->db->join('expense_type c', 'a.type_id = c.id', 'left');
+    	$this->db->where('a.expense_id', $expense_id);
     	return $this->db->get_where()->result_array();
+    }
+    
+    public function save_reimbursement() {
+    	
+    	$user_info = $this->session->userdata('user_info');
+    	$user_id = $user_info['id'];
+    	
+    	$this->db->trans_start();//--------开始事务
+    	
+    	$expense = array(
+    		'dept_id' => $_POST['dept_id'],
+    		'creator' => $_POST['creator'],
+    		'user_id' => $user_id,
+    		'total'   => $_POST['total'],
+    		'status'  => 0,
+    		'created' => date('Y-m-d H:i:s')
+    	);
+    	
+    	$expense_id = $_POST['expense_id'];
+    	if(!empty($expense_id)) {
+    		$this->db->where('id', $expense_id);
+    		$this->db->update('expense', $expense);
+    		
+    		$this->db->where('expense_id', $expense_id);
+    		$this->db->delete('expense_list');
+    	} else {
+    		$this->db->insert('expense', $expense);
+    		
+    		$expense_id = $this->db->insert_id();
+    	}
+    	
+    	$amounts = $_POST['amount'];
+    	foreach ($amounts as $idx => $amount) {
+    		$data = array();
+    		$data['amount'] = $amount;
+    		$data['project'] = $_POST['project'][$idx];
+    		$data['date'] = $_POST['date'][$idx];
+    		$data['style_id'] = $_POST['style_id'][$idx];
+    		$data['type_id'] = $_POST['type_id'][$idx];
+    		$data['expense_id'] = $expense_id;
+    		$data['created'] = date('Y-m-d H:i:s');
+    		$this->db->insert('expense_list', $data);
+    	}
+    	
+    	$this->db->trans_complete();//------结束事务
+    	if ($this->db->trans_status() === FALSE) {
+    		return -1;
+    	} else {
+    		return 1;
+    	}
+    }
+    
+    public function get_reimbursement($id) {
+    	$this->db->select('a.*, b.name AS dept_name, c.name AS company_name');
+    	$this->db->from('expense a');
+    	$this->db->join('department b', 'a.dept_id = b.id', 'left');
+    	$this->db->join('company c', 'b.pid = c.id', 'left');
+    	return $this->db->where('a.id', $id)->get()->row_array();
+    }
+    
+    public function get_reimbursement_list() {
+    	
+    	$this->db->select('a.*, b.name AS dept_name, c.name AS company_name');
+    	$this->db->from('expense a');
+    	$this->db->join('department b', 'a.dept_id = b.id', 'left');
+    	$this->db->join('company c', 'b.pid = c.id', 'left');
+    	
+    	if($this->input->post('reporter_name')){
+    		$this->db->like('a.creator', $this->input->post('reporter_name'));
+    	}
+    	return $this->db->get()->result_array();
+    }
+    
+    public function del_reimbursement($id) {
+    	$this->db->trans_start();//--------开始事务
+    	
+    	$this->db->where('expense_id', $id);
+    	$this->db->delete('expense_list');
+    	
+    	$this->db->where('id', $id);
+    	$this->db->delete('expense');
+    	
+    	$this->db->trans_complete();//------结束事务
+    	if ($this->db->trans_status() === FALSE) {
+    		return -1;
+    	} else {
+    		return 1;
+    	}
     }
 }
