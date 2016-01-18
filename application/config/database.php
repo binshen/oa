@@ -64,13 +64,13 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-// 	'hostname' => '121.40.97.183',
-// 	'username' => 'root',
-// 	'password' => 'soukecsk',
-
-	'hostname' => 'localhost',
+	'hostname' => '121.40.97.183',
 	'username' => 'root',
-	'password' => '',
+	'password' => 'soukecsk',
+
+// 	'hostname' => 'localhost',
+// 	'username' => 'root',
+// 	'password' => '',
 		
 	'database' => 'oa_db',
 	'dbdriver' => 'mysqli',
