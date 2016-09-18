@@ -57,7 +57,7 @@ class Common_model extends MY_Model
     	->join('users b','a.from_uid=b.id','left')
     	->where('a.id',$id)->get()->row_array();
     	
-    	$rs = $this->db->select('id,read')->from('notice_list')->where('mid',$id)->where('uid',$user_info['id'])->get()->row();
+    	$rs = $this->db->select('id,read')->from('notice_list')->where('mid',$id)->where('uid',$user_info)->get()->row();
     	if(!$rs){
     		return -1;//不能查看别人的通知
     	}else{
