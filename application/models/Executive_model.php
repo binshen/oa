@@ -116,9 +116,13 @@ class Executive_model extends MY_Model
     }
     
     public function get_notice($id){
+		$user_info = $this->session->userdata('user_info');
     	$data = $this->db->select('a.*,b.rel_name')->from('notice_main a')
     	->join('users b','a.from_uid=b.id','left')
     	->where('a.id',$id)->get()->row_array();
+		$this->db->where('mid',$data['id']);
+		$this->db->where('uid',$user_info['id']);
+		$this->db->update('notice_list',array('read'=>1));
     	return $data;
     }
     
